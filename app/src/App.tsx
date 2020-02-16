@@ -1,18 +1,17 @@
 import React from 'react';
-import './App.css';
 import ZincContent from './zinc/zincContent';
 import ApiFetcher from './ApiFetcher';
+import ContentPage from './utils/layout/ContentPage/ContentPage';
+import ZincGenerator from './utils/generator/ZincGenerator';
 
 const App: React.FC = () => {
   
   const zincContent: ZincContent = new ZincContent()
   return (
     <div className="App">
-      <header className="App-header">
-        <h2>Zinc Test</h2>
-        <div>{zincContent.body.getBody()}</div>
-        <ApiFetcher zincContent={zincContent}/>
-      </header>
+
+      <ZincGenerator content={zincContent}/>
+
     </div>
   );
 }

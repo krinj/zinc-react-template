@@ -1,5 +1,5 @@
 import React from 'react';
-import ZincContentInterface from './zinc/zincContentInterface';
+import ZincContentInterface from './zinc/ZincContentInterface';
 
 interface ApiFetcherProps {
     zincContent: ZincContentInterface
