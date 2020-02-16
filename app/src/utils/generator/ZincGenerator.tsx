@@ -29,7 +29,9 @@ const ZincGenerator: React.FC<ZincGeneratorProps> = (props) => {
     const pageModel: ZincPage = props.content.getPage();
 
     const contentBlocks = createBlocksFromPage(pageModel);
-    const contentPage = <ContentPage contentBlocks={contentBlocks}/>
+    const contentPage = <ContentPage 
+        contentBlocks={contentBlocks} 
+        headerModel={props.content.headerModel}/>
     
 
     return <div>

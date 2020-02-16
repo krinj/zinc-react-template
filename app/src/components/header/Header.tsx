@@ -1,15 +1,33 @@
 import React from 'react';
-import ContentBlock from '../../utils/layout/ContentBlock/ContentBlock';
-import TextElement from '../text/TextElement';
+import IDisplayableElement from '../../zinc/interface/IDisplayElement';
+import HeaderModel from '../../zinc/interface/header/HeaderModel';
 
-interface HeaderProps {
 
+class Header implements IDisplayableElement {
+
+    private model: HeaderModel;
+    
+    constructor(model: HeaderModel) {
+        this.model = model;
+    }
+
+    render(key?: string) {
+        return <HeaderJSX key={key} {...this.model}/>;
+    }
 }
 
-const Header: React.FC<HeaderProps> = (props) => {
-    return <ContentBlock 
-        elements={[new TextElement("This is Header")]}
-        />;
+const HeaderJSX: React.FC<HeaderModel> = (props) => {
+
+    return <div>
+        
+        <img src={props.logoImagePath}/>
+        <h1>{props.title}</h1>
+        <h3>{props.subtitle}</h3>
+
+        <p>Phone: {props.phone} | Email: {props.email}</p>
+        
+
+    </div>
 }
 
 export default Header;

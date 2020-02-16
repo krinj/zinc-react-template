@@ -1,5 +1,10 @@
 import ZincText from "./zincText"
 import ZincPage from "./structure/ZincPage";
+import HeaderModel from "./interface/header/HeaderModel";
+
+// Image Imports
+import importedlogoImagePath from "../injected/images/logo.svg";
+
 
 abstract class ZincContentInterface {
 
@@ -8,6 +13,14 @@ abstract class ZincContentInterface {
     public body: ZincText = new ZincText(this.UNDEFINED);
     public apiEndpoint: string = this.UNDEFINED;
     public page: ZincPage = new ZincPage();
+
+    public headerModel: HeaderModel = {
+        title: "Big Company Co",
+        subtitle: "The place where the magic happens.",
+        phone: "0823493200",
+        email: "hello@bigco.com",
+        logoImagePath: importedlogoImagePath
+    };
 
     public getEndpoint(stub: string): string {
         return this.apiEndpoint + stub;
