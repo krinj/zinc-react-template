@@ -1,5 +1,6 @@
 import React from 'react';
 import IDisplayableElement from '../../zinc/interface/IDisplayElement';
+import "../../style/style.css";
 
 
 class TextElement implements IDisplayableElement {
@@ -22,7 +23,7 @@ interface TextElementProps {
 }
 
 const TextElementJSX: React.FC<TextElementProps> = (props) => {
-    return <div>Element: {props.content}</div>
+    return <div className="dev-green">Element: {props.content}</div>
 }
 
 

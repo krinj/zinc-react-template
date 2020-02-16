@@ -21,9 +21,16 @@ class ZincContent extends ZincContentInterface {
             .add(new TextElement("Hello World 2"));
 
         const block3 = new ZincBlock()
-            .add(new TextElement("Hello World 3"));
+            .add(new TextElement("YOYO"))
+            .add(new TextElement("YOYO"));
 
-        this.page.add(block1).add(block2).add(block3);
+        const block4 = new ZincBlock()
+            .add(new TextElement("A"))
+            .add(new TextElement("B"))
+            .add(new TextElement("C"))
+            .add(new TextElement("D"))
+
+        this.page.add(block1).add(block2).add(block3).add(block4);
 
     }
 }
