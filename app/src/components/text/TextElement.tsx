@@ -1,6 +1,7 @@
 import React from 'react';
 import IDisplayableElement from '../../zinc/interface/IDisplayElement';
 import "../../style/style.css";
+import Markdown from 'markdown-to-jsx';
 
 
 class TextElement implements IDisplayableElement {
@@ -23,7 +24,7 @@ interface TextElementProps {
 }
 
 const TextElementJSX: React.FC<TextElementProps> = (props) => {
-    return <div className="dev-green">Element: {props.content}</div>
+    return <div className="dev-green"><Markdown>{props.content}</Markdown></div>
 }
 
 

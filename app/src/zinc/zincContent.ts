@@ -18,7 +18,7 @@ class ZincContent extends ZincContentInterface {
             .add(new TextElement("Howdy! Third Text Element"));
 
         const block2 = new ZincBlock()
-            .add(new TextElement("Hello World 2"));
+            .add(new TextElement("# This is a title \n Hello World 2 \n\n ### This is Subtitle \n * Yo 1\n * Yo2 \n\n > Blokc quotye `inline` \n\n ```python\nprint(HelloWorld)\n```"));
 
         const block3 = new ZincBlock()
             .add(new TextElement("YOYO"))
