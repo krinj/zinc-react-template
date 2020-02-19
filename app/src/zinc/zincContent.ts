@@ -1,6 +1,9 @@
 import ZincContentInterface from "./ZincContentInterface";
 import ZincBlock from "./structure/ZincBlock";
 import TextElement from "../components/text/TextElement";
+import Card from "../components/card/Card";
+import photo1path from "../injected/images/photo1.jpg";
+
 
 class ZincContent extends ZincContentInterface {
     constructor () {
@@ -21,7 +24,10 @@ class ZincContent extends ZincContentInterface {
             .add(new TextElement("# This is a title \n Hello World 2 \n\n ### This **is Subtitle** and [this is link](www.google.com) \n * Yo 1\n * Yo2 \n\n\n > Blokc **quotye** `inline` \n\n ```python\nprint(HelloWorld)\n```"));
 
         const block3 = new ZincBlock()
-            .add(new TextElement("YOYO"))
+            .add(new Card({
+                title: "CardT", 
+                body: "Some quick example text to build on the card title and make up the bulk of the card's content.", 
+                imagePath: photo1path}))
             .add(new TextElement("YOYO"));
 
         const block4 = new ZincBlock()
