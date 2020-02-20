@@ -4,6 +4,7 @@ import TextElement from "../components/text/TextElement";
 import Card from "../components/card/Card";
 import photo1path from "../injected/images/photo1.jpg";
 import OpeningHours from "../components/opening-hours/OpeningHoursElement";
+import ContactForm from "../components/contact-form/ContactForm";
 
 
 class ZincContent extends ZincContentInterface {
@@ -40,12 +41,11 @@ class ZincContent extends ZincContentInterface {
                     {day: "Sunday", detail: "Closed", isOpen: false},
                 ]
             }));
-
+        
         const block4 = new ZincBlock()
-            .add(new TextElement("A"))
+            .add(new ContactForm({title: "Contact Us", body: "Get a FREE quote!"}))
             .add(new TextElement("B"))
-            .add(new TextElement("C"))
-            .add(new TextElement("D"))
+
 
         this.page.add(block1).add(block2).add(block3).add(block4);
 
