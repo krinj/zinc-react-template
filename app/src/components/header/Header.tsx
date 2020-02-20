@@ -11,8 +11,8 @@ class Header implements IDisplayableElement {
         this.model = model;
     }
 
-    render(key?: string) {
-        return <HeaderJSX key={key} {...this.model}/>;
+    render() {
+        return <HeaderJSX {...this.model}/>;
     }
 }
 

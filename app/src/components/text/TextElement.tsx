@@ -14,8 +14,8 @@ class TextElement implements IDisplayableElement {
         }
     }
 
-    render(key: string) {
-        return <TextElementJSX content={this.content} key={key}/>;
+    render() {
+        return <TextElementJSX content={this.content}/>;
     }
 }
 

@@ -1,5 +1,5 @@
 interface IDisplayableElement {
-    render(key?: string): JSX.Element;
+    render(): JSX.Element;
 }
 
 export default IDisplayableElement;

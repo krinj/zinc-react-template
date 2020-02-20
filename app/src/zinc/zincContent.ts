@@ -29,7 +29,17 @@ class ZincContent extends ZincContentInterface {
                 title: "CardT", 
                 body: "Some quick example text to build on the card title and make up the bulk of the card's content.", 
                 imagePath: photo1path}))
-            .add(new OpeningHours({}));
+            .add(new OpeningHours({
+                slots: [
+                    {day: "Monday", detail: "Closed", isOpen: false},
+                    {day: "Tuesday", detail: "9:00 AM to 5:00 PM", isOpen: true},
+                    {day: "Wednesday", detail: "9:00 AM to 5:00 PM", isOpen: true},
+                    {day: "Thursday", detail: "9:00 AM to 5:00 PM", isOpen: true},
+                    {day: "Friday", detail: "9:00 AM to 5:00 PM", isOpen: true},
+                    {day: "Saturday", detail: "10:00 AM to 2:00 PM", isOpen: true},
+                    {day: "Sunday", detail: "Closed", isOpen: false},
+                ]
+            }));
 
         const block4 = new ZincBlock()
             .add(new TextElement("A"))

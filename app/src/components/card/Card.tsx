@@ -9,8 +9,8 @@ class Card implements IDisplayableElement {
         this.model = model;
     }
 
-    render(key: string) {
-        return <CardJSX key={key} {...this.model}/>;
+    render() {
+        return <CardJSX {...this.model}/>;
     }
 }
 
