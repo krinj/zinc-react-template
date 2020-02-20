@@ -1,5 +1,5 @@
 import React from 'react';
-import IDisplayableElement from '../../zinc/interface/IDisplayElement';
+import IDisplayableElement from '../IDisplayElement';
 import "../../style/style.css";
 import Markdown from 'markdown-to-jsx';
 

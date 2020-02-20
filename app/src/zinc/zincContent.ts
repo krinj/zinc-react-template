@@ -3,6 +3,7 @@ import ZincBlock from "./structure/ZincBlock";
 import TextElement from "../components/text/TextElement";
 import Card from "../components/card/Card";
 import photo1path from "../injected/images/photo1.jpg";
+import OpeningHours from "../components/opening-hours/OpeningHoursElement";
 
 
 class ZincContent extends ZincContentInterface {
@@ -28,7 +29,7 @@ class ZincContent extends ZincContentInterface {
                 title: "CardT", 
                 body: "Some quick example text to build on the card title and make up the bulk of the card's content.", 
                 imagePath: photo1path}))
-            .add(new TextElement("YOYO"));
+            .add(new OpeningHours({}));
 
         const block4 = new ZincBlock()
             .add(new TextElement("A"))

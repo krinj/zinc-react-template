@@ -1,5 +1,5 @@
 import React from 'react';
-import IDisplayableElement from '../../zinc/interface/IDisplayElement';
+import IDisplayableElement from '../IDisplayElement';
 import HeaderModel from '../../zinc/interface/header/HeaderModel';
 
 

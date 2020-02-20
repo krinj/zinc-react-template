@@ -33,7 +33,6 @@ const ZincGenerator: React.FC<ZincGeneratorProps> = (props) => {
         contentBlocks={contentBlocks} 
         headerModel={props.content.headerModel}/>
     
-
     return <div>
         {contentPage}
     </div>

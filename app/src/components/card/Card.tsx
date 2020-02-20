@@ -1,5 +1,5 @@
 import React from 'react';
-import IDisplayableElement from '../../zinc/interface/IDisplayElement';
+import IDisplayableElement from '../IDisplayElement';
 import CardModel from '../../zinc/interface/card/CardModel';
 
 

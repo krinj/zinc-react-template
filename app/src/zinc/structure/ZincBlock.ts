@@ -1,4 +1,4 @@
-import IDisplayableElement from "../interface/IDisplayElement";
+import IDisplayableElement from "../../components/IDisplayElement";
 
 class ZincBlock {
 
