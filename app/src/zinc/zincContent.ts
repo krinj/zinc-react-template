@@ -1,10 +1,16 @@
+// Component Imports
 import ZincContentInterface from "./ZincContentInterface";
 import ZincBlock from "./structure/ZincBlock";
 import TextElement from "../components/text/TextElement";
 import Card from "../components/card/Card";
-import photo1path from "../injected/images/photo1.jpg";
 import OpeningHours from "../components/opening-hours/OpeningHoursElement";
 import ContactForm from "../components/contact-form/ContactForm";
+import FeatureList from "../components/feature-list/FeatureList";
+import FeatureItemModel from "../components/feature-list/FeatureItemModel";
+
+// Media Imports
+import photo1path from "../injected/images/photo1.jpg";
+
 
 
 class ZincContent extends ZincContentInterface {
@@ -42,9 +48,16 @@ class ZincContent extends ZincContentInterface {
                 ]
             }));
         
+        const featureItems: FeatureItemModel[] = [
+            {title: "Property Lending", body: "Discover the home load everyone is talking about."},
+            {title: "Business Lending", body: "Get the best rates for business lending.", linkUrl: "www.google.com"},
+            {title: "Business Lending", body: "Get the best rates for business lending.", linkUrl: "www.google.com", linkText: "Subscribe"}
+        ]
+        const featureList: FeatureList = new FeatureList({feautureItemModels: featureItems});
+        
         const block4 = new ZincBlock()
             .add(new ContactForm({title: "Contact Us", body: "Get a FREE quote!", requireName: true, requirePhone: true, requireNotes: true}))
-            .add(new TextElement("B"))
+            .add(featureList)
 
 
         this.page.add(block1).add(block2).add(block3).add(block4);
