@@ -43,7 +43,7 @@ class ZincContent extends ZincContentInterface {
             }));
         
         const block4 = new ZincBlock()
-            .add(new ContactForm({title: "Contact Us", body: "Get a FREE quote!"}))
+            .add(new ContactForm({title: "Contact Us", body: "Get a FREE quote!", requireName: true, requirePhone: true, requireNotes: true}))
             .add(new TextElement("B"))
 
 

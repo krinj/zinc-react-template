@@ -3,9 +3,8 @@ import DisplayableElement from '../DisplayableElement';
 import ContactFormModel from './ContactFormModel';
 import ContactFormField, {FieldType} from './ContactFormField';
 import ContactFormTextArea from './ContactFormTextArea';
-import ContactFormButton from './ContactFormButton';
 
-const DEFAULT_BUTTON_TEXT: string = "Send";
+const DEFAULT_BUTTON_TEXT: string = "Submit";
 
 export enum FormState {
     READY,
@@ -68,6 +67,8 @@ const createInfoBanner = (formState: FormState): JSX.Element => {
 
 const ContactFormJSX: React.FC<ContactFormModel> = (props) => {
 
+    // Pre-process.
+    const notesFieldTitle: string = props.notesText === undefined ? "Notes" : props.notesText
     // React Hooks.
     const [formState, setFormState] = React.useState(FormState.READY);
     const isDisabled: boolean = formState !== FormState.READY;
@@ -75,7 +76,7 @@ const ContactFormJSX: React.FC<ContactFormModel> = (props) => {
     const [userName, nameField] = createContactFormField("name", FieldType.Name, isDisabled,  React.useState(""));
     const [userEmail, emailField] = createContactFormField("email", FieldType.Email, isDisabled,  React.useState(""));
     const [userPhone, phoneField] = createContactFormField("phone", FieldType.PhoneNumber, isDisabled,  React.useState(""));
-    const [userNotes, notesField] = createContactFormTextArea("notes", isDisabled, React.useState(""));
+    const [userNotes, notesField] = createContactFormTextArea(notesFieldTitle, isDisabled, React.useState(""));
 
     const displayTitle: string = props.title;
     const displayButton: string = props.buttonText !== undefined ? props.buttonText : DEFAULT_BUTTON_TEXT;
@@ -95,13 +96,19 @@ const ContactFormJSX: React.FC<ContactFormModel> = (props) => {
 
     let infoBanner: JSX.Element = createInfoBanner(formState);
 
+    // Add elements which are required by the model.
+    const displayedNameField = props.requireName === true ? nameField : null;
+    const displayedEmailField = props.requireEmail === true ? emailField : null;
+    const displayedPhoneField = props.requirePhone === true ? phoneField : null;
+    const displayedNotesField = props.requireNotes === true ? notesField : null;
+
     return <form onSubmit={onSubmit}>
         <h2>{displayTitle}</h2>
 
-        {nameField}
-        {emailField}
-        {phoneField}
-        {notesField}
+        {displayedNameField}
+        {displayedEmailField}
+        {displayedPhoneField}
+        {displayedNotesField}
         {infoBanner}
 
         <button type="submit" disabled={isDisabled}>{displayButton}</button>
