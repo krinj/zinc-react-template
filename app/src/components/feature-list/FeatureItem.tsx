@@ -1,6 +1,7 @@
 import React from 'react';
 import DisplayableElement from '../DisplayableElement';
 import FeatureItemModel from './FeatureItemModel';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
 class FeatureItem extends DisplayableElement {
@@ -26,8 +27,12 @@ const FeatureItemJSX: React.FC<FeatureItemModel> = (props) => {
         linkElement = <a href={props.linkUrl}>{linkTitle}</a>
     }
 
+    const iconElement: JSX.Element | null = props.fontIcon === undefined ? null : <FontAwesomeIcon icon={props.fontIcon} />
+
     return <>
         <h4>{props.title}</h4>
+        <img src={props.imagePath} />
+        {iconElement}
         <p>
             {props.body}
         </p>
