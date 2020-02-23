@@ -10,6 +10,10 @@ interface FeatureItemModel {
 
     linkUrl?: string;
     linkText?: string;
+    
+    // Pricing
+    price?: string;
+    priceCaption?: string;
 
 }
 

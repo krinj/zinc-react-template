@@ -56,8 +56,9 @@ class ZincContent extends ZincContentInterface {
         
         const featureItems: FeatureItemModel[] = [
             {title: "Property Lending", body: "Discover the home load everyone is talking about.", imagePath: squareIcon},
-            {title: "Business Lending", body: "Get the best rates for business lending.", linkUrl: "www.google.com", fontIcon: "check"},
-            {title: "Business Lending", body: "Get the best rates for business lending.", linkUrl: "www.google.com", linkText: "Subscribe"}
+            {title: "Business Lending", body: "Get the best rates for business lending.", linkUrl: "www.google.com", fontIcon: "check", price: "$108"},
+            {title: "Business Lending", body: "Get the best rates for business lending.", fontIcon: "check", linkUrl: "www.google.com", linkText: "Subscribe", price: "$4"},
+            {title: "Business Lending", body: "Get the best rates for business lending.", fontIcon: "check", price: "$22", priceCaption: "Per Hour"}
         ]
         const featureList: FeatureList = new FeatureList({feautureItemModels: featureItems});
         
