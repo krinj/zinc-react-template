@@ -9,12 +9,19 @@ import FeatureList from "../components/feature-list/FeatureList";
 import FeatureItemModel from "../components/feature-list/FeatureItemModel";
 
 // Media Imports
-import photo1path from "../injected/images/photo1.jpg";
+import photo1path from "../injected/images/gallery_5.png";
 import squareIcon from "../injected/images/square_icon.svg";
+import gallery1 from "../injected/images/gallery_1.png";
+import gallery2 from "../injected/images/gallery_2.png";
+import gallery3 from "../injected/images/gallery_3.png";
+import gallery4 from "../injected/images/gallery_4.png";
+import gallery5 from "../injected/images/gallery_5.png";
+import gallery6 from "../injected/images/gallery_6.png";
 
 // Import Font Icons
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faCheck } from '@fortawesome/free-solid-svg-icons'
+import Gallery from "../components/gallery/Gallery";
 
 
 class ZincContent extends ZincContentInterface {
@@ -67,7 +74,15 @@ class ZincContent extends ZincContentInterface {
             .add(featureList)
 
 
-        this.page.add(block1).add(block2).add(block3).add(block4);
+        const galleryElement = new Gallery({
+            images: [
+                gallery1, gallery2, gallery3, gallery4, gallery5, gallery6
+            ]
+        });
+        const block5 = new ZincBlock()
+            .add(galleryElement);
+
+        this.page.add(block1).add(block2).add(block3).add(block4).add(block5);
 
     }
 }
