@@ -1,6 +1,8 @@
 interface GalleryModel {
 
     images: string[];
+    imageColMd?: number;
+    imageColSm?: number;
 
 }
 

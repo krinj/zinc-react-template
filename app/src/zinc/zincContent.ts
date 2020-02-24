@@ -77,7 +77,8 @@ class ZincContent extends ZincContentInterface {
         const galleryElement = new Gallery({
             images: [
                 gallery1, gallery2, gallery3, gallery4, gallery5, gallery6
-            ]
+            ],
+            imageColMd: 4
         });
         const block5 = new ZincBlock()
             .add(galleryElement);
