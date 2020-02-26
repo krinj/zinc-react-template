@@ -22,6 +22,7 @@ import gallery6 from "../injected/images/gallery_6.png";
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faCheck } from '@fortawesome/free-solid-svg-icons'
 import Gallery from "../components/gallery/Gallery";
+import Location from "../components/location/Location";
 
 
 class ZincContent extends ZincContentInterface {
@@ -38,8 +39,7 @@ class ZincContent extends ZincContentInterface {
 
         const block1 = new ZincBlock()
             .add(new TextElement("Hello World 1"))
-            .add(new TextElement("Howdy! Second Text Element"))
-            .add(new TextElement("Howdy! Third Text Element"));
+            .add(new Location({displayAddress: "2 Park Street, Sydney, NSW", mapAddress: "2 Park Street, Sydney, NSW", email: "joe@g.com", phoneNumber: "40302"}));
 
         const block2 = new ZincBlock()
             .add(new TextElement("# This is a title \n Hello World 2 \n\n ### This **is Subtitle** and [this is link](www.google.com) \n * Yo 1\n * Yo2 \n\n\n > Blokc **quotye** `inline` \n\n ```python\nprint(HelloWorld)\n```"));
