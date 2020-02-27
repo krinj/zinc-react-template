@@ -4,6 +4,7 @@ import HeaderModel from "./interface/header/HeaderModel";
 
 // Image Imports
 import importedlogoImagePath from "../injected/images/logo.svg";
+import FooterModel from "../components/footer/FooterModel";
 
 
 abstract class ZincContentInterface {
@@ -20,6 +21,11 @@ abstract class ZincContentInterface {
         phone: "0823493200",
         email: "hello@bigco.com",
         logoImagePath: importedlogoImagePath
+    };
+
+    public footerModel: FooterModel = {
+        height: 160,
+        contactModel: {}
     };
 
     public getEndpoint(stub: string): string {

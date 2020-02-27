@@ -7,6 +7,9 @@ import OpeningHours from "../components/opening-hours/OpeningHoursElement";
 import ContactForm from "../components/contact-form/ContactForm";
 import FeatureList from "../components/feature-list/FeatureList";
 import FeatureItemModel from "../components/feature-list/FeatureItemModel";
+import Gallery from "../components/gallery/Gallery";
+import Location from "../components/location/Location";
+import ContactModel from "../components/common/ContactModel";
 
 // Media Imports
 import photo1path from "../injected/images/gallery_5.png";
@@ -19,23 +22,29 @@ import gallery5 from "../injected/images/gallery_5.png";
 import gallery6 from "../injected/images/gallery_6.png";
 
 // Import Font Icons
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { faCheck } from '@fortawesome/free-solid-svg-icons'
-import Gallery from "../components/gallery/Gallery";
-import Location from "../components/location/Location";
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faCheck } from '@fortawesome/free-solid-svg-icons';
+import { faFacebookSquare } from '@fortawesome/free-brands-svg-icons';
+
 
 
 class ZincContent extends ZincContentInterface {
     constructor () {
         super();
 
-        library.add(faCheck);
+        library.add(faCheck, faFacebookSquare);
 
         this.setApiEndpoint("https://api.zinccli.com/")
 
         this.addBody('This is injected content!');
         this.addBody('This is injected content!');
         this.addBody('This is injected content!');
+
+        const contactModel: ContactModel = {
+            name: "Happy House Inc",
+            facebook: {label: "HappyHouse", link: "facebook.com/happyhouse"},
+            instagram: {label: "HappyHouse", link: "instagram.com/happyhouse"}
+        }
 
         const block1 = new ZincBlock()
             .add(new TextElement("Hello World 1"))
@@ -84,6 +93,9 @@ class ZincContent extends ZincContentInterface {
             .add(galleryElement);
 
         this.page.add(block1).add(block2).add(block3).add(block4).add(block5);
+
+        this.footerModel.height = 80;
+        this.footerModel.contactModel = contactModel;
 
     }
 }

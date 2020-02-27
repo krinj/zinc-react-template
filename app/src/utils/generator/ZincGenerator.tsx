@@ -20,18 +20,18 @@ const createBlocksFromPage = (pageModel: ZincPage): JSX.Element[] => {
         const contentBlock: JSX.Element = <ContentBlock elements={blockModel.elements} key={i} />
         contentBlocks.push(contentBlock);
     }
-
     return contentBlocks;
 }
 
 const ZincGenerator: React.FC<ZincGeneratorProps> = (props) => {
 
     const pageModel: ZincPage = props.content.getPage();
-
     const contentBlocks = createBlocksFromPage(pageModel);
     const contentPage = <ContentPage 
         contentBlocks={contentBlocks} 
-        headerModel={props.content.headerModel}/>
+        headerModel={props.content.headerModel}
+        footerModel={props.content.footerModel}
+        />
     
     return <div>
         {contentPage}
