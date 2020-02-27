@@ -17,7 +17,7 @@ class Location extends DisplayableElement {
     }
 }
 
-const getMapUrl = (address: string) => {
+const getMapUrl = (address: string): string => {
     const mapApiURL: string = "https://maps.googleapis.com/maps/api/staticmap";
     const apiKey: string = "REDACTED";
     const scale: number = 1;
@@ -25,9 +25,16 @@ const getMapUrl = (address: string) => {
     const width: number = 460;
     const height: number = 460;
     const mapStyle: string = "style=feature:poi|element:all|visibility:off"
-    const marker: string = `markers=size:normal%7Ccolor:red%7C${address}`
+    const marker: string = `markers=size:normal|color:red|${address}`
     const mapStaticURL: string = `${mapApiURL}?center=${address}&zoom=${zoom}&size=${width}x${height}&scale=${scale}&${marker}&${mapStyle}&key=${apiKey}`
     return mapStaticURL;
+}
+
+const getMapClickUrl = (address: string): string => {
+    const mapsURL: string = "https://www.google.com/maps/place/"
+    const formattedAddress: string = address.replace(" ", "+");
+    const clickableURL: string = `${mapsURL}${formattedAddress}`;
+    return clickableURL;
 }
 
 const createSingleContactElement = (label: string, value?: string): JSX.Element | null => {
@@ -54,7 +61,8 @@ const LocationJSX: React.FC<LocationModel> = (props) => {
 
     const title: string = props.title === undefined ? "Contact Us" : props.title;
     const mapStaticURL: string = getMapUrl(props.mapAddress);
-    const mapImage = <img src={mapStaticURL}/>;
+    const mapClickURL: string = getMapClickUrl(props.mapAddress);
+    const mapImage = <div><a href={mapClickURL} target="_blank"><img src={mapStaticURL}/></a></div>;
     const addressElement: JSX.Element = getContactInformation(props.displayAddress, props.phoneNumber, props.email);
 
     return <>
