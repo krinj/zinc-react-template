@@ -17,9 +17,8 @@ class Location extends DisplayableElement {
     }
 }
 
-const getMapUrl = (address: string): string => {
+const getMapUrl = (address: string, apiKey: string): string => {
     const mapApiURL: string = "https://maps.googleapis.com/maps/api/staticmap";
-    const apiKey: string = "REDACTED";
     const scale: number = 1;
     const zoom: number = 17;
     const width: number = 460;
@@ -60,9 +59,16 @@ const getContactInformation = (address: string, phoneNumber?: string, email?: st
 const LocationJSX: React.FC<LocationModel> = (props) => {
 
     const title: string = props.title === undefined ? "Contact Us" : props.title;
-    const mapStaticURL: string = getMapUrl(props.mapAddress);
-    const mapClickURL: string = getMapClickUrl(props.mapAddress);
-    const mapImage = <div><a href={mapClickURL} target="_blank"><img src={mapStaticURL}/></a></div>;
+
+    let mapImage: JSX.Element | null;
+    if (props.googleApiKey !== undefined) {
+        const mapStaticURL: string = getMapUrl(props.mapAddress, props.googleApiKey);
+        const mapClickURL: string = getMapClickUrl(props.mapAddress);
+        mapImage = <div><a href={mapClickURL} target="_blank"><img src={mapStaticURL}/></a></div>;
+    } else {
+        mapImage = <div><b>Error: No Map API Key</b></div>;
+    }
+
     const addressElement: JSX.Element = getContactInformation(props.displayAddress, props.phoneNumber, props.email);
 
     return <>

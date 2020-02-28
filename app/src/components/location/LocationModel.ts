@@ -5,6 +5,7 @@ interface LocationModel {
     mapAddress: string;
     phoneNumber?: string;
     email?: string;
+    googleApiKey?: string;
 
 }
 

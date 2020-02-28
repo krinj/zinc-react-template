@@ -48,7 +48,12 @@ class ZincContent extends ZincContentInterface {
 
         const block1 = new ZincBlock()
             .add(new TextElement("Hello World 1"))
-            .add(new Location({displayAddress: "2 Park Street, Sydney, NSW", mapAddress: "2 Park Street, Sydney, NSW", email: "joe@g.com", phoneNumber: "40302"}));
+            .add(new Location({
+                displayAddress: "2 Park Street, Sydney, NSW",
+                 mapAddress: "2 Park Street, Sydney, NSW", 
+                 email: "joe@g.com", 
+                 phoneNumber: "40302",
+                googleApiKey: undefined}));
 
         const block2 = new ZincBlock()
             .add(new TextElement("# This is a title \n Hello World 2 \n\n ### This **is Subtitle** and [this is link](www.google.com) \n * Yo 1\n * Yo2 \n\n\n > Blokc **quotye** `inline` \n\n ```python\nprint(HelloWorld)\n```"));
