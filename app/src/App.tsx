@@ -1,8 +1,6 @@
 import React from 'react';
-import ZincContent from './zinc/zincContent';
-import ApiFetcher from './ApiFetcher';
-import ContentPage from './utils/layout/ContentPage/ContentPage';
-import ZincGenerator from './utils/generator/ZincGenerator';
+import ZincContent from './injected/content/zincContent';
+import SiteGenerator from './utils/structure/SiteGenerator';
 
 const App: React.FC = () => {
   
@@ -10,7 +8,7 @@ const App: React.FC = () => {
   return (
     <div className="App">
 
-      <ZincGenerator content={zincContent}/>
+      <SiteGenerator content={zincContent}/>
 
     </div>
   );

@@ -1,17 +1,18 @@
 import React from 'react';
-import IDisplayableElement from '../IDisplayElement';
-import HeaderModel from '../../zinc/interface/header/HeaderModel';
+import HeaderModel from './HeaderModel';
+import DisplayableElement from '../../utils/structure/DisplayableElement';
 
 
-class Header implements IDisplayableElement {
+class Header extends DisplayableElement {
 
     private model: HeaderModel;
     
     constructor(model: HeaderModel) {
+        super();
         this.model = model;
     }
 
-    render() {
+    protected internalRender() {
         return <HeaderJSX {...this.model}/>;
     }
 }

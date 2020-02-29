@@ -1,6 +1,6 @@
 import React from 'react';
 import OpeningHoursModel, { OpeningHoursSlot } from "./OpeningHoursModel";
-import DisplayableElement from '../DisplayableElement';
+import DisplayableElement from '../../utils/structure/DisplayableElement';
 
 
 class OpeningHours extends DisplayableElement {

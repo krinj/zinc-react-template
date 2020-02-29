@@ -1,31 +1,31 @@
 import React from 'react';
-import ZincContentInterface from '../../zinc/ZincContentInterface';
-import ContentPage from '../layout/ContentPage/ContentPage';
-import ContentBlock from '../layout/ContentBlock/ContentBlock';
-import ZincPage from '../../zinc/structure/ZincPage';
-import ZincBlock from '../../zinc/structure/ZincBlock';
+import ZincContentInterface from './SiteContentInterface';
+import ContentPage from './ContentPage/ContentPage';
+import ContentBlock from './ContentBlock/ContentBlock';
+import ContentPageModel from './ContentPage/ContentPageModel';
+import ContentBlockModel from './ContentBlock/ContentBlockModel';
 
 // This class generates the entire site from the content object.
 
-interface ZincGeneratorProps {
+interface SiteGeneratorProps {
     content: ZincContentInterface
 }
 
-const createBlocksFromPage = (pageModel: ZincPage): JSX.Element[] => {
+const createBlocksFromPage = (pageModel: ContentPageModel): JSX.Element[] => {
 
     const contentBlocks: Array<JSX.Element> = [];
     
     for (let i: number = 0; i < pageModel.blocks.length; i++) {
-        const blockModel: ZincBlock = pageModel.blocks[i];
+        const blockModel: ContentBlockModel = pageModel.blocks[i];
         const contentBlock: JSX.Element = <ContentBlock elements={blockModel.elements} key={i} />
         contentBlocks.push(contentBlock);
     }
     return contentBlocks;
 }
 
-const ZincGenerator: React.FC<ZincGeneratorProps> = (props) => {
+const SiteGenerator: React.FC<SiteGeneratorProps> = (props) => {
 
-    const pageModel: ZincPage = props.content.getPage();
+    const pageModel: ContentPageModel = props.content.getPage();
     const contentBlocks = createBlocksFromPage(pageModel);
     const contentPage = <ContentPage 
         contentBlocks={contentBlocks} 
@@ -38,4 +38,4 @@ const ZincGenerator: React.FC<ZincGeneratorProps> = (props) => {
     </div>
 }
 
-export default ZincGenerator;
+export default SiteGenerator;

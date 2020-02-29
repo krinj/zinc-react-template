@@ -1,5 +1,5 @@
 import React from 'react';
-import DisplayableElement from '../DisplayableElement';
+import DisplayableElement from '../../utils/structure/DisplayableElement';
 import LocationModel from './LocationModel';
 
 

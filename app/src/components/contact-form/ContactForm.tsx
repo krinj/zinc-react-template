@@ -1,5 +1,5 @@
 import React from 'react';
-import DisplayableElement from '../DisplayableElement';
+import DisplayableElement from '../../utils/structure/DisplayableElement';
 import ContactFormModel from './ContactFormModel';
 import ContactFormField, {FieldType} from './ContactFormField';
 import ContactFormTextArea from './ContactFormTextArea';

@@ -1,9 +1,9 @@
 import React from 'react';
-import IDisplayableElement from '../../../components/IDisplayElement';
 import "../../../style/style.css"
+import DisplayableElement from '../DisplayableElement';
 
 interface ContentBlockProps {
-    elements: IDisplayableElement[],
+    elements: DisplayableElement[],
     height?: number
 }
 

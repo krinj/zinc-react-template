@@ -1,9 +1,9 @@
 import React from "react";
 import ContentBlock from "./ContentBlock";
-import IDisplayableElement from "../../../components/IDisplayElement";
+import DisplayableElement from "../DisplayableElement";
 
 
-const wrapWithContentBlock = (element: IDisplayableElement, key?: string) => {
+const wrapWithContentBlock = (element: DisplayableElement, key?: string) => {
     return <ContentBlock elements={[element]} key={key} />
 }
 

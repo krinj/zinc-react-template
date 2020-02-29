@@ -1,5 +1,5 @@
 import React from 'react';
-import DisplayableElement from '../DisplayableElement';
+import DisplayableElement from '../../utils/structure/DisplayableElement';
 import FeatureItemModel from './FeatureItemModel';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 

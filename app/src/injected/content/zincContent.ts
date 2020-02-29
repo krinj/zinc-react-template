@@ -1,30 +1,30 @@
 // Component Imports
-import ZincContentInterface from "./ZincContentInterface";
-import ZincBlock from "./structure/ZincBlock";
-import TextElement from "../components/text/TextElement";
-import Card from "../components/card/Card";
-import OpeningHours from "../components/opening-hours/OpeningHoursElement";
-import ContactForm from "../components/contact-form/ContactForm";
-import FeatureList from "../components/feature-list/FeatureList";
-import FeatureItemModel from "../components/feature-list/FeatureItemModel";
-import Gallery from "../components/gallery/Gallery";
-import Location from "../components/location/Location";
-import ContactModel from "../components/common/ContactModel";
+import ZincContentInterface from "../../utils/structure/SiteContentInterface";
+import ContentBlockModel from "../../utils/structure/ContentBlock/ContentBlockModel";
+import Card from "../../components/card/Card";
+import OpeningHours from "../../components/opening-hours/OpeningHoursElement";
+import ContactForm from "../../components/contact-form/ContactForm";
+import FeatureList from "../../components/feature-list/FeatureList";
+import FeatureItemModel from "../../components/feature-list/FeatureItemModel";
+import Gallery from "../../components/gallery/Gallery";
+import Location from "../../components/location/Location";
+import ContactModel from "../../components/common/ContactModel";
 
 // Media Imports
-import photo1path from "../injected/images/gallery_5.png";
-import squareIcon from "../injected/images/square_icon.svg";
-import gallery1 from "../injected/images/gallery_1.png";
-import gallery2 from "../injected/images/gallery_2.png";
-import gallery3 from "../injected/images/gallery_3.png";
-import gallery4 from "../injected/images/gallery_4.png";
-import gallery5 from "../injected/images/gallery_5.png";
-import gallery6 from "../injected/images/gallery_6.png";
+import photo1path from "../images/gallery_5.png";
+import squareIcon from "../images/square_icon.svg";
+import gallery1 from "../images/gallery_1.png";
+import gallery2 from "../images/gallery_2.png";
+import gallery3 from "../images/gallery_3.png";
+import gallery4 from "../images/gallery_4.png";
+import gallery5 from "../images/gallery_5.png";
+import gallery6 from "../images/gallery_6.png";
 
 // Import Font Icons
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { faFacebookSquare } from '@fortawesome/free-brands-svg-icons';
+import TextSection from "../../components/text-section/TextSection";
 
 
 
@@ -36,18 +36,14 @@ class ZincContent extends ZincContentInterface {
 
         this.setApiEndpoint("https://api.zinccli.com/")
 
-        this.addBody('This is injected content!');
-        this.addBody('This is injected content!');
-        this.addBody('This is injected content!');
-
         const contactModel: ContactModel = {
             name: "Happy House Inc",
             facebook: {label: "HappyHouse", link: "facebook.com/happyhouse"},
             instagram: {label: "HappyHouse", link: "instagram.com/happyhouse"}
         }
 
-        const block1 = new ZincBlock()
-            .add(new TextElement("Hello World 1"))
+        const block1 = new ContentBlockModel()
+            .add(new TextSection({body: "Hello World 1"}))
             .add(new Location({
                 displayAddress: "2 Park Street, Sydney, NSW",
                  mapAddress: "2 Park Street, Sydney, NSW", 
@@ -55,10 +51,10 @@ class ZincContent extends ZincContentInterface {
                  phoneNumber: "40302",
                 googleApiKey: undefined}));
 
-        const block2 = new ZincBlock()
-            .add(new TextElement("# This is a title \n Hello World 2 \n\n ### This **is Subtitle** and [this is link](www.google.com) \n * Yo 1\n * Yo2 \n\n\n > Blokc **quotye** `inline` \n\n ```python\nprint(HelloWorld)\n```"));
+        const block2 = new ContentBlockModel()
+            .add(new TextSection({body: "# This is a title \n Hello World 2 \n\n ### This **is Subtitle** and [this is link](www.google.com) \n * Yo 1\n * Yo2 \n\n\n > Blokc **quotye** `inline` \n\n ```python\nprint(HelloWorld)\n```"}));
 
-        const block3 = new ZincBlock()
+        const block3 = new ContentBlockModel()
             .add(new Card({
                 title: "CardT", 
                 body: "Some quick example text to build on the card title and make up the bulk of the card's content.", 
@@ -83,7 +79,7 @@ class ZincContent extends ZincContentInterface {
         ]
         const featureList: FeatureList = new FeatureList({feautureItemModels: featureItems});
         
-        const block4 = new ZincBlock()
+        const block4 = new ContentBlockModel()
             .add(new ContactForm({title: "Contact Us", body: "Get a FREE quote!", requireName: true, requirePhone: true, requireNotes: true}))
             .add(featureList)
 
@@ -94,7 +90,7 @@ class ZincContent extends ZincContentInterface {
             ],
             imageColMd: 4
         });
-        const block5 = new ZincBlock()
+        const block5 = new ContentBlockModel()
             .add(galleryElement);
 
         this.page.add(block1).add(block2).add(block3).add(block4).add(block5);
