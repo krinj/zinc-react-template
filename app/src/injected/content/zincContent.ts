@@ -80,7 +80,7 @@ class ZincContent extends ZincContentInterface {
         const featureList: FeatureList = new FeatureList({feautureItemModels: featureItems});
         
         const block4 = new ContentBlockModel()
-            .add(new ContactForm({title: "Contact Us", body: "Get a FREE quote!", requireName: true, requirePhone: true, requireNotes: true}))
+            .add(new ContactForm({title: "Contact Us", contactFormApi: this.getEndpoint("contact"), body: "Get a FREE quote!", requireName: true, requirePhone: true, requireNotes: true}))
             .add(featureList)
 
 

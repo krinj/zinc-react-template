@@ -5,21 +5,27 @@ interface ApiFetcherProps {
     zincContent: ZincContentInterface
 }
 
+const invokeApi = (endpoint: string, onResponseReceived:(x: any) => void, onError:(x: any) => void) => {
+
+    console.log("Getting from API: " + endpoint);
+    fetch(endpoint, {method: "GET"})
+        .then(res => res.json())
+        .then(response => {
+            onResponseReceived(response)
+        })
+        .catch(error => onError(error));
+
+}
+
 const ApiFetcher: React.FC<ApiFetcherProps> = (props) => {
 
     const [payload, setPayload] = React.useState("Unknown State");
+    const apiUrl: string = props.zincContent.getEndpoint("example")
 
     const onUseEffect = () => {
-        const apiUrl: string = props.zincContent.getEndpoint("example")
-        console.log("Getting from API: " + apiUrl);
-        fetch(apiUrl, {method: "GET"})
-            .then(res => res.json())
-            .then(response => {
-                setPayload(response.body)
-            })
-            .catch(error => console.log(error));
+        invokeApi(apiUrl, setPayload, console.log)
     }
-
+    
     React.useEffect(onUseEffect);
 
     return <div>

@@ -3,6 +3,7 @@ import DisplayableElement from '../../utils/structure/DisplayableElement';
 import ContactFormModel from './ContactFormModel';
 import ContactFormField, {FieldType} from './ContactFormField';
 import ContactFormTextArea from './ContactFormTextArea';
+import { invokePostApi } from '../../api/api';
 
 const DEFAULT_BUTTON_TEXT: string = "Submit";
 
@@ -38,7 +39,27 @@ interface ContactFormClickProps {
 const onContactFormClick = (props: ContactFormClickProps) => {
     console.log(props);
     props.setFormState(FormState.PENDING);
-    setTimeout((e) => props.setFormState(FormState.SUCCESS), 5000);
+    const payload = {
+        name: props.name,
+        email: props.email,
+        phone: props.phoneNumber,
+        notes: props.notes
+    };
+    invokePostApi("https://api.zinccli.com/contact", payload, x => onContactFormResponse(x, props), x => onContactFormError(x, props))
+}
+
+const onContactFormResponse = (response: any, props: ContactFormClickProps) => {
+    console.log(response);
+    if (response.statusCode && response.statusCode == "200") {
+        props.setFormState(FormState.SUCCESS);
+    } else {
+        props.setFormState(FormState.FAILED);
+    }
+}
+
+const onContactFormError = (response: object, props: ContactFormClickProps) => {
+    console.log(response);
+    props.setFormState(FormState.FAILED);
 }
 
 const createContactFormField = (label: string, type: FieldType, isDisabled: boolean, hook: [string, (x: string) => void]): [string, JSX.Element] => {

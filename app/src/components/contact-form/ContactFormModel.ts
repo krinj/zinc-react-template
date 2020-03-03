@@ -1,6 +1,8 @@
 interface ContactFormModel {
 
     title: string;
+    contactFormApi: string;
+
     body?: string;
     buttonText?: string;
 
