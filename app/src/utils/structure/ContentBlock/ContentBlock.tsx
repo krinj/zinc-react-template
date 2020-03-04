@@ -4,7 +4,8 @@ import DisplayableElement from '../DisplayableElement';
 
 interface ContentBlockProps {
     elements: DisplayableElement[],
-    height?: number
+    height?: number,
+    color?: string
 }
 
 const getElementSize = (numberOfElements: number) => {
@@ -32,7 +33,12 @@ const getElementSize = (numberOfElements: number) => {
 
 const ContentBlock: React.FC<ContentBlockProps> = (props) => {
 
-    const blockStyle = {width: "100%", height: "auto"};
+    const blockStyle = {
+        width: "100%", 
+        height: "auto",
+        backgroundColor: props.color
+    };
+    
     if (props.height !== undefined) {
         blockStyle.height = `${props.height}px`;
     }
@@ -41,7 +47,6 @@ const ContentBlock: React.FC<ContentBlockProps> = (props) => {
     const elementSize: string = getElementSize(props.elements.length);
 
     for (let i: number = 0; i < props.elements.length; i++) {
-        const key: string = i.toString();
         const renderedElement: JSX.Element = props.elements[i].render();
         const renderedContainer: JSX.Element = <div className={elementSize} key={`block${i}`}>{renderedElement}</div>
         renderedElements.push(renderedContainer);

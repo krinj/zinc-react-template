@@ -1,5 +1,5 @@
 // Component Imports
-import ZincContentInterface from "../../utils/structure/SiteContentInterface";
+import SiteContentInterface from "../../utils/structure/SiteContentInterface";
 import ContentBlockModel from "../../utils/structure/ContentBlock/ContentBlockModel";
 import Card from "../../components/card/Card";
 import OpeningHours from "../../components/opening-hours/OpeningHoursElement";
@@ -9,6 +9,9 @@ import FeatureItemModel from "../../components/feature-list/FeatureItemModel";
 import Gallery from "../../components/gallery/Gallery";
 import Location from "../../components/location/Location";
 import ContactModel from "../../components/common/ContactModel";
+
+// Import Text Content.
+import sampleSection from "./text/sampleSection.md";
 
 // Media Imports
 import photo1path from "../images/gallery_5.png";
@@ -28,7 +31,7 @@ import TextSection from "../../components/text-section/TextSection";
 
 
 
-class ZincContent extends ZincContentInterface {
+class ZincContent extends SiteContentInterface {
     constructor () {
         super();
 
@@ -42,7 +45,7 @@ class ZincContent extends ZincContentInterface {
             instagram: {label: "HappyHouse", link: "instagram.com/happyhouse"}
         }
 
-        const block1 = new ContentBlockModel()
+        const block1 = new ContentBlockModel("#cccccc")
             .add(new TextSection({body: "Hello World 1"}))
             .add(new Location({
                 displayAddress: "2 Park Street, Sydney, NSW",
@@ -52,7 +55,7 @@ class ZincContent extends ZincContentInterface {
                 googleApiKey: undefined}));
 
         const block2 = new ContentBlockModel()
-            .add(new TextSection({body: "# This is a title \n Hello World 2 \n\n ### This **is Subtitle** and [this is link](www.google.com) \n * Yo 1\n * Yo2 \n\n\n > Blokc **quotye** `inline` \n\n ```python\nprint(HelloWorld)\n```"}));
+            .add(new TextSection({body: "Loading", markdownPath: sampleSection}));
 
         const block3 = new ContentBlockModel()
             .add(new Card({
@@ -93,7 +96,7 @@ class ZincContent extends ZincContentInterface {
         const block5 = new ContentBlockModel()
             .add(galleryElement);
 
-        this.page.add(block1).add(block2).add(block3).add(block4).add(block5);
+        this.getIndexPage().add(block1).add(block2).add(block3).add(block4).add(block5);
 
         this.footerModel.height = 80;
         this.footerModel.contactModel = contactModel;

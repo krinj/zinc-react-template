@@ -1,5 +1,5 @@
 import React from 'react';
-import ZincContentInterface from './SiteContentInterface';
+import SiteContentInterface from './SiteContentInterface';
 import ContentPage from './ContentPage/ContentPage';
 import ContentBlock from './ContentBlock/ContentBlock';
 import ContentPageModel from './ContentPage/ContentPageModel';
@@ -8,7 +8,7 @@ import ContentBlockModel from './ContentBlock/ContentBlockModel';
 // This class generates the entire site from the content object.
 
 interface SiteGeneratorProps {
-    content: ZincContentInterface
+    content: SiteContentInterface
 }
 
 const createBlocksFromPage = (pageModel: ContentPageModel): JSX.Element[] => {
@@ -17,7 +17,7 @@ const createBlocksFromPage = (pageModel: ContentPageModel): JSX.Element[] => {
     
     for (let i: number = 0; i < pageModel.blocks.length; i++) {
         const blockModel: ContentBlockModel = pageModel.blocks[i];
-        const contentBlock: JSX.Element = <ContentBlock elements={blockModel.elements} key={i} />
+        const contentBlock: JSX.Element = <ContentBlock elements={blockModel.elements} key={i} color={blockModel.color}/>
         contentBlocks.push(contentBlock);
     }
     return contentBlocks;
@@ -25,7 +25,7 @@ const createBlocksFromPage = (pageModel: ContentPageModel): JSX.Element[] => {
 
 const SiteGenerator: React.FC<SiteGeneratorProps> = (props) => {
 
-    const pageModel: ContentPageModel = props.content.getPage();
+    const pageModel: ContentPageModel = props.content.getIndexPage();
     const contentBlocks = createBlocksFromPage(pageModel);
     const contentPage = <ContentPage 
         contentBlocks={contentBlocks} 

@@ -1,21 +1,24 @@
 import ContentPageModel from "./ContentPage/ContentPageModel";
 import HeaderModel from "../../components/header/HeaderModel";
-
-// Image Imports
 import FooterModel from "../../components/footer/FooterModel";
 
 
-abstract class ZincContentInterface {
+interface PageMap { [key: string]: ContentPageModel; }
+
+
+abstract class SiteContentInterface {
 
     public UNDEFINED: string = "Undefined";
-    public apiEndpoint: string = this.UNDEFINED;
-    public page: ContentPageModel = new ContentPageModel();
+    private apiEndpoint: string = this.UNDEFINED;
+    public pages: PageMap = {
+        index: new ContentPageModel()
+    };
 
     public headerModel: HeaderModel = {
-        title: "Big Company Co",
-        subtitle: "The place where the magic happens.",
-        phone: "0823493200",
-        email: "hello@bigco.com",
+        title: "Default Company Header",
+        subtitle: "Company Subtitle Text",
+        phone: "0480500800",
+        email: "hello@gmail.com",
     };
 
     public footerModel: FooterModel = {
@@ -31,14 +34,9 @@ abstract class ZincContentInterface {
         this.apiEndpoint = endpoint;
     }
 
-    public addPage() {
-        return this.page; 
+    public getIndexPage() {
+        return this.pages.index;
     }
-
-    public getPage() {
-        return this.page;
-    }
-
 }
 
-export default ZincContentInterface
+export default SiteContentInterface

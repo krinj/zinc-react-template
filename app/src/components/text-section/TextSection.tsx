@@ -19,7 +19,20 @@ class TextSection extends DisplayableElement {
 }
 
 const TextSectionJSX: React.FC<TextSectionModel> = (props) => {
-    return <div className="dev-green"><Markdown>{props.body}</Markdown></div>
+
+    const [body, setBody] = React.useState(props.body);
+    const [isLoaded, setIsLoaded] = React.useState(false);
+
+    if (props.markdownPath !== undefined && !isLoaded) {
+        fetch(props.markdownPath)
+        .then(x => x.text())
+        .then(x => {
+            setBody(x);
+            setIsLoaded(true);
+        });
+    }
+
+    return <div className="dev-green"><Markdown>{body}</Markdown></div>
 }
 
 export default TextSection;
