@@ -2,6 +2,8 @@ import React from 'react';
 import HeaderModel from './HeaderModel';
 import DisplayableElement from '../../utils/structure/DisplayableElement';
 import ContactModel from '../common/ContactModel';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
 
 
 class Header extends DisplayableElement {
@@ -41,18 +43,34 @@ const createLogoElement = (title: string, image?: string): JSX.Element => {
     </div>;
 }
 
+const createContactElement = (iconString: IconProp, text?: string): JSX.Element => {
+    const iconElement: JSX.Element = <FontAwesomeIcon icon={iconString} />;
+    return <div><p className="no-margin" style={{fontSize: "1.2em"}}>{iconElement} {text}</p></div>;
+}
+
+const createContactBar = (contact: ContactModel): JSX.Element => {
+
+    const phoneElement = createContactElement("phone", contact.phoneNumber);
+    const emailElement = createContactElement("envelope", contact.email);
+
+    return <div className="dev col-md-4 no-padding">
+        <div style={{display: "flex", height: "100%"}}>
+            <div style={{marginTop: "auto", marginBottom: "auto",marginLeft: "auto", textAlign: "left"}}>
+                {phoneElement}
+                {emailElement}
+            </div>
+        </div>
+    </div>
+}
+
 const HeaderJSX: React.FC<HeaderModel> = (props) => {
 
     let contactElement: JSX.Element | null = null;
     let logoCol: string = "col-md-12";
     
     if (props.showContact && props.contactModel !== undefined) {
-        const cm: ContactModel = props.contactModel;
-        contactElement = <div className="dev col-md-6 no-padding">
-            <p>Phone: {cm.phoneNumber} | Email: {cm.email}</p>
-        </div>
-
-        logoCol = "col-md-6";
+        contactElement = createContactBar(props.contactModel);
+        logoCol = "col-md-8";
     }
 
     return <div className="dev">

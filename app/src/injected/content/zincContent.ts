@@ -24,7 +24,7 @@ import gallery6 from "../images/gallery_6.png";
 
 // Import Font Icons
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faCheck } from '@fortawesome/free-solid-svg-icons';
+import { faCheck, faPhone, faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import { faFacebookSquare } from '@fortawesome/free-brands-svg-icons';
 import TextSection from "../../components/text-section/TextSection";
 import DisplayableElement from "../../utils/structure/DisplayableElement";
@@ -190,7 +190,7 @@ class ZincContent extends SiteContentInterface {
             title: "Default Title",
             subtitle: "Subtitle Text",
             logoImagePath: logo,
-            showContact: false
+            showContact: true
         })
     }
 
@@ -207,7 +207,7 @@ class ZincContent extends SiteContentInterface {
     }
 
     private registerIconLibrary = (): void => {
-        library.add(faCheck, faFacebookSquare);
+        library.add(faCheck, faPhone, faEnvelope, faFacebookSquare);
     }
 
     // ==========================================================================================
