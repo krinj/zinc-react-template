@@ -14,7 +14,7 @@ import sampleSection from "./text/sampleSection.md";
 
 // Media Imports
 import photo1path from "../images/gallery_5.png";
-import squareIcon from "../images/square_icon.svg";
+import logo from "../images/logo.svg";
 import gallery1 from "../images/gallery_1.png";
 import gallery2 from "../images/gallery_2.png";
 import gallery3 from "../images/gallery_3.png";
@@ -72,7 +72,8 @@ class ZincContent extends SiteContentInterface {
             body: "Get a FREE quote!", 
             requireName: true, 
             requireEmail: true,
-            requireNotes: true});
+            requireNotes: true
+        });
         
         this.addElementsAsNewBlock(textElement, contactForm);
     }
@@ -187,7 +188,9 @@ class ZincContent extends SiteContentInterface {
     private populateHeader = (): void => {
         this.setHeaderModel({
             title: "Default Title",
-            subtitle: "Subtitle Text"
+            subtitle: "Subtitle Text",
+            logoImagePath: logo,
+            showContact: false
         })
     }
 

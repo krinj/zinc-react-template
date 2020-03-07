@@ -1,9 +1,9 @@
 .dev {
-    /* border: 1px dashed #ccc; */
+    border: 1px dashed #bbb;
 }
 
 .dev-green {
-    /* border: 1px dashed lime; */
+    border: 1px dashed #bbb;
 }
 
 .content-block:nth-child(odd) {
@@ -21,3 +21,52 @@
 .content-block-footer {
     background-color: #ccc !important;
 }
+
+.no-margin {
+    margin: 0px;
+}
+
+.no-padding {
+    padding: 0px;
+}
+
+.header-logo {
+    max-height: 4rem;
+    margin: auto;
+}
+
+/* @media only screen and (max-width: 1200px) {
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    h3, h4, h5 {
+        font-size: large;
+    }
+} */
+
+
+@media only screen and (max-width: 768px) {
+    .header-logo {
+        max-height: 2.8rem;
+    }
+
+    .header-title {
+        width: 100%;
+        text-align: center;
+    }
+
+    .header-logo-margin {
+        margin-left: calc(-2.8em - 16px);
+    }
+
+    h1, h2 {
+        font-size: x-large;
+    }
+
+    h3, h4, h5 {
+        font-size: large;
+    }
+}
+
+

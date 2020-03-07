@@ -5,6 +5,7 @@ interface HeaderModel {
     subtitle?: string;
     contactModel?: ContactModel;
     logoImagePath?: string;
+    showContact?: boolean;
 }
 
 export default HeaderModel;
