@@ -3,9 +3,10 @@ import "../../../style/style.css"
 import DisplayableElement from '../DisplayableElement';
 
 interface ContentBlockProps {
-    elements: DisplayableElement[],
-    height?: number,
-    color?: string
+    elements: DisplayableElement[];
+    height?: number;
+    color?: string;
+    classOverride?: string;
 }
 
 const getElementSize = (numberOfElements: number) => {
@@ -38,9 +39,19 @@ const ContentBlock: React.FC<ContentBlockProps> = (props) => {
         height: "auto",
         backgroundColor: props.color
     };
+
+    const contentHolderStyle = {
+        height: "100%",
+        padding: "1rem"
+    }
     
     if (props.height !== undefined) {
         blockStyle.height = `${props.height}px`;
+    }
+
+    let blockClass: string = "content-block dev";
+    if (props.classOverride) {
+        blockClass += " " + props.classOverride;
     }
 
     const renderedElements: Array<JSX.Element> = [];
@@ -52,9 +63,9 @@ const ContentBlock: React.FC<ContentBlockProps> = (props) => {
         renderedElements.push(renderedContainer);
     }
 
-    return <div className="dev" style={blockStyle}>
-        <div className="dev container" style={{height: "100%"}}>
-            <div className="dev row" style={{height: "100%"}}>{renderedElements}</div>
+    return <div className={blockClass} style={blockStyle}>
+        <div className="container dev" style={contentHolderStyle}>
+            <div className="row" style={{height: "100%"}}>{renderedElements}</div>
         </div>
     </div>
 }

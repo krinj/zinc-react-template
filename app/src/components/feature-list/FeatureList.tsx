@@ -21,7 +21,7 @@ class FeatureList extends DisplayableElement {
 
 const FeatureListJSX: React.FC<FeatureListModel> = (props) => {
 
-    const title: string = props.title === undefined ? "Features" : props.title;
+    const titleElement: JSX.Element | null = props.title ? <h2>{props.title}</h2> : null;
     const featureListItems: JSX.Element[] = [];
 
     for (let i: number = 0; i < props.feautureItemModels.length; i++) {
@@ -32,8 +32,8 @@ const FeatureListJSX: React.FC<FeatureListModel> = (props) => {
     }
 
     return <>
-    <h2>{title}</h2>
-    {featureListItems}
+        {titleElement}
+        {featureListItems}
     </>
 }
 

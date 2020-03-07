@@ -89,8 +89,13 @@ const GalleryJSX: React.FC<GalleryModel> = (props) => {
     const lightbox: JSX.Element | null = isOpen ? createLightBox(index, props.images, setIndex, setIsOpen) : null;
     const negativePadding: string = `-${GALLERY_PADDING}px`;
 
+    // Description Elements.
+    const titleElement: JSX.Element | null = props.title ? <h2>{props.title}</h2> : null;
+    const bodyElement: JSX.Element | null = props.body ? <>{props.body}</> : null;
+
     return <>
-        <h2>Gallery</h2>
+        {titleElement}
+        {bodyElement}
         <div className="row" style={{marginLeft: negativePadding, marginRight: negativePadding}}>{gallery}</div>
         {lightbox}
     </>

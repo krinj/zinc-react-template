@@ -2,6 +2,7 @@ import React from 'react';
 import DisplayableElement from '../../utils/structure/DisplayableElement';
 import FeatureItemModel from './FeatureItemModel';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Markdown from 'markdown-to-jsx';
 
 
 class FeatureItem extends DisplayableElement {
@@ -20,14 +21,7 @@ class FeatureItem extends DisplayableElement {
 
 const FeatureItemJSX: React.FC<FeatureItemModel> = (props) => {
 
-    let linkElement: JSX.Element | null = null;
-    let linkTitle: string = props.linkText === undefined ? "Click Here" : props.linkText;
-
-    if (props.linkUrl !== undefined) {
-        linkElement = <a href={props.linkUrl}>{linkTitle}</a>
-    }
-
-    const iconElement: JSX.Element | null = props.fontIcon === undefined ? null : <FontAwesomeIcon icon={props.fontIcon} />
+    const iconElement: JSX.Element | null = props.icon === undefined ? null : <FontAwesomeIcon icon={props.icon} />
     let priceLabel: JSX.Element | null = null;
 
     if (props.price !== undefined) {
@@ -38,14 +32,13 @@ const FeatureItemJSX: React.FC<FeatureItemModel> = (props) => {
     }
 
     const leftSection = <div style={{width: "64px", display: "flex"}} className="text-center">
-        <img src={props.imagePath} />
-        <div style={{fontSize: "1.6em", margin: "auto"}}>{iconElement}</div>
+        <div style={{fontSize: "1.4em", margin: "auto"}}>{iconElement}</div>
     </div>
 
     const centralSection = <div style={{flexGrow: 1, display: "flex"}}>
         <div>
             <h4>{props.title}</h4>
-            <span>{props.body}<br/>{linkElement}</span>
+            <span><Markdown>{props.body}</Markdown></span>
         </div>
     </div>;
 

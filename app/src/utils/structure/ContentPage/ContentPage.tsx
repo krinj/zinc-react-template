@@ -16,7 +16,8 @@ interface ContentPageProps {
 const wrappedFooter = (model: FooterModel) => {
     return <ContentBlock 
         elements={[new Footer(model)]} 
-        height={model.height}/>;
+        height={model.height}
+        classOverride="content-block-footer"/>;
 }
 
 const ContentPage: React.FC<ContentPageProps> = (props) => {
@@ -35,8 +36,8 @@ const ContentPage: React.FC<ContentPageProps> = (props) => {
     }
 
     const wrappedBodyAndHeader = <div style={{minHeight: `calc(100vh - ${FOOTER_HEIGHT}px)`}}>
-        {headerBlock}
-        {props.contentBlocks}
+            {headerBlock}
+            {props.contentBlocks}
         </div>;
 
     return <>

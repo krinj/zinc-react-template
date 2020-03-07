@@ -1,7 +1,12 @@
 interface CardModel {
+    title?: string;
+    body?: string;
+
     imagePath?: string;
-    title: string;
-    body: string;
+    imageAlt?: string;
+    
+    callToActionLabel?: string;
+    callToActionLink?: string;
 }
 
 export default CardModel;

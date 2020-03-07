@@ -2,15 +2,13 @@ import { IconProp } from "@fortawesome/fontawesome-svg-core";
 
 interface FeatureItemModel {
 
+    // Text
     title: string;
     body?: string;
 
-    imagePath?: string;
-    fontIcon?: IconProp;
+    // Image
+    icon?: IconProp;
 
-    linkUrl?: string;
-    linkText?: string;
-    
     // Pricing
     price?: string;
     priceCaption?: string;

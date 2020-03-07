@@ -6,7 +6,9 @@ export interface OpeningHoursSlot {
 
 
 interface OpeningHoursModel {
+    title?: string;
     slots: OpeningHoursSlot[];
+    showPublicHolidayMessage?: boolean;
 }
 
 export default OpeningHoursModel;

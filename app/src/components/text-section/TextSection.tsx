@@ -2,6 +2,7 @@ import React from 'react';
 import DisplayableElement from '../../utils/structure/DisplayableElement';
 import TextSectionModel from './TextSectionModel';
 import Markdown from 'markdown-to-jsx';
+import CallToActionButton from '../common/CallToActionButton';
 
 
 class TextSection extends DisplayableElement {
@@ -42,8 +43,17 @@ const TextSectionJSX: React.FC<TextSectionModel> = (props) => {
         });
     }
 
+    const callToActionElement: JSX.Element | null = props.callToActionLink ?
+        <div style={{marginTop: "2rem"}}>
+            <CallToActionButton label={props.callToActionLabel} link={props.callToActionLink} extraClass="btn-lg" />
+        </div> :
+        null;
+
     return <div className={classString} style={style}>
-        <div style={{margin: "auto"}}><Markdown>{body}</Markdown></div>
+        <div style={{margin: "auto"}}>
+            <Markdown>{body}</Markdown>
+            {callToActionElement}
+        </div>
     </div>
 }
 

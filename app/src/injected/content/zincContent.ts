@@ -8,7 +8,6 @@ import FeatureList from "../../components/feature-list/FeatureList";
 import FeatureItemModel from "../../components/feature-list/FeatureItemModel";
 import Gallery from "../../components/gallery/Gallery";
 import Location from "../../components/location/Location";
-import ContactModel from "../../components/common/ContactModel";
 
 // Import Text Content.
 import sampleSection from "./text/sampleSection.md";
@@ -48,15 +47,16 @@ class ZincContent extends SiteContentInterface {
     // ==========================================================================================
 
     private addCustomContent = (): void => {
-        this.addBlock1();
+        this.addBlockWithForm();
         this.addBlock2();
         this.addBlockGallery();
         this.addBlockCenteredText();
-        this.addBlock3();
-        this.addBlock4();
+        this.addBlockWithCards();
+        this.addBlockWithHoursAndLocation();
+        this.addBlockWithFeatures();
     }
 
-    private addBlock1 = (): void => {
+    private addBlockWithForm = (): void => {
 
         const textBody: string = 
 
@@ -65,13 +65,16 @@ class ZincContent extends SiteContentInterface {
         "* Example 1 \n* Example 2 \n* Example 3 \n\n";
 
         const textElement = new TextSection({body: textBody})
-        const locationElement = new Location({
-            title: "Our Location",
-            displayAddress: "2 Park Street\n2000\nSydney, NSW",
-            mapAddress: "2 Park Street, Sydney, NSW", 
-            contactModel: this.getContactModel(),
-            googleApiKey: this.getGoogleMapApiKey()});
-        this.addElementsAsNewBlock(textElement, locationElement);
+
+        const contactForm = new ContactForm({
+            title: "Contact Us", 
+            contactFormApi: this.getEndpoint("contact"), 
+            body: "Get a FREE quote!", 
+            requireName: true, 
+            requireEmail: true,
+            requireNotes: true});
+        
+        this.addElementsAsNewBlock(textElement, contactForm);
     }
 
     private addBlock2 = (): void => {
@@ -79,12 +82,21 @@ class ZincContent extends SiteContentInterface {
         this.addElementsAsNewBlock(textElement);
     }
 
-    private addBlock3 = (): void => {
+    private addBlockWithCards = (): void => {
         const card = new Card({
-            title: "CardT", 
-            body: "Some quick example text to build on the card title and make up the bulk of the card's content.", 
-            imagePath: photo1path});
+            title: "Card Title", 
+            body: "**This is a simple card element.** Markdown is also enabled on this body section.",
+            imagePath: "https://placekeanu.com/320/200/",
+            callToActionLink: "https://google.com"
+        });
+
+        this.addElementsAsNewBlock(card, card, card);
+    }
+
+    private addBlockWithHoursAndLocation = (): void => {
+
         const openingHours = new OpeningHours({
+            showPublicHolidayMessage: true,
             slots: [
                 {day: "Monday", detail: "Closed", isOpen: false},
                 {day: "Tuesday", detail: "9:00 AM to 5:00 PM", isOpen: true},
@@ -96,34 +108,51 @@ class ZincContent extends SiteContentInterface {
             ]
         });
 
-        this.addElementsAsNewBlock(card, openingHours);
+        const locationElement = new Location({
+            title: "Our Location",
+            displayAddress: "2 Park Street\n2000\nSydney, NSW",
+            mapAddress: "2 Park Street, Sydney, NSW", 
+            contactModel: this.getContactModel(),
+            googleApiKey: this.getGoogleMapApiKey()});
+
+        this.addElementsAsNewBlock(openingHours, locationElement);
     }
 
-    private addBlock4 = (): void => {
+    private addBlockWithFeatures = (): void => {
 
+        const itemBody: string = "This is the **feature body** text with MD support.";
+        
         const featureItems: FeatureItemModel[] = [
-            {title: "Property Lending", body: "Discover the home load everyone is talking about.", imagePath: squareIcon},
-            {title: "Business Lending", body: "Get the best rates for business lending.", linkUrl: "www.google.com", fontIcon: "check", price: "$108"},
-            {title: "Business Lending", body: "Get the best rates for business lending.", fontIcon: "check", linkUrl: "www.google.com", linkText: "Subscribe", price: "$4"},
-            {title: "Business Lending", body: "Get the best rates for business lending.", fontIcon: "check", price: "$22", priceCaption: "Per Hour"}
+            {title: "Feature One", body: itemBody, price: "$99"},
+            {title: "Feature Two", body: itemBody, price: "$99"},
+            {title: "Feature Three", body: itemBody, price: "$99", priceCaption: "per hour"},
+            {title: "Feature Four", body: itemBody, price: "$99", priceCaption: "per day"},
         ]
-        const featureList: FeatureList = new FeatureList({feautureItemModels: featureItems});
-        
-        const contactForm = new ContactForm({
-            title: "Contact Us", 
-            contactFormApi: this.getEndpoint("contact"), 
-            body: "Get a FREE quote!", 
-            requireName: true, 
-            requireEmail: true,
-            requireNotes: true});
-        
-        this.addElementsAsNewBlock(featureList, contactForm);
+
+        const featureList: FeatureList = new FeatureList({
+            title: "Priced Features",
+            feautureItemModels: featureItems
+        });
+
+        const featureItemsWithIcon: FeatureItemModel[] = [
+            {title: "Feature One", body: itemBody, icon: faCheck},
+            {title: "Feature Two", body: itemBody, icon: faCheck},
+            {title: "Feature Three", body: itemBody, icon: faCheck},
+            {title: "Feature Four", body: itemBody, icon: faCheck},
+        ]
+
+        const featureListWithIcon: FeatureList = new FeatureList({
+            title: "Icon Features",
+            feautureItemModels: featureItemsWithIcon
+        });
+ 
+        this.addElementsAsNewBlock(featureList, featureListWithIcon);
     }
 
     private addBlockGallery = (): void => {
         const galleryElement = new Gallery({
             images: [gallery1, gallery2, gallery3, gallery4, gallery5, gallery6],
-            imageColMd: 4
+            imageColMd: 3
         });
 
         this.addElementsAsNewBlock(galleryElement);
@@ -131,9 +160,11 @@ class ZincContent extends SiteContentInterface {
 
     private addBlockCenteredText = (): void => {
         const textElement = new TextSection({
-            body: "## Centered Text Section \n\n ##### Text can also be centered for impact.",
+            body: "## Call To Action \n\n ##### Text can also be centered for impact.",
             centered: true,
-            minHeight: 240
+            minHeight: 240,
+            callToActionLink: "https://google.com",
+            callToActionLabel: "Press Me!"
         });
 
         this.addElementsAsNewBlock(textElement);

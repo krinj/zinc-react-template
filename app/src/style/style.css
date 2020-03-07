@@ -1,7 +1,23 @@
 .dev {
-    /* border: 1px solid gray; */
+    /* border: 1px dashed #ccc; */
 }
 
 .dev-green {
-    border: 1px solid green;
+    /* border: 1px dashed lime; */
+}
+
+.content-block:nth-child(odd) {
+    background-color: #e5e5e5;
+}
+
+.content-block:nth-child(even) {
+    background-color: #fff;
+}
+
+.content-block:first-child {
+    background-color: #ccc;
+}
+
+.content-block-footer {
+    background-color: #ccc !important;
 }

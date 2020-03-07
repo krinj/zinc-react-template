@@ -28,6 +28,13 @@ const renderOpeningHourSlot = (slot: OpeningHoursSlot, i: number) => {
 const OpeningHoursJSX: React.FC<OpeningHoursModel> = (props) => {
 
     const slots = [];
+    const title: string = props.title ? props.title : "Opening Hours";
+
+    let publicHolidayElement: JSX.Element | null = null;
+    if (props.showPublicHolidayMessage) {
+        const publicHolidayMessage: string = "Our hours may be different during public holidays. Please contact us for more details.";
+        publicHolidayElement = <div>{publicHolidayMessage}</div>;
+    }
 
     for (let i:number = 0; i < props.slots.length; i++) {
         const slot = renderOpeningHourSlot(props.slots[i], i);
@@ -35,7 +42,8 @@ const OpeningHoursJSX: React.FC<OpeningHoursModel> = (props) => {
     }
 
     return <>
-        <h3>Opening Hours</h3>
+        <h2>{title}</h2>
+        {publicHolidayElement}
         {slots}
     </>
 }
