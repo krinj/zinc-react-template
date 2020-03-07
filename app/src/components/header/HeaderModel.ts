@@ -1,8 +1,9 @@
+import ContactModel from "../common/ContactModel";
+
 interface HeaderModel {
     title: string;
     subtitle?: string;
-    phone?: string;
-    email?: string;
+    contactModel?: ContactModel;
     logoImagePath?: string;
 }
 

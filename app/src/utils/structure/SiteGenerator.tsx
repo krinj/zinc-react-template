@@ -29,8 +29,8 @@ const SiteGenerator: React.FC<SiteGeneratorProps> = (props) => {
     const contentBlocks = createBlocksFromPage(pageModel);
     const contentPage = <ContentPage 
         contentBlocks={contentBlocks} 
-        headerModel={props.content.headerModel}
-        footerModel={props.content.footerModel}
+        headerModel={props.content.getHeaderModelWithDefaultContact()}
+        footerModel={props.content.getFooterModelWithDefaultContact()}
         />
     
     return <div>
