@@ -41,7 +41,6 @@ class ZincContent extends SiteContentInterface {
         this.populateHeader();
         this.populateFooter();
         this.addCustomContent();
-        
     }
 
     // ==========================================================================================
@@ -51,19 +50,27 @@ class ZincContent extends SiteContentInterface {
     private addCustomContent = (): void => {
         this.addBlock1();
         this.addBlock2();
+        this.addBlockGallery();
+        this.addBlockCenteredText();
         this.addBlock3();
         this.addBlock4();
-        this.addBlock5();
     }
 
     private addBlock1 = (): void => {
-        const textElement = new TextSection({body: "Hello World 1"})
+
+        const textBody: string = 
+
+        "## Simple Text Section \n Here is a simple text section. You can enter any plain string here. \n"+
+        "You can also use [Markdown](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet) to do some basic formatting. \n\n" +
+        "* Example 1 \n* Example 2 \n* Example 3 \n\n";
+
+        const textElement = new TextSection({body: textBody})
         const locationElement = new Location({
-            displayAddress: "2 Park Street, Sydney, NSW",
-             mapAddress: "2 Park Street, Sydney, NSW", 
-             email: "joe@g.com", 
-             phoneNumber: "40302",
-            googleApiKey: undefined});
+            title: "Our Location",
+            displayAddress: "2 Park Street\n2000\nSydney, NSW",
+            mapAddress: "2 Park Street, Sydney, NSW", 
+            contactModel: this.getContactModel(),
+            googleApiKey: this.getGoogleMapApiKey()});
         this.addElementsAsNewBlock(textElement, locationElement);
     }
 
@@ -113,13 +120,23 @@ class ZincContent extends SiteContentInterface {
         this.addElementsAsNewBlock(featureList, contactForm);
     }
 
-    private addBlock5 = (): void => {
+    private addBlockGallery = (): void => {
         const galleryElement = new Gallery({
             images: [gallery1, gallery2, gallery3, gallery4, gallery5, gallery6],
             imageColMd: 4
         });
 
         this.addElementsAsNewBlock(galleryElement);
+    }
+
+    private addBlockCenteredText = (): void => {
+        const textElement = new TextSection({
+            body: "## Centered Text Section \n\n ##### Text can also be centered for impact.",
+            centered: true,
+            minHeight: 240
+        });
+
+        this.addElementsAsNewBlock(textElement);
     }
 
     // ==========================================================================================
@@ -129,8 +146,10 @@ class ZincContent extends SiteContentInterface {
     private populateContact = (): void => {
         this.setContactModel({
             name: "Company Name",
-            facebook: {label: "HappyHouse", link: "facebook.com/happyhouse"},
-            instagram: {label: "HappyHouse", link: "instagram.com/happyhouse"}
+            email: "hello@mycompany.com",
+            phoneNumber: "0439003200",
+            facebook: {label: "MyFacebookPage", link: "https://facebook.com/"},
+            instagram: {label: "MyInstaPage", link: "https://instagram.com/"}
         });
     }
 
@@ -150,6 +169,7 @@ class ZincContent extends SiteContentInterface {
 
     private populateApi = (): void => {
         this.setApiEndpoint("https://api.zinccli.com/");
+        this.setGoogleMapApiKey(undefined);
     }
 
     private registerIconLibrary = (): void => {

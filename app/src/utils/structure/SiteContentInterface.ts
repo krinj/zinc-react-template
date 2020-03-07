@@ -9,12 +9,12 @@ interface PageMap { [key: string]: ContentPageModel; }
 
 abstract class SiteContentInterface {
 
-    public UNDEFINED: string = "Undefined";
     public pages: PageMap = {
         index: new ContentPageModel()
     };
 
-    private apiEndpoint: string = this.UNDEFINED;
+    private apiEndpoint: string | undefined = undefined;
+    private googleMapApiKey: string | undefined = undefined;
     private contactModel: ContactModel = {};
     private headerModel: HeaderModel = {title: "Header"};
     private footerModel: FooterModel = {height: 140, contactModel: {}};
@@ -52,6 +52,14 @@ abstract class SiteContentInterface {
 
     public setApiEndpoint(endpoint: string) {
         this.apiEndpoint = endpoint;
+    }
+
+    public setGoogleMapApiKey(key: string | undefined) {
+        this.googleMapApiKey = key;
+    }
+
+    public getGoogleMapApiKey() {
+        return this.googleMapApiKey;
     }
 
     public getIndexPage() {

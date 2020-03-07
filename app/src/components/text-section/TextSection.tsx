@@ -23,6 +23,16 @@ const TextSectionJSX: React.FC<TextSectionModel> = (props) => {
     const [body, setBody] = React.useState(props.body);
     const [isLoaded, setIsLoaded] = React.useState(false);
 
+    let classString: string = "dev-green";
+    const style = {
+        minHeight: props.minHeight ? `${props.minHeight}px` : undefined,
+        display: "flex"
+    };
+
+    if (props.centered) {
+        classString += " text-center";
+    }
+
     if (props.markdownPath !== undefined && !isLoaded) {
         fetch(props.markdownPath)
         .then(x => x.text())
@@ -32,7 +42,9 @@ const TextSectionJSX: React.FC<TextSectionModel> = (props) => {
         });
     }
 
-    return <div className="dev-green"><Markdown>{body}</Markdown></div>
+    return <div className={classString} style={style}>
+        <div style={{margin: "auto"}}><Markdown>{body}</Markdown></div>
+    </div>
 }
 
 export default TextSection;

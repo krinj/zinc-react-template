@@ -1,10 +1,11 @@
+import ContactModel from "../common/ContactModel";
+
 interface LocationModel {
 
     title?: string;
     displayAddress: string;
     mapAddress: string;
-    phoneNumber?: string;
-    email?: string;
+    contactModel: ContactModel;
     googleApiKey?: string;
 
 }
