@@ -39,11 +39,6 @@ const ContentBlock: React.FC<ContentBlockProps> = (props) => {
         height: "auto",
         backgroundColor: props.color
     };
-
-    const contentHolderStyle = {
-        height: "100%",
-        padding: "1rem"
-    }
     
     if (props.height !== undefined) {
         blockStyle.height = `${props.height}px`;
@@ -64,7 +59,7 @@ const ContentBlock: React.FC<ContentBlockProps> = (props) => {
     }
 
     return <div className={blockClass} style={blockStyle}>
-        <div className="container dev" style={contentHolderStyle}>
+        <div className="container dev content-holder">
             <div className="row" style={{height: "100%"}}>{renderedElements}</div>
         </div>
     </div>

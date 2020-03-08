@@ -5,6 +5,7 @@ import HeaderModel from '../../../components/header/HeaderModel';
 import FooterModel from '../../../components/footer/FooterModel';
 import Footer from '../../../components/footer/Footer';
 import ContentBlock from '../ContentBlock/ContentBlock';
+import MobileContactBar from '../../../components/header/MobileContactBar';
 
 
 interface ContentPageProps {
@@ -20,10 +21,11 @@ const wrappedFooter = (model: FooterModel) => {
         classOverride="content-block-footer"/>;
 }
 
+
 const ContentPage: React.FC<ContentPageProps> = (props) => {
 
-    const [isMobile, setIsMobile] = React.useState(true);
     const mobileWidthBreakPoint = 768;
+    const [isMobile, setIsMobile] = React.useState(window.innerWidth <= mobileWidthBreakPoint);
 
     React.useEffect(() => {
         window.addEventListener("resize", () => {setIsMobile(window.innerWidth <= mobileWidthBreakPoint)} );
@@ -37,15 +39,25 @@ const ContentPage: React.FC<ContentPageProps> = (props) => {
     }
 
     let headerBlock = null;
-    if (props.headerModel !== undefined) {
+    let mobileContactBlock = null;
+
+    if (props.headerModel) {
+
         // Only show the main contact bar if it's not on mobile.
         const shouldShowHeaderContact: boolean = props.headerModel.showContact ? !isMobile : false;
         const header = new Header({...props.headerModel, showContact: shouldShowHeaderContact});
         headerBlock = wrapWithContentBlock(header);
+
+        // If it's on mobile, we'll use a separate contact block.
+        if (isMobile && props.headerModel.showContact && props.headerModel.contactModel) {
+            const mobileContactBar = new MobileContactBar({contactModel: props.headerModel.contactModel});
+            mobileContactBlock = wrapWithContentBlock(mobileContactBar);
+        }
     }
 
     const wrappedBodyAndHeader = <div style={{minHeight: `calc(100vh - ${footerHeight}px)`}}>
             {headerBlock}
+            {mobileContactBlock}
             {props.contentBlocks}
         </div>;
 
