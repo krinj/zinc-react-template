@@ -26,9 +26,12 @@ import gallery6 from "../images/gallery_6.png";
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faCheck, faPhone } from '@fortawesome/free-solid-svg-icons';
 import { faEnvelope } from '@fortawesome/free-regular-svg-icons';
-import { faFacebookSquare } from '@fortawesome/free-brands-svg-icons';
+import { faFacebookSquare, faFacebook } from '@fortawesome/free-brands-svg-icons';
 import TextSection from "../../components/text-section/TextSection";
 import DisplayableElement from "../../utils/structure/DisplayableElement";
+import ContactLibrary from "../../components/common/ContactLibrary";
+import ContactType from "../../components/common/ContactType";
+import ContactEntry from "../../components/common/ContactEntry";
 
 
 class ZincContent extends SiteContentInterface {
@@ -177,12 +180,16 @@ class ZincContent extends SiteContentInterface {
     // ==========================================================================================
 
     private populateContact = (): void => {
+
+        const contactMap: Map<ContactType, ContactEntry> = new Map<ContactType, ContactEntry>();
+        contactMap.set(ContactType.EMAIL, {label: "hello@company.com", link: "mailto: hello@company.com"});
+        contactMap.set(ContactType.PHONE, {label: "0439003200", link: "tel: 0439003200"});
+        contactMap.set(ContactType.FACEBOOK, {label: "MyFacebook", link: "https://facebook.com"});
+        contactMap.set(ContactType.ADDRESS, {label: "2 Park Street", link: "2 Park Street"});
+
         this.setContactModel({
             name: "Company Name",
-            email: "hello@mycompany.com",
-            phoneNumber: "0439003200",
-            facebook: {label: "MyFacebookPage", link: "https://facebook.com/"},
-            instagram: {label: "MyInstaPage", link: "https://instagram.com/"}
+            contactMap: contactMap
         });
     }
 
@@ -208,8 +215,14 @@ class ZincContent extends SiteContentInterface {
     }
 
     private registerIconLibrary = (): void => {
-        console.log(faEnvelope);
+
         library.add(faCheck, faPhone, faEnvelope, faFacebookSquare);
+
+        // Set the icons that we need for our contact library.
+        const contactLibrary: ContactLibrary = ContactLibrary.getInstance();
+        contactLibrary.setLabelAndIcon(ContactType.PHONE, "Phone", faPhone);
+        contactLibrary.setLabelAndIcon(ContactType.EMAIL, "Email", faEnvelope);
+        contactLibrary.setLabelAndIcon(ContactType.FACEBOOK, "Facebook", faFacebookSquare);
     }
 
     // ==========================================================================================
