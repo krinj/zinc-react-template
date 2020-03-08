@@ -1,5 +1,5 @@
 interface ContactEntry {
-    label: string;
+    body: string;
     link: string;
 }
 

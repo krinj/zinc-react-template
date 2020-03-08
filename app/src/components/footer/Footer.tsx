@@ -24,17 +24,17 @@ const FooterJSX: React.FC<FooterModel> = (props) => {
     const socialElements = [];
     const contact: ContactModel = props.contactModel;
     
-    if (contact.facebook !== undefined) {
-        const facebookElement = <div key="facebook-icon">
-            <div style={{fontSize: "2.4em"}}><FontAwesomeIcon icon={["fab", "facebook-square"]} /></div>
-            Facebook: {contact.facebook.label}
-        </div>
-        socialElements.push(facebookElement);
-    }
+    // if (contact.facebook !== undefined) {
+    //     const facebookElement = <div key="facebook-icon">
+    //         <div style={{fontSize: "2.4em"}}><FontAwesomeIcon icon={["fab", "facebook-square"]} /></div>
+    //         Facebook: {contact.facebook.label}
+    //     </div>
+    //     socialElements.push(facebookElement);
+    // }
 
     return <>
         This is a footer.
-        {socialElements}
+        {/* {socialElements} */}
     </>
 }
 

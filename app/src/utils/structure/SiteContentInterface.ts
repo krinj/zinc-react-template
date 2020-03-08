@@ -2,6 +2,8 @@ import ContentPageModel from "./ContentPage/ContentPageModel";
 import HeaderModel from "../../components/header/HeaderModel";
 import FooterModel from "../../components/footer/FooterModel";
 import ContactModel from "../../components/common/ContactModel";
+import ContactType from "../../components/common/ContactType";
+import ContactEntry from "../../components/common/ContactEntry";
 
 
 interface PageMap { [key: string]: ContentPageModel; }
@@ -15,9 +17,9 @@ abstract class SiteContentInterface {
 
     private apiEndpoint: string | undefined = undefined;
     private googleMapApiKey: string | undefined = undefined;
-    private contactModel: ContactModel = {};
-    private headerModel: HeaderModel = {title: "Header"};
-    private footerModel: FooterModel = {height: 140, contactModel: {}};
+    private contactModel: ContactModel = {contactMap: new Map<ContactType, ContactEntry>()};
+    private headerModel: HeaderModel = {title: "Header", contactTypesToShow: []};
+    private footerModel: FooterModel = {height: 140, contactModel: this.contactModel};
 
     public setContactModel = (model: ContactModel): ContactModel => {
         this.contactModel = model;

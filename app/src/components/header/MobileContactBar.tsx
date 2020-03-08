@@ -3,9 +3,14 @@ import DisplayableElement from '../../utils/structure/DisplayableElement';
 import ContactModel from '../common/ContactModel';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
+import ContactLibrary from '../common/ContactLibrary';
+import ContactType from '../common/ContactType';
+import ContactDefinition from '../common/ContactDefinition';
+import ContactEntry from '../common/ContactEntry';
 
 
 interface MobileContactBarModel {
+    contactTypesToShow?: ContactType[];
     contactModel: ContactModel;
 }
 
@@ -23,9 +28,9 @@ class MobileContactBar extends DisplayableElement {
     }
 }
 
-const createMobileContactElement = (iconString: IconProp, body?: string): JSX.Element => {
+const createMobileContactElement = (iconString: IconProp, key: string, body?: string): JSX.Element => {
     const iconElement: JSX.Element = <FontAwesomeIcon icon={iconString} />;
-    return <div className="dev" style={{width: "100%"}}>
+    return <div className="dev" style={{width: "100%"}} key={key}>
         <div className="btn-group" role="group" aria-label="Basic example"style={{width: "100%"}}>
             <button type="button" className="btn btn-dark btn-sm" >{iconElement}</button>
             <button type="button" 
@@ -40,13 +45,29 @@ const createMobileContactElement = (iconString: IconProp, body?: string): JSX.El
 
 const MobileContactBarJSX: React.FC<MobileContactBarModel> = (props) => {
 
-    const contactElement = createMobileContactElement("phone", props.contactModel.phoneNumber);
-    const emailElement = createMobileContactElement(["far", "envelope"], props.contactModel.email);
+    // Get dense contact definitions.
+    const contactLib: ContactLibrary = ContactLibrary.getInstance();
+    const contactMap: Map<ContactType, ContactEntry> | undefined = props.contactModel?.contactMap;
+    const contactDefs: ContactDefinition[] = contactLib.getFilteredContactItems(props.contactTypesToShow, contactMap);
+
+    // Loop through and create a contact element for each one.
+    const contactElements: JSX.Element[] = [];
+    if (contactDefs) {
+        for (let i =0; i < contactDefs.length; i++) {
+
+            if (i != 0) {
+                const spacer: JSX.Element = <span style={{width: "1rem"}} key={`spacer${i}`}></span>;
+                contactElements.push(spacer);
+            }
+
+            const contactDef: ContactDefinition = contactDefs[i];
+            const element: JSX.Element = createMobileContactElement(contactDef.icon, `contactElement${i}`, contactDef.body);
+            contactElements.push(element);
+        }
+    }
 
     return <div className="dev" style={{display: "flex", justifyContent: "space-between"}}>
-        {contactElement}
-        <span style={{width: "1rem"}}></span>
-        {emailElement}
+        {contactElements}
     </div>
 }
 

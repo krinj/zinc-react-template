@@ -6,7 +6,7 @@ interface ContactModel {
 
     // Primary Contact
     name?: string;
-    contactItems: Map<ContactType, ContactEntry>;
+    contactMap: Map<ContactType, ContactEntry>;
 
 }
 

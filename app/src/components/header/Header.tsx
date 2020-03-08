@@ -4,6 +4,10 @@ import DisplayableElement from '../../utils/structure/DisplayableElement';
 import ContactModel from '../common/ContactModel';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
+import ContactLibrary from '../common/ContactLibrary';
+import ContactDefinition from '../common/ContactDefinition';
+import ContactType from '../common/ContactType';
+import ContactEntry from '../common/ContactEntry';
 
 
 class Header extends DisplayableElement {
@@ -43,31 +47,34 @@ const createLogoElement = (title: string, image?: string): JSX.Element => {
     </div>;
 }
 
-const createContactElement = (iconString: IconProp, text?: string): JSX.Element => {
-    const iconElement: JSX.Element = <FontAwesomeIcon icon={iconString} />;
-    return <div>
-        <div className="btn-group" role="group" aria-label="Basic example"style={{width: "100%"}}>
+const createContactElement = (icon: IconProp, key: string, text?: string): JSX.Element => {
+
+    const iconElement: JSX.Element = <FontAwesomeIcon icon={icon} />;
+
+    return <div className="btn-group" role="group" aria-label="Basic example" style={{width: "100%"}} key={key}>
             <button type="button" className="btn btn-dark btn-sm" >{iconElement}</button>
             <button type="button" 
             className="btn btn-outline-dark btn-sm" 
             style={{width: "100%", textAlign: "left", fontWeight: "bold"}}>
                 {text}
             </button>
-        </div>
-    </div>;
+        </div>;
 }
 
-const createContactBar = (contact: ContactModel): JSX.Element => {
+const createContactBar = (contactDefs: ContactDefinition[]): JSX.Element => {
 
-    const phoneElement = createContactElement("phone", contact.phoneNumber);
-    const emailElement = createContactElement(["far", "envelope"], contact.email);
+    const contactElements: JSX.Element[] = [];
+    for (let i = 0; i < contactDefs.length; i++) {
+        const contactDef: ContactDefinition = contactDefs[i];
+        const e: JSX.Element = createContactElement(contactDef.icon, `contactElement${i}`, contactDef.body);
+        contactElements.push(e);
+    }
 
     return <div className="dev col-md-5 no-padding">
         <div style={{display: "flex", height: "100%"}}>
             <div style={{marginTop: "auto", marginBottom: "auto",marginLeft: "auto", textAlign: "left", 
             display: "flex",  justifyContent: "space-evenly", flexDirection: "column", height: "100%"}}>
-                {phoneElement}
-                {emailElement}
+                {contactElements}
             </div>
         </div>
     </div>
@@ -77,9 +84,14 @@ const HeaderJSX: React.FC<HeaderModel> = (props) => {
 
     let contactElement: JSX.Element | null = null;
     let logoCol: string = "col-md-12";
+
+    // Get dense contact definitions.
+    const contactLib: ContactLibrary = ContactLibrary.getInstance();
+    const contactMap: Map<ContactType, ContactEntry> | undefined = props.contactModel?.contactMap;
+    const contactDefs: ContactDefinition[] = contactLib.getFilteredContactItems(props.contactTypesToShow, contactMap);
     
-    if (props.showContact && props.contactModel !== undefined) {
-        contactElement = createContactBar(props.contactModel);
+    if (contactDefs) {
+        contactElement = createContactBar(contactDefs);
         logoCol = "col-md-7";
     }
 

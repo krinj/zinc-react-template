@@ -6,6 +6,7 @@ import FooterModel from '../../../components/footer/FooterModel';
 import Footer from '../../../components/footer/Footer';
 import ContentBlock from '../ContentBlock/ContentBlock';
 import MobileContactBar from '../../../components/header/MobileContactBar';
+import ContactType from '../../../components/common/ContactType';
 
 
 interface ContentPageProps {
@@ -44,13 +45,16 @@ const ContentPage: React.FC<ContentPageProps> = (props) => {
     if (props.headerModel) {
 
         // Only show the main contact bar if it's not on mobile.
-        const shouldShowHeaderContact: boolean = props.headerModel.showContact ? !isMobile : false;
-        const header = new Header({...props.headerModel, showContact: shouldShowHeaderContact});
+        const headerContactsToShow: ContactType[] | undefined = isMobile ? [] : props.headerModel.contactTypesToShow;
+        const header = new Header({...props.headerModel, contactTypesToShow: headerContactsToShow});
         headerBlock = wrapWithContentBlock(header);
 
         // If it's on mobile, we'll use a separate contact block.
-        if (isMobile && props.headerModel.showContact && props.headerModel.contactModel) {
-            const mobileContactBar = new MobileContactBar({contactModel: props.headerModel.contactModel});
+        if (isMobile && props.headerModel.contactTypesToShow && props.headerModel.contactModel) {
+            const mobileContactBar = new MobileContactBar({
+                contactTypesToShow: props.headerModel.contactTypesToShow, 
+                contactModel: props.headerModel.contactModel});
+
             mobileContactBlock = wrapWithContentBlock(mobileContactBar);
         }
     }

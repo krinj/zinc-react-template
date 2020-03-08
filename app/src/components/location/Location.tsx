@@ -69,12 +69,12 @@ const LocationJSX: React.FC<LocationModel> = (props) => {
         mapImage = <div><b>Error: No Map API Key</b></div>;
     }
 
-    const addressElement: JSX.Element = getContactInformation(props.displayAddress, props.contactModel.phoneNumber, props.contactModel.email);
+    // const addressElement: JSX.Element = getContactInformation(props.displayAddress, props.contactModel.phoneNumber, props.contactModel.email);
 
     return <>
         <h2>{title}</h2>
         {mapImage}
-        {addressElement}
+        {/* {addressElement} */}
     </>
 }
 

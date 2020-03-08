@@ -182,10 +182,10 @@ class ZincContent extends SiteContentInterface {
     private populateContact = (): void => {
 
         const contactMap: Map<ContactType, ContactEntry> = new Map<ContactType, ContactEntry>();
-        contactMap.set(ContactType.EMAIL, {label: "hello@company.com", link: "mailto: hello@company.com"});
-        contactMap.set(ContactType.PHONE, {label: "0439003200", link: "tel: 0439003200"});
-        contactMap.set(ContactType.FACEBOOK, {label: "MyFacebook", link: "https://facebook.com"});
-        contactMap.set(ContactType.ADDRESS, {label: "2 Park Street", link: "2 Park Street"});
+        contactMap.set(ContactType.EMAIL, {body: "hello@company.com", link: "mailto: hello@company.com"});
+        contactMap.set(ContactType.PHONE, {body: "0439003200", link: "tel: 0439003200"});
+        contactMap.set(ContactType.FACEBOOK, {body: "MyFacebook", link: "https://facebook.com"});
+        contactMap.set(ContactType.ADDRESS, {body: "2 Park Street", link: "2 Park Street"});
 
         this.setContactModel({
             name: "Company Name",
@@ -198,7 +198,7 @@ class ZincContent extends SiteContentInterface {
             title: "Default Title",
             subtitle: "Subtitle Text",
             logoImagePath: logo,
-            showContact: true
+            contactTypesToShow: [ContactType.PHONE, ContactType.EMAIL]
         })
     }
 
