@@ -45,17 +45,27 @@ const createLogoElement = (title: string, image?: string): JSX.Element => {
 
 const createContactElement = (iconString: IconProp, text?: string): JSX.Element => {
     const iconElement: JSX.Element = <FontAwesomeIcon icon={iconString} />;
-    return <div><p className="no-margin" style={{fontSize: "1.2em"}}>{iconElement} {text}</p></div>;
+    return <div>
+        <div className="btn-group" role="group" aria-label="Basic example"style={{width: "100%"}}>
+            <button type="button" className="btn btn-dark btn-sm" >{iconElement}</button>
+            <button type="button" 
+            className="btn btn-outline-dark btn-sm" 
+            style={{width: "100%", textAlign: "left", fontWeight: "bold"}}>
+                {text}
+            </button>
+        </div>
+    </div>;
 }
 
 const createContactBar = (contact: ContactModel): JSX.Element => {
 
     const phoneElement = createContactElement("phone", contact.phoneNumber);
-    const emailElement = createContactElement("envelope", contact.email);
+    const emailElement = createContactElement(["far", "envelope"], contact.email);
 
-    return <div className="dev col-md-4 no-padding">
+    return <div className="dev col-md-5 no-padding">
         <div style={{display: "flex", height: "100%"}}>
-            <div style={{marginTop: "auto", marginBottom: "auto",marginLeft: "auto", textAlign: "left"}}>
+            <div style={{marginTop: "auto", marginBottom: "auto",marginLeft: "auto", textAlign: "left", 
+            display: "flex",  justifyContent: "space-evenly", flexDirection: "column", height: "100%"}}>
                 {phoneElement}
                 {emailElement}
             </div>
@@ -70,7 +80,7 @@ const HeaderJSX: React.FC<HeaderModel> = (props) => {
     
     if (props.showContact && props.contactModel !== undefined) {
         contactElement = createContactBar(props.contactModel);
-        logoCol = "col-md-8";
+        logoCol = "col-md-7";
     }
 
     return <div className="dev">

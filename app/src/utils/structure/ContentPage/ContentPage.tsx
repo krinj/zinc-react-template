@@ -22,7 +22,14 @@ const wrappedFooter = (model: FooterModel) => {
 
 const ContentPage: React.FC<ContentPageProps> = (props) => {
 
-    const FOOTER_HEIGHT: number = 120;
+    const [isMobile, setIsMobile] = React.useState(true);
+    const mobileWidthBreakPoint = 768;
+
+    React.useEffect(() => {
+        window.addEventListener("resize", () => {setIsMobile(window.innerWidth <= mobileWidthBreakPoint)} );
+    }, []);
+
+    const footerHeight: number = props.footerModel ? props.footerModel.height : 120;
 
     let footerBlock = null;
     if (props.footerModel !== undefined) {
@@ -31,11 +38,13 @@ const ContentPage: React.FC<ContentPageProps> = (props) => {
 
     let headerBlock = null;
     if (props.headerModel !== undefined) {
-        const header = new Header(props.headerModel);
+        // Only show the main contact bar if it's not on mobile.
+        const shouldShowHeaderContact: boolean = props.headerModel.showContact ? !isMobile : false;
+        const header = new Header({...props.headerModel, showContact: shouldShowHeaderContact});
         headerBlock = wrapWithContentBlock(header);
     }
 
-    const wrappedBodyAndHeader = <div style={{minHeight: `calc(100vh - ${FOOTER_HEIGHT}px)`}}>
+    const wrappedBodyAndHeader = <div style={{minHeight: `calc(100vh - ${footerHeight}px)`}}>
             {headerBlock}
             {props.contentBlocks}
         </div>;

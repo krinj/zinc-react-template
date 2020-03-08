@@ -24,7 +24,8 @@ import gallery6 from "../images/gallery_6.png";
 
 // Import Font Icons
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faCheck, faPhone, faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import { faCheck, faPhone } from '@fortawesome/free-solid-svg-icons';
+import { faEnvelope } from '@fortawesome/free-regular-svg-icons';
 import { faFacebookSquare } from '@fortawesome/free-brands-svg-icons';
 import TextSection from "../../components/text-section/TextSection";
 import DisplayableElement from "../../utils/structure/DisplayableElement";
@@ -207,6 +208,7 @@ class ZincContent extends SiteContentInterface {
     }
 
     private registerIconLibrary = (): void => {
+        console.log(faEnvelope);
         library.add(faCheck, faPhone, faEnvelope, faFacebookSquare);
     }
 
