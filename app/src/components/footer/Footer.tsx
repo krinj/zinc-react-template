@@ -1,7 +1,7 @@
 import React from 'react';
 import DisplayableElement from '../../utils/structure/DisplayableElement';
 import FooterModel from './FooterModel';
-import ContactModel from '../common/ContactModel';
+import ContactModel from '../common-contact/ContactModel';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 

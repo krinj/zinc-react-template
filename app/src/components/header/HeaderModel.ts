@@ -1,5 +1,5 @@
-import ContactModel from "../common/ContactModel";
-import ContactType from "../common/ContactType";
+import ContactModel from "../common-contact/ContactModel";
+import ContactType from "../common-contact/ContactType";
 
 interface HeaderModel {
     title: string;

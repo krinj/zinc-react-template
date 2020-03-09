@@ -1,13 +1,12 @@
 import React from 'react';
 import HeaderModel from './HeaderModel';
 import DisplayableElement from '../../utils/structure/DisplayableElement';
-import ContactModel from '../common/ContactModel';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
-import ContactLibrary from '../common/ContactLibrary';
-import ContactDefinition from '../common/ContactDefinition';
-import ContactType from '../common/ContactType';
-import ContactEntry from '../common/ContactEntry';
+import ContactLibrary from '../common-contact/ContactLibrary';
+import ContactDefinition from '../common-contact/ContactDefinition';
+import ContactType from '../common-contact/ContactType';
+import ContactEntry from '../common-contact/ContactEntry';
 
 
 class Header extends DisplayableElement {
@@ -31,7 +30,7 @@ const createLogoElement = (title: string, image?: string): JSX.Element => {
 
     if (image) {
         headerTitleClass += " header-logo-margin";
-        imageElement = <div style={{display: "flex", marginRight: "16px"}}><img src={image} className="header-logo"/></div>;
+        imageElement = <div style={{display: "flex", marginRight: "16px"}}><img src={image} className="header-logo" alt="logo of business"/></div>;
     }
 
     return <div className="dev" style={{display: "flex"}}>

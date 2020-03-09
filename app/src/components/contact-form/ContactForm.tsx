@@ -50,7 +50,7 @@ const onContactFormClick = (props: ContactFormClickProps) => {
 
 const onContactFormResponse = (response: any, props: ContactFormClickProps) => {
     console.log(response);
-    if (response.statusCode && response.statusCode == "200") {
+    if (response.statusCode && response.statusCode === "200") {
         props.setFormState(FormState.SUCCESS);
     } else {
         props.setFormState(FormState.FAILED);

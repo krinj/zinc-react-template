@@ -1,9 +1,9 @@
 import ContentPageModel from "./ContentPage/ContentPageModel";
 import HeaderModel from "../../components/header/HeaderModel";
 import FooterModel from "../../components/footer/FooterModel";
-import ContactModel from "../../components/common/ContactModel";
-import ContactType from "../../components/common/ContactType";
-import ContactEntry from "../../components/common/ContactEntry";
+import ContactModel from "../../components/common-contact/ContactModel";
+import ContactType from "../../components/common-contact/ContactType";
+import ContactEntry from "../../components/common-contact/ContactEntry";
 
 
 interface PageMap { [key: string]: ContentPageModel; }

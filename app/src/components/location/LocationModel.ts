@@ -1,4 +1,4 @@
-import ContactModel from "../common/ContactModel";
+import ContactModel from "../common-contact/ContactModel";
 
 interface LocationModel {
 

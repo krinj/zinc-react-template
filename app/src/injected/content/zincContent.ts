@@ -29,9 +29,9 @@ import { faEnvelope } from '@fortawesome/free-regular-svg-icons';
 import { faFacebookSquare, faFacebook } from '@fortawesome/free-brands-svg-icons';
 import TextSection from "../../components/text-section/TextSection";
 import DisplayableElement from "../../utils/structure/DisplayableElement";
-import ContactLibrary from "../../components/common/ContactLibrary";
-import ContactType from "../../components/common/ContactType";
-import ContactEntry from "../../components/common/ContactEntry";
+import ContactLibrary from "../../components/common-contact/ContactLibrary";
+import ContactType from "../../components/common-contact/ContactType";
+import ContactEntry from "../../components/common-contact/ContactEntry";
 
 
 class ZincContent extends SiteContentInterface {

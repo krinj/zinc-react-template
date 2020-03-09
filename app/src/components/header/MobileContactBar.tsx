@@ -1,12 +1,12 @@
 import React from 'react';
 import DisplayableElement from '../../utils/structure/DisplayableElement';
-import ContactModel from '../common/ContactModel';
+import ContactModel from '../common-contact/ContactModel';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
-import ContactLibrary from '../common/ContactLibrary';
-import ContactType from '../common/ContactType';
-import ContactDefinition from '../common/ContactDefinition';
-import ContactEntry from '../common/ContactEntry';
+import ContactLibrary from '../common-contact/ContactLibrary';
+import ContactType from '../common-contact/ContactType';
+import ContactDefinition from '../common-contact/ContactDefinition';
+import ContactEntry from '../common-contact/ContactEntry';
 
 
 interface MobileContactBarModel {
@@ -53,9 +53,9 @@ const MobileContactBarJSX: React.FC<MobileContactBarModel> = (props) => {
     // Loop through and create a contact element for each one.
     const contactElements: JSX.Element[] = [];
     if (contactDefs) {
-        for (let i =0; i < contactDefs.length; i++) {
+        for (let i: number = 0; i < contactDefs.length; i++) {
 
-            if (i != 0) {
+            if (i > 0) {
                 const spacer: JSX.Element = <span style={{width: "1rem"}} key={`spacer${i}`}></span>;
                 contactElements.push(spacer);
             }

@@ -6,7 +6,7 @@ import FooterModel from '../../../components/footer/FooterModel';
 import Footer from '../../../components/footer/Footer';
 import ContentBlock from '../ContentBlock/ContentBlock';
 import MobileContactBar from '../../../components/header/MobileContactBar';
-import ContactType from '../../../components/common/ContactType';
+import ContactType from '../../../components/common-contact/ContactType';
 
 
 interface ContentPageProps {
