@@ -1,9 +1,11 @@
 interface ContactFormModel {
 
-    title: string;
+    title?: string;
+    subtitle?: string;
+    body?: string;
+
     contactFormApi: string;
 
-    body?: string;
     buttonText?: string;
 
     requireName?: boolean;

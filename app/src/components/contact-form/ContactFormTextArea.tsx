@@ -9,9 +9,15 @@ interface ContactFormTextAreaProps {
 
 const ContactFormTextArea: React.FC<ContactFormTextAreaProps> = (props) => {
     return <div>
-        {props.title}
-        <textarea rows={3} disabled={props.disabled} onChange={(e) => props.setValue(e.currentTarget.value)} />
+        <h6>{props.title}</h6>
+        <div className="input-group">
+            <textarea 
+                className="form-control"  
+                rows={3} 
+                disabled={props.disabled} 
+                onChange={(e) => props.setValue(e.currentTarget.value)} />
         </div>
+    </div>
 }
 
 export default ContactFormTextArea;

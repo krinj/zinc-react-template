@@ -1,4 +1,5 @@
 enum ContactType {
+    NAME,
     PHONE,
     EMAIL,
     ADDRESS,

@@ -4,6 +4,8 @@ import ContactFormModel from './ContactFormModel';
 import ContactFormField, {FieldType} from './ContactFormField';
 import ContactFormTextArea from './ContactFormTextArea';
 import { invokePostApi } from '../../api/api';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
 
 const DEFAULT_BUTTON_TEXT: string = "Submit";
 
@@ -62,9 +64,9 @@ const onContactFormError = (response: object, props: ContactFormClickProps) => {
     props.setFormState(FormState.FAILED);
 }
 
-const createContactFormField = (label: string, type: FieldType, isDisabled: boolean, hook: [string, (x: string) => void]): [string, JSX.Element] => {
+const createContactFormField = (type: FieldType, isDisabled: boolean, hook: [string, (x: string) => void]): [string, JSX.Element] => {
     const [value, setValue] = hook;
-    const contactFormField = <ContactFormField label={label} type={type} onUpdateValue={setValue} value={value} disabled={isDisabled}/>;
+    const contactFormField = <ContactFormField type={type} onUpdateValue={setValue} value={value} disabled={isDisabled}/>;
     return [value, contactFormField];
 }
 
@@ -75,12 +77,25 @@ const createContactFormTextArea = (label: string, isDisabled: boolean, hook: [st
 }
 
 const createInfoBanner = (formState: FormState): JSX.Element => {
+
     if (formState === FormState.SUCCESS) {
-        return <>Form Sent Success</>;
+        const message: string = "Success!";
+        return <span className="text-success"><FontAwesomeIcon icon={"check"} style={{marginRight: "0.6em"}}/>{message}</span>;
     }
 
     if (formState === FormState.FAILED) {
-        return <>Form Failed</>;
+        const message: string = "Error Occured";
+        return <span className="text-danger"><FontAwesomeIcon icon={"times"} style={{marginRight: "0.6em"}}/>{message}</span>;
+    }
+
+    if (formState === FormState.PENDING) {
+        const message: string = "Loading";
+        return <div className="text-muted">
+            <div className="spinner-border spinner-border-sm" role="status"  style={{marginRight: "0.6em"}}>
+                <span className="sr-only" />
+            </div>
+            {message}
+        </div>;
     }
 
     return <></>;
@@ -90,17 +105,17 @@ const ContactFormJSX: React.FC<ContactFormModel> = (props) => {
 
     // Pre-process.
     const notesFieldTitle: string = props.notesText === undefined ? "Notes" : props.notesText
+    const displayButton: string = props.buttonText !== undefined ? props.buttonText : DEFAULT_BUTTON_TEXT;
+
     // React Hooks.
-    const [formState, setFormState] = React.useState(FormState.READY);
+    const [formState, setFormState] = React.useState(FormState.SUCCESS);
     const isDisabled: boolean = formState !== FormState.READY;
 
-    const [userName, nameField] = createContactFormField("name", FieldType.Name, isDisabled,  React.useState(""));
-    const [userEmail, emailField] = createContactFormField("email", FieldType.Email, isDisabled,  React.useState(""));
-    const [userPhone, phoneField] = createContactFormField("phone", FieldType.PhoneNumber, isDisabled,  React.useState(""));
+    // Fields
+    const [userName, nameField] = createContactFormField(FieldType.Name, isDisabled,  React.useState(""));
+    const [userEmail, emailField] = createContactFormField(FieldType.Email, isDisabled,  React.useState(""));
+    const [userPhone, phoneField] = createContactFormField(FieldType.PhoneNumber, isDisabled,  React.useState(""));
     const [userNotes, notesField] = createContactFormTextArea(notesFieldTitle, isDisabled, React.useState(""));
-
-    const displayTitle: string = props.title;
-    const displayButton: string = props.buttonText !== undefined ? props.buttonText : DEFAULT_BUTTON_TEXT;
 
     const formProps: ContactFormClickProps = {
         name: userName,
@@ -116,6 +131,9 @@ const ContactFormJSX: React.FC<ContactFormModel> = (props) => {
     }
 
     let infoBanner: JSX.Element = createInfoBanner(formState);
+    const titleElement: JSX.Element | null = props.title ? <h2 className="card-header">{props.title}</h2> : null;
+    const subtitleElement: JSX.Element | null = props.subtitle ? <h5 className="card-title">{props.subtitle}</h5> : null;
+    const bodyElement: JSX.Element | null = props.body ? <p className="card-text">{props.body}</p> : null;
 
     // Add elements which are required by the model.
     const displayedNameField = props.requireName === true ? nameField : null;
@@ -124,15 +142,25 @@ const ContactFormJSX: React.FC<ContactFormModel> = (props) => {
     const displayedNotesField = props.requireNotes === true ? notesField : null;
 
     return <form onSubmit={onSubmit}>
-        <h2>{displayTitle}</h2>
 
-        {displayedNameField}
-        {displayedEmailField}
-        {displayedPhoneField}
-        {displayedNotesField}
-        {infoBanner}
+        <div className="card">
+            {titleElement}
+            <div className="card-body">
 
-        <button type="submit" disabled={isDisabled}>{displayButton}</button>
+                {subtitleElement}
+                {bodyElement}
+                {displayedNameField}
+                {displayedEmailField}
+                {displayedPhoneField}
+                {displayedNotesField}
+                
+                <div style={{marginTop: "1rem", display: "flex", justifyContent: "space-between"}}>
+                    <div style={{marginTop: "auto", marginBottom: "auto"}}>{infoBanner}</div>
+                    <button style={{minWidth: "120px"}} className="btn btn-primary" type="submit" disabled={isDisabled}>{displayButton}</button>
+                </div>
+
+            </div>
+        </div>
     </form>
 }
 

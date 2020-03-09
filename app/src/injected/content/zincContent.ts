@@ -13,7 +13,6 @@ import Location from "../../components/location/Location";
 import sampleSection from "./text/sampleSection.md";
 
 // Media Imports
-import photo1path from "../images/gallery_5.png";
 import logo from "../images/logo.svg";
 import gallery1 from "../images/gallery_1.png";
 import gallery2 from "../images/gallery_2.png";
@@ -24,8 +23,8 @@ import gallery6 from "../images/gallery_6.png";
 
 // Import Font Icons
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faCheck, faPhone } from '@fortawesome/free-solid-svg-icons';
-import { faEnvelope } from '@fortawesome/free-regular-svg-icons';
+import { faCheck, faPhone, faUser, faTimes} from '@fortawesome/free-solid-svg-icons';
+import { faEnvelope, } from '@fortawesome/free-regular-svg-icons';
 import { faFacebookSquare, faFacebook } from '@fortawesome/free-brands-svg-icons';
 import TextSection from "../../components/text-section/TextSection";
 import DisplayableElement from "../../utils/structure/DisplayableElement";
@@ -71,9 +70,10 @@ class ZincContent extends SiteContentInterface {
         const textElement = new TextSection({body: textBody})
 
         const contactForm = new ContactForm({
-            title: "Contact Us", 
+            title: undefined, 
             contactFormApi: this.getEndpoint("contact"), 
-            body: "Get a FREE quote!", 
+            subtitle: "Get a FREE quote!",
+            body: "Please enter your details below and our team will get back to you with more information.", 
             requireName: true, 
             requireEmail: true,
             requireNotes: true
@@ -216,10 +216,11 @@ class ZincContent extends SiteContentInterface {
 
     private registerIconLibrary = (): void => {
 
-        library.add(faCheck, faPhone, faEnvelope, faFacebookSquare);
+        library.add(faCheck, faPhone, faEnvelope, faFacebookSquare, faUser, faTimes);
 
         // Set the icons that we need for our contact library.
         const contactLibrary: ContactLibrary = ContactLibrary.getInstance();
+        contactLibrary.setLabelAndIcon(ContactType.NAME, "Name", faUser);
         contactLibrary.setLabelAndIcon(ContactType.PHONE, "Phone", faPhone);
         contactLibrary.setLabelAndIcon(ContactType.EMAIL, "Email", faEnvelope);
         contactLibrary.setLabelAndIcon(ContactType.FACEBOOK, "Facebook", faFacebookSquare);
