@@ -1,0 +1,7 @@
+.table-cell {
+    padding: 0.7em;
+}
+
+.table-cell:nth-child(odd) {
+    background-color: rgba(0, 0, 0, 0.03);
+}

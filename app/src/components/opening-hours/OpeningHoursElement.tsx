@@ -1,6 +1,9 @@
 import React from 'react';
 import OpeningHoursModel, { OpeningHoursSlot } from "./OpeningHoursModel";
 import DisplayableElement from '../../utils/structure/DisplayableElement';
+import "../../style/table.css";
+import "../../style/style.css";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
 class OpeningHours extends DisplayableElement {
@@ -19,9 +22,22 @@ class OpeningHours extends DisplayableElement {
 
 const renderOpeningHourSlot = (slot: OpeningHoursSlot, i: number) => {
 
-    return <div style={{display: "flex", justifyContent: "space-between"}} key={`slot_${i}`}>
-        <div><h5>{slot.day}</h5></div>
-        <div>{slot.detail}</div>
+    return <div className="table-cell">
+        <div style={{display: "flex", justifyContent: "space-between"}} key={`slot_${i}`}>
+            <div><h5 className="no-margin">{slot.day}</h5></div>
+            <div>{slot.detail}</div>
+        </div>
+    </div>
+}
+
+const renderPublicHolidayMessage = () => {
+    const publicHolidayMessage: string = "Our hours may be different during public holidays. Please contact us for more details.";
+    return <div className="alert alert-primary" style={{marginTop: "1em", display: "flex"}} role="alert">
+        
+        <div style={{fontSize: "1.6em", marginRight: "0.8em", display: "flex"}}>
+            <FontAwesomeIcon style={{margin: "auto"}} icon={"info"} />
+        </div>
+        <div>{publicHolidayMessage}</div>
     </div>
 }
 
@@ -32,8 +48,7 @@ const OpeningHoursJSX: React.FC<OpeningHoursModel> = (props) => {
 
     let publicHolidayElement: JSX.Element | null = null;
     if (props.showPublicHolidayMessage) {
-        const publicHolidayMessage: string = "Our hours may be different during public holidays. Please contact us for more details.";
-        publicHolidayElement = <div>{publicHolidayMessage}</div>;
+        publicHolidayElement = renderPublicHolidayMessage();
     }
 
     for (let i:number = 0; i < props.slots.length; i++) {
@@ -42,9 +57,15 @@ const OpeningHoursJSX: React.FC<OpeningHoursModel> = (props) => {
     }
 
     return <>
-        <h2>{title}</h2>
-        {publicHolidayElement}
-        {slots}
+        <div className="card">
+            <div className="card-body">
+                <h2>{title}</h2>
+                <div style={{width: "100%", height: "8px"}}/>
+                {slots}
+                {publicHolidayElement}
+
+            </div>
+        </div>
     </>
 }
 

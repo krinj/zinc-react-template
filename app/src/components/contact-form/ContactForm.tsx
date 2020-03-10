@@ -108,7 +108,7 @@ const ContactFormJSX: React.FC<ContactFormModel> = (props) => {
     const displayButton: string = props.buttonText !== undefined ? props.buttonText : DEFAULT_BUTTON_TEXT;
 
     // React Hooks.
-    const [formState, setFormState] = React.useState(FormState.SUCCESS);
+    const [formState, setFormState] = React.useState(FormState.READY);
     const isDisabled: boolean = formState !== FormState.READY;
 
     // Fields
