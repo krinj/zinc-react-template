@@ -23,7 +23,7 @@ import gallery6 from "../images/gallery_6.png";
 
 // Import Font Icons
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faCheck, faPhone, faUser, faTimes, faInfo} from '@fortawesome/free-solid-svg-icons';
+import { faCheck, faPhone, faUser, faTimes, faInfo, faMapMarkedAlt} from '@fortawesome/free-solid-svg-icons';
 import { faEnvelope, } from '@fortawesome/free-regular-svg-icons';
 import { faFacebookSquare, faFacebook } from '@fortawesome/free-brands-svg-icons';
 import TextSection from "../../components/text-section/TextSection";
@@ -115,8 +115,8 @@ class ZincContent extends SiteContentInterface {
 
         const locationElement = new Location({
             title: "Our Location",
-            displayAddress: "2 Park Street\n2000\nSydney, NSW",
-            mapAddress: "2 Park Street, Sydney, NSW", 
+            mapAddress: "2 Park Street, Sydney, NSW",
+            contactTypesToShow: [ContactType.ADDRESS, ContactType.PHONE, ContactType.EMAIL], 
             contactModel: this.getContactModel(),
             googleApiKey: this.getGoogleMapApiKey()});
 
@@ -185,7 +185,7 @@ class ZincContent extends SiteContentInterface {
         contactMap.set(ContactType.EMAIL, {body: "hello@company.com", link: "mailto: hello@company.com"});
         contactMap.set(ContactType.PHONE, {body: "0439003200", link: "tel: 0439003200"});
         contactMap.set(ContactType.FACEBOOK, {body: "MyFacebook", link: "https://facebook.com"});
-        contactMap.set(ContactType.ADDRESS, {body: "2 Park Street", link: "2 Park Street"});
+        contactMap.set(ContactType.ADDRESS, {body: "2 Park Street, Sydney, NSW 2000", link: "2 Park Street"});
 
         this.setContactModel({
             name: "Company Name",
@@ -216,12 +216,13 @@ class ZincContent extends SiteContentInterface {
 
     private registerIconLibrary = (): void => {
 
-        library.add(faCheck, faPhone, faEnvelope, faFacebookSquare, faUser, faTimes);
+        library.add(faCheck, faPhone, faEnvelope, faFacebookSquare, faUser, faTimes, faMapMarkedAlt);
         library.add(faInfo);
 
         // Set the icons that we need for our contact library.
         const contactLibrary: ContactLibrary = ContactLibrary.getInstance();
         contactLibrary.setLabelAndIcon(ContactType.NAME, "Name", faUser);
+        contactLibrary.setLabelAndIcon(ContactType.ADDRESS, "Address", faMapMarkedAlt);
         contactLibrary.setLabelAndIcon(ContactType.PHONE, "Phone", faPhone);
         contactLibrary.setLabelAndIcon(ContactType.EMAIL, "Email", faEnvelope);
         contactLibrary.setLabelAndIcon(ContactType.FACEBOOK, "Facebook", faFacebookSquare);
