@@ -9,7 +9,7 @@ abstract class DisplayableElement {
 
     // General public facing render function.
     public render = (): JSX.Element => {
-        return <div className="dev-green">{this.internalRender()}</div>
+        return <div className="dev">{this.internalRender()}</div>
     }
 
 }

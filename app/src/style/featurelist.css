@@ -1,0 +1,8 @@
+.feature-item {
+    padding-top: 0.3em;
+    padding-bottom: 0.3em;
+}
+
+.feature-item:not(:last-child){
+    border-bottom: 1px solid #ddd;
+}

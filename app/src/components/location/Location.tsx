@@ -46,7 +46,7 @@ const getMapClickUrl = (address: string): string => {
 
 const createContactElement = (def: ContactDefinition, key: string): JSX.Element => {
 
-    const iconStyle = {marginTop: "auto", marginBottom: "auto", marginRight: "1.4rem", fontSize: "1.2rem"};
+    const iconStyle = {marginTop: "auto", marginBottom: "auto", marginRight: "1rem", fontSize: "1.1rem"};
     const iconElement: JSX.Element = <FontAwesomeIcon style={iconStyle} icon={def.icon} />;
 
     return <div className="contact-element" style={{display: "flex"}} key={key}>
@@ -67,7 +67,7 @@ const createContactSection = (contactDefs: ContactDefinition[]) => {
         contactElements.push(e);
     }
 
-    return <div style={{marginTop: "1em"}}>{contactElements}</div>;
+    return <div style={{marginTop: "2em"}}>{contactElements}</div>;
 }
 
 const LocationJSX: React.FC<LocationModel> = (props) => {

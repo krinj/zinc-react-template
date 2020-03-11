@@ -126,29 +126,33 @@ class ZincContent extends SiteContentInterface {
     private addBlockWithFeatures = (): void => {
 
         const itemBody: string = "This is the **feature body** text with MD support.";
+        const longItemBody: string = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
         
         const featureItems: FeatureItemModel[] = [
             {title: "Feature One", body: itemBody, price: "$99"},
             {title: "Feature Two", body: itemBody, price: "$99"},
             {title: "Feature Three", body: itemBody, price: "$99", priceCaption: "per hour"},
-            {title: "Feature Four", body: itemBody, price: "$99", priceCaption: "per day"},
+            {title: "Feature Four", body: longItemBody, price: "$99", priceCaption: "per day"},
         ]
 
         const featureList: FeatureList = new FeatureList({
             title: "Priced Features",
-            feautureItemModels: featureItems
+            feautureItemModels: featureItems,
+            withCard: true
         });
 
         const featureItemsWithIcon: FeatureItemModel[] = [
             {title: "Feature One", body: itemBody, icon: faCheck},
             {title: "Feature Two", body: itemBody, icon: faCheck},
             {title: "Feature Three", body: itemBody, icon: faCheck},
-            {title: "Feature Four", body: itemBody, icon: faCheck},
+            {title: "Feature Four", body: longItemBody, icon: faCheck},
         ]
 
         const featureListWithIcon: FeatureList = new FeatureList({
             title: "Icon Features",
-            feautureItemModels: featureItemsWithIcon
+            feautureItemModels: featureItemsWithIcon,
+            withCard: true,
+            body: "You can write something about this feature here."
         });
  
         this.addElementsAsNewBlock(featureList, featureListWithIcon);

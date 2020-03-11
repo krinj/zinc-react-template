@@ -54,7 +54,7 @@ const ContentBlock: React.FC<ContentBlockProps> = (props) => {
 
     for (let i: number = 0; i < props.elements.length; i++) {
         const renderedElement: JSX.Element = props.elements[i].render();
-        const renderedContainer: JSX.Element = <div className={elementSize} key={`block${i}`}>{renderedElement}</div>
+        const renderedContainer: JSX.Element = <div className={"display-element " + elementSize} key={`block${i}`}>{renderedElement}</div>
         renderedElements.push(renderedContainer);
     }
 

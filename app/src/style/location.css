@@ -1,12 +1,8 @@
 .contact-element {
-    padding: 1em;
+    padding: 0.5em;
     width: 100%;
 }
 
 .contact-element:not(:last-child){
     border-bottom: 1px solid #ddd;
-}
-
-p {
-    margin: 0px;
 }

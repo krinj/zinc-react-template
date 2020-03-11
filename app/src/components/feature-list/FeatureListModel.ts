@@ -2,7 +2,9 @@ import FeatureItemModel from "./FeatureItemModel";
 
 interface FeatureListModel {
     title?: string;
-    feautureItemModels: FeatureItemModel[]
+    body?: string;
+    feautureItemModels: FeatureItemModel[];
+    withCard?: boolean;
 }
 
 export default FeatureListModel;

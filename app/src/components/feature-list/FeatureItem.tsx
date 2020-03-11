@@ -3,6 +3,9 @@ import DisplayableElement from '../../utils/structure/DisplayableElement';
 import FeatureItemModel from './FeatureItemModel';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Markdown from 'markdown-to-jsx';
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
+import "../../style/featurelist.css";
+import "../../style/style.css";
 
 
 class FeatureItem extends DisplayableElement {
@@ -19,42 +22,54 @@ class FeatureItem extends DisplayableElement {
     }
 }
 
-const FeatureItemJSX: React.FC<FeatureItemModel> = (props) => {
+const createIconElement = (icon?: IconProp): JSX.Element | null => {
 
-    const iconElement: JSX.Element | null = props.icon === undefined ? null : <FontAwesomeIcon icon={props.icon} />
-    let priceLabel: JSX.Element | null = null;
-
-    if (props.price !== undefined) {
-        priceLabel = <div>
-            <h3>{props.price}</h3>
-            <span>{props.priceCaption}</span>
+    if (icon) {
+        return <div style={{width: "48px", display: "flex", marginRight: "0.5em"}} className="text-center">
+            <div style={{fontSize: "1.2em", margin: "auto"}}>{<FontAwesomeIcon icon={icon} />}</div>
         </div>
     }
 
-    const leftSection = <div style={{width: "64px", display: "flex"}} className="text-center">
-        <div style={{fontSize: "1.4em", margin: "auto"}}>{iconElement}</div>
-    </div>
+    return null;
+}
 
-    const centralSection = <div style={{flexGrow: 1, display: "flex"}}>
+const createPriceElement = (price?: string, rate?: string) => {
+
+    if (price) {
+        const priceLabel = <div style={{display: "flex", height: "100%"}}>
+            <div style={{margin: "auto"}}>
+                <h4 className="no-margin">{price}</h4>
+                <small>{rate}</small>
+            </div>
+        </div>;
+
+        return <div style={{width: "84px", display: "flex"}} className="dev text-center">
+            <div style={{width: "100%"}}>{priceLabel}</div>
+        </div>;
+    }
+    return null;
+}
+
+const createBodyElement = (title: string, body?: string) => {
+    return <div style={{display: "flex", width: "100%", marginRight: "0.5em"}}>
         <div>
-            <h4>{props.title}</h4>
-            <span><Markdown>{props.body}</Markdown></span>
+            <h5>{title}</h5>
+            <Markdown>{body}</Markdown>
         </div>
     </div>;
+}
 
-    const rightSection = <div style={{width: "92px", display: "flex"}} className="text-left">
-        <div style={{width: "100%"}}>{priceLabel}</div>
-    </div>;
+const FeatureItemJSX: React.FC<FeatureItemModel> = (props) => {
 
-    return <>
-        <div style={{display: "flex"}}>
+    const leftSection = createIconElement(props.icon);
+    const centralSection = createBodyElement(props.title, props.body);
+    const rightSection = createPriceElement(props.price, props.priceCaption);
 
-            {leftSection}
-            {centralSection}
-            {rightSection}
-
-        </div> 
-    </>
+    return <div className="feature-item dev" style={{display: "flex"}}>
+        {leftSection}
+        {centralSection}
+        {rightSection}
+    </div> 
 }
 
 export default FeatureItem;
