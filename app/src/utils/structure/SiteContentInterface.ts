@@ -19,7 +19,7 @@ abstract class SiteContentInterface {
     private googleMapApiKey: string | undefined = undefined;
     private contactModel: ContactModel = {contactMap: new Map<ContactType, ContactEntry>()};
     private headerModel: HeaderModel = {title: "Header", contactTypesToShow: []};
-    private footerModel: FooterModel = {height: 140, contactModel: this.contactModel};
+    private footerModel: FooterModel = {height: 140, contactModel: this.contactModel, contactIconsToShow: [], contactTextToShow: []};
 
     public setContactModel = (model: ContactModel): ContactModel => {
         this.contactModel = model;

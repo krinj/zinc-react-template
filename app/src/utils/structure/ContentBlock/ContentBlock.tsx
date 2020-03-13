@@ -37,11 +37,12 @@ const ContentBlock: React.FC<ContentBlockProps> = (props) => {
     const blockStyle = {
         width: "100%", 
         height: "auto",
+        minHeight: "auto",
         backgroundColor: props.color
     };
     
     if (props.height !== undefined) {
-        blockStyle.height = `${props.height}px`;
+        blockStyle.minHeight = `${props.height}px`;
     }
 
     let blockClass: string = "content-block dev";

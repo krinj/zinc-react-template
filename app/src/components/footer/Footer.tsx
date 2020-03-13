@@ -3,6 +3,11 @@ import DisplayableElement from '../../utils/structure/DisplayableElement';
 import FooterModel from './FooterModel';
 import ContactModel from '../common-contact/ContactModel';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import ContactLibrary from '../common-contact/ContactLibrary';
+import ContactType from '../common-contact/ContactType';
+import ContactDefinition from '../common-contact/ContactDefinition';
+import ContactEntry from '../common-contact/ContactEntry';
+import "../../style/style.css";
 
 
 class Footer extends DisplayableElement {
@@ -19,22 +24,83 @@ class Footer extends DisplayableElement {
     }
 }
 
+const getCopyrightText = (initialYear: number, name?: string, ): string => {
+    
+    const currentYear = new Date().getFullYear();
+    const symbol: string = "©";
+    let yearString: string;
+
+    if (initialYear < currentYear) {
+        yearString = `${initialYear} - ${currentYear}`;
+    } else {
+        yearString = initialYear.toString();
+    }
+
+    const copyrightText = `${symbol} ${yearString} ${name} `;
+    return copyrightText;
+}
+
+const getContactTextElement = (defs: ContactDefinition[]) => {
+
+    if (defs.length === 0) {
+        return null;
+    }
+
+    const elements: JSX.Element[] = [];
+    for (let i: number = 0; i < defs.length; i ++) {
+        const def: ContactDefinition = defs[i];
+        const element = <div><h6 className="no-margin">{def.body}</h6></div>;
+        elements.push(element);
+    }
+    
+    return <div style={{marginTop: "0.5em"}}>
+        {elements}
+    </div>;
+}
+
+const getContactIconElement = (defs: ContactDefinition[]) => {
+    if (defs.length === 0) {
+        return null;
+    }
+
+    const elements: JSX.Element[] = [];
+    for (let i: number = 0; i < defs.length; i ++) {
+        const def: ContactDefinition = defs[i];
+        const icon: JSX.Element = <FontAwesomeIcon icon={def.icon} />;
+        const element = <a href={def.link}>{icon}</a>;
+        elements.push(element);
+    }
+    
+    return <div style={{display: "flex", height: "100%"}}>
+        <div className="footer-icon-section">{elements}</div>
+    </div>;
+}
+
 const FooterJSX: React.FC<FooterModel> = (props) => {
 
-    const socialElements = [];
-    const contact: ContactModel = props.contactModel;
-    
-    // if (contact.facebook !== undefined) {
-    //     const facebookElement = <div key="facebook-icon">
-    //         <div style={{fontSize: "2.4em"}}><FontAwesomeIcon icon={["fab", "facebook-square"]} /></div>
-    //         Facebook: {contact.facebook.label}
-    //     </div>
-    //     socialElements.push(facebookElement);
-    // }
+    const copyright: string = getCopyrightText(2020, props.contactModel.name);
+
+    // Get dense contact definitions.
+    const contactLib: ContactLibrary = ContactLibrary.getInstance();
+    const contactMap: Map<ContactType, ContactEntry> | undefined = props.contactModel?.contactMap;
+
+    // Get the contact definitions needed for each element.
+    const contactIconDef: ContactDefinition[] = contactLib.getFilteredContactItems(props.contactIconsToShow, contactMap);
+    const contactTextDef: ContactDefinition[] = contactLib.getFilteredContactItems(props.contactTextToShow, contactMap);
+
+    // Create the elements.
+    const contactTextElement = getContactTextElement(contactTextDef);
+    const contactIconElement = getContactIconElement(contactIconDef);
 
     return <>
-        This is a footer.
-        {/* {socialElements} */}
+    <div className="row dev no-margin" style={{width: "100%"}}>
+
+        
+        <div className="footer-section col-md-6 dev no-padding">{copyright} {contactTextElement}</div>
+        {/* <div className="col-md-4 dev no-padding"></div> */}
+        <div className="footer-section col-md-6 dev no-padding">{contactIconElement}</div>
+
+    </div>
     </>
 }
 
