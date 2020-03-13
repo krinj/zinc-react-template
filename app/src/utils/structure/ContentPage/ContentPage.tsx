@@ -60,8 +60,7 @@ const ContentPage: React.FC<ContentPageProps> = (props) => {
     }
 
     const wrappedBodyAndHeader = <div style={{minHeight: `calc(100vh - ${footerHeight}px)`}}>
-            {headerBlock}
-            {mobileContactBlock}
+            <div>{headerBlock}{mobileContactBlock}</div>
             {props.contentBlocks}
         </div>;
 

@@ -176,7 +176,8 @@ class ZincContent extends SiteContentInterface {
             callToActionLabel: "Press Me!"
         });
 
-        this.addElementsAsNewBlock(textElement);
+        const block = this.addElementsAsNewBlock(textElement);
+        block.imagePath = gallery4;
     }
 
     // ==========================================================================================
@@ -244,9 +245,10 @@ class ZincContent extends SiteContentInterface {
         return block;
     }
 
-    private addElementsAsNewBlock = (...elements: DisplayableElement[]) => {
+    private addElementsAsNewBlock = (...elements: DisplayableElement[]): ContentBlockModel => {
         const block = this.createNextBlock();
         elements.forEach(e => block.add(e));
+        return block;
     }
 }
 

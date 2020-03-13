@@ -7,6 +7,7 @@ interface ContentBlockProps {
     height?: number;
     color?: string;
     classOverride?: string;
+    backgroundImagePath?: string;
 }
 
 const getElementSize = (numberOfElements: number) => {
@@ -38,9 +39,16 @@ const ContentBlock: React.FC<ContentBlockProps> = (props) => {
         width: "100%", 
         height: "auto",
         minHeight: "auto",
-        backgroundColor: props.color
+        backgroundColor: props.color,
+        backgroundImage: "none",
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover"
     };
     
+    if (props.backgroundImagePath) {
+        blockStyle.backgroundImage = `url(${props.backgroundImagePath})`;
+    }
+
     if (props.height !== undefined) {
         blockStyle.minHeight = `${props.height}px`;
     }
