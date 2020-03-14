@@ -3,7 +3,6 @@ import DisplayableElement from '../../utils/structure/DisplayableElement';
 import FeatureListModel from './FeatureListModel';
 import FeatureItem from './FeatureItem';
 import FeatureItemModel from './FeatureItemModel';
-import "../../style/style.css";
 import Markdown from 'markdown-to-jsx';
 
 

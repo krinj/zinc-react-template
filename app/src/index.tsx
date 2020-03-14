@@ -1,8 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './style/index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+
+// Custom theming.
+import "./style/bootstrap-override.scss";
+import "./style/custom.scss";
+import "./style/style.scss";
+
 
 ReactDOM.render(<App />, document.getElementById('root'));
 

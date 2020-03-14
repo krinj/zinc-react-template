@@ -1,0 +1,26 @@
+// Main Base body component.
+$col-base: #bce0e0;
+$col-base-body: #435764;
+$col-primary: #8846e4;
+
+
+// Main base computed.
+$col-base-faded:  desaturate($col-base, 10%);
+$col-base-bg: lighten($col-base-faded, 15%);
+$col-base-bg-alt: lighten($col-base-faded, 10%);
+$col-base-bg-dark: darken($col-base-faded, 15%);
+$col-base-border: rgba($col-base-bg-dark, 0.5);
+$col-base-input: lighten($col-base-bg, 5%);
+
+// Base body.
+$col-base-body-muted: lighten($col-base-body, 35%);
+
+
+$theme-colors: (
+  "primary": $col-primary,
+  "secondary": $col-primary,
+  "dark": $col-primary,
+  "danger": #ff4136
+);
+
+$body-color: $col-base-body;

@@ -5,7 +5,6 @@ import ContactFormField, {FieldType} from './ContactFormField';
 import ContactFormTextArea from './ContactFormTextArea';
 import { invokePostApi } from '../../api/api';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { IconProp } from '@fortawesome/fontawesome-svg-core';
 
 const DEFAULT_BUTTON_TEXT: string = "Submit";
 
@@ -47,7 +46,8 @@ const onContactFormClick = (props: ContactFormClickProps) => {
         phone: props.phoneNumber,
         notes: props.notes
     };
-    invokePostApi("https://api.zinccli.com/contact", payload, x => onContactFormResponse(x, props), x => onContactFormError(x, props))
+    // invokePostApi("https://api.zinccli.com/contact", payload, x => onContactFormResponse(x, props), x => onContactFormError(x, props))
+    setTimeout(() => props.setFormState(FormState.SUCCESS), 1000);
 }
 
 const onContactFormResponse = (response: any, props: ContactFormClickProps) => {

@@ -1,8 +1,7 @@
 import React from 'react';
 import OpeningHoursModel, { OpeningHoursSlot } from "./OpeningHoursModel";
 import DisplayableElement from '../../utils/structure/DisplayableElement';
-import "../../style/table.css";
-import "../../style/style.css";
+import "../../style/table.scss";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 

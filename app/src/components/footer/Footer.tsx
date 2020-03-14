@@ -1,14 +1,11 @@
 import React from 'react';
 import DisplayableElement from '../../utils/structure/DisplayableElement';
 import FooterModel from './FooterModel';
-import ContactModel from '../common-contact/ContactModel';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ContactLibrary from '../common-contact/ContactLibrary';
 import ContactType from '../common-contact/ContactType';
 import ContactDefinition from '../common-contact/ContactDefinition';
 import ContactEntry from '../common-contact/ContactEntry';
-import "../../style/style.css";
-
 
 class Footer extends DisplayableElement {
 

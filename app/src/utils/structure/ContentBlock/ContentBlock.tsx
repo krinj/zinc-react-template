@@ -1,5 +1,4 @@
 import React from 'react';
-import "../../../style/style.css"
 import DisplayableElement from '../DisplayableElement';
 
 interface ContentBlockProps {
@@ -53,7 +52,7 @@ const ContentBlock: React.FC<ContentBlockProps> = (props) => {
         blockStyle.minHeight = `${props.height}px`;
     }
 
-    let blockClass: string = "content-block dev";
+    let blockClass: string = "content-block dev block-style";
     if (props.classOverride) {
         blockClass += " " + props.classOverride;
     }

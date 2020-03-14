@@ -2,18 +2,6 @@
     /* border: 1px dashed #bbb; */
 }
 
-.content-block:nth-child(odd) {
-    background-color: #e5e5e5;
-}
-
-.content-block:nth-child(even) {
-    background-color: #fff;
-}
-
-.content-block:first-child {
-    background-color: #ccc;
-}
-
 .content-block-footer {
     background-color: #ccc !important;
 }
@@ -93,5 +81,24 @@
         font-size: large;
     }
 }
+
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+        'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+        sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+        monospace;
+}
+
+img {
+    max-width: 100%;
+}
+  
 
 

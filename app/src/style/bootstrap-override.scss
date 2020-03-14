@@ -1,0 +1,34 @@
+@import "./theme.scss";
+@import '~bootstrap/scss/bootstrap.scss';
+
+
+.card {
+    background-color: $col-base-bg;
+    border-color: $col-base-border;
+}
+
+.input-group-text {
+    color: $col-base-bg-dark;
+    border-color: $col-base-border;
+    background-color: $col-base-bg-alt;
+}
+
+.form-control {
+    border-color: $col-base-border;
+    background-color: $col-base-input;
+    color: $col-base-body;
+}
+
+.form-control::placeholder {
+    color: $col-base-body-muted;
+}
+
+.form-control:focus {
+    border-color: $col-base-border;
+    background-color: $col-base-input;
+    color: $col-base-body;
+}
+
+.form-control:disabled {
+    background-color: $col-base-bg-alt;
+}

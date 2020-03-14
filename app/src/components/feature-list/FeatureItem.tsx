@@ -5,7 +5,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Markdown from 'markdown-to-jsx';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import "../../style/featurelist.css";
-import "../../style/style.css";
 
 
 class FeatureItem extends DisplayableElement {

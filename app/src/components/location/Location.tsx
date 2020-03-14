@@ -5,8 +5,7 @@ import ContactDefinition from '../common-contact/ContactDefinition';
 import ContactType from '../common-contact/ContactType';
 import ContactLibrary from '../common-contact/ContactLibrary';
 import ContactEntry from '../common-contact/ContactEntry';
-import "../../style/location.css";
-import "../../style/style.css";
+import "../../style/location.scss";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Markdown from 'markdown-to-jsx';
 

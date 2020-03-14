@@ -2,8 +2,6 @@ import React from 'react';
 import DisplayableElement from '../../utils/structure/DisplayableElement';
 import GalleryModel from './GalleryModel';
 import Lightbox from 'react-image-lightbox';
-import 'react-image-lightbox/style.css';
-
 
 const GALLERY_PADDING: number = 6;
 

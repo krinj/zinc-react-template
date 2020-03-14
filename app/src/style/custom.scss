@@ -1,0 +1,14 @@
+@import "./theme.scss";
+
+
+.content-block:nth-child(odd) {
+    background-color: $col-base-bg;
+}
+
+.content-block:nth-child(even) {
+    background-color: $col-base-bg-alt;
+}
+
+.content-block:first-child {
+    background-color: $col-base-bg;
+}
