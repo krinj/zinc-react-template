@@ -66,9 +66,13 @@ const ContentBlock: React.FC<ContentBlockProps> = (props) => {
         renderedElements.push(renderedContainer);
     }
 
+    const theme: string = "basic";
+
     return <div className={blockClass} style={blockStyle}>
-        <div className="container dev content-holder">
-            <div className="row" style={{height: "100%"}}>{renderedElements}</div>
+        <div className={theme}>
+            <div className="container dev content-holder">
+                <div className="row" style={{height: "100%"}}>{renderedElements}</div>
+            </div>
         </div>
     </div>
 }

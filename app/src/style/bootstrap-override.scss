@@ -1,34 +1,42 @@
 @import "./theme.scss";
 @import '~bootstrap/scss/bootstrap.scss';
 
+@each $key, $map in $col-palette {
 
-.card {
-    background-color: $col-base-bg;
-    border-color: $col-base-border;
-}
+    .#{$key} { // Palette Name
+        .card {
+            background-color: map-get($map, bg);
+            border-color: map-get($map, bg-border);
+        }
 
-.input-group-text {
-    color: $col-base-bg-dark;
-    border-color: $col-base-border;
-    background-color: $col-base-bg-alt;
-}
+        .input-group-text {
+            color: map-get($map, bg-dark);
+            border-color: map-get($map, bg-border);
+            background-color: map-get($map, bg-alt);
+        }
 
-.form-control {
-    border-color: $col-base-border;
-    background-color: $col-base-input;
-    color: $col-base-body;
-}
+        .form-control {
+            border-color: map-get($map, bg-border);
+            background-color: map-get($map, bg-input);
+            color: map-get($map, body);
+        }
 
-.form-control::placeholder {
-    color: $col-base-body-muted;
-}
+        .form-control::placeholder {
+            color: map-get($map, body-muted);
+        }
 
-.form-control:focus {
-    border-color: $col-base-border;
-    background-color: $col-base-input;
-    color: $col-base-body;
-}
+        .form-control:focus {
+            border-color: map-get($map, bg-border);
+            background-color: map-get($map, bg-input);
+            color: map-get($map, body);
+        }
 
-.form-control:disabled {
-    background-color: $col-base-bg-alt;
+        .form-control:disabled {
+            background-color: map-get($map, bg-alt);
+        }
+
+        div {
+            color: map-get($map, body);
+        }
+    }
 }
