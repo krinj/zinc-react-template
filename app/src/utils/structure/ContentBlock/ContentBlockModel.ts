@@ -1,14 +1,19 @@
 import DisplayableElement from "../DisplayableElement";
+import BlockTheme from "./BlockTheme";
 
 class ContentBlockModel {
 
     public elements: Array<DisplayableElement> = [];
-    public color?: string;
+    public theme?: BlockTheme;
     public imagePath?: string;
 
-    constructor(color?: string, imagePath?: string) {
-        this.color = color;
+    constructor(theme?: BlockTheme, imagePath?: string) {
+        this.theme = theme;
         this.imagePath = imagePath;
+    }
+
+    public setTheme(theme: BlockTheme) {
+        this.theme = theme;
     }
 
     public add(element: DisplayableElement): ContentBlockModel {

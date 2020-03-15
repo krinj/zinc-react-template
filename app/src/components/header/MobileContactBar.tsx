@@ -32,9 +32,9 @@ const createMobileContactElement = (iconString: IconProp, key: string, body?: st
     const iconElement: JSX.Element = <FontAwesomeIcon icon={iconString} />;
     return <div className="dev" style={{width: "100%"}} key={key}>
         <div className="btn-group" role="group" aria-label="Basic example"style={{width: "100%"}}>
-            <button type="button" className="btn btn-dark btn-sm" >{iconElement}</button>
+            <button type="button" className="btn btn-header btn-sm" >{iconElement}</button>
             <button type="button" 
-            className="btn btn-outline-dark btn-sm" 
+            className="btn btn-outline-header btn-sm" 
             style={{width: "100%", textAlign: "left", fontWeight: "bold"}}>
                 {body}
             </button>

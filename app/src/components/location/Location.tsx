@@ -48,7 +48,7 @@ const createContactElement = (def: ContactDefinition, key: string): JSX.Element 
     const iconStyle = {marginTop: "auto", marginBottom: "auto", marginRight: "1rem", fontSize: "1.1rem"};
     const iconElement: JSX.Element = <FontAwesomeIcon style={iconStyle} icon={def.icon} />;
 
-    return <div className="contact-element" style={{display: "flex"}} key={key}>
+    return <div className="contact-element bottom-border" style={{display: "flex"}} key={key}>
         <div style={{display: "flex"}}>{iconElement}</div>
         <div style={{width: "100%"}}>
             <div><h6 className="no-margin text-muted">{def.label}</h6></div>
@@ -98,7 +98,6 @@ const LocationJSX: React.FC<LocationModel> = (props) => {
                 <div style={{width: "100%", height: "8px"}}/>
                 {mapImage}
                 {contactSection}
-
             </div>
         </div>
     </>

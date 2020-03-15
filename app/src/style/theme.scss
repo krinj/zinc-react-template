@@ -1,10 +1,28 @@
 $col-template: (
-  basic: (
-    base: #bce0e0,
-    body: #435764,
-    primary: #8846e4,
-    secondary: #ffcc00
+  basic-theme: (
+    base: #ccc,
+    body: #395d75,
+    special: #a54b4b
+  ),
+
+  inverted-theme: (
+    base: #31424e,
+    body: #ffffff,
+    special: #56ff6c
+  ),
+  
+  feature-theme: (
+    base: #9e2d23,
+    body: #ffffff,
+    special: #fdc54b
   )
+);
+
+$theme-colors: (
+  header: #ffffff
+  // "primary": map-get($basic-palette, highlight),
+  // "secondary": map-get($basic-palette, highlight),
+  // "dark": map-get($basic-palette, highlight)
 );
 
 @function createLightPalette($template) {
@@ -16,27 +34,47 @@ $col-template: (
   $palette: (
     base: map-get($template, base),
     body: map-get($template, body),
-    primary: map-get($template, primary),
-    secondary: map-get($template, secondary),
+    body-special: map-get($template, special),
     faded-base: desaturate($tmp-faded-base, 10%),
     bg: lighten($tmp-faded-base, 15%),
     bg-alt: lighten($tmp-faded-base, 10%),
     bg-dark: darken($tmp-faded-base, 15%),
     bg-border: rgba($tmp-base-bg-dark, 0.5),
     bg-input: lighten($tmp-base-bg, 5%),
-    body-muted: lighten(map-get($template, body), 35%)
+    body-muted: lighten(map-get($template, body), 35%),
+    body-alt-muted: darken($tmp-faded-base, 35%),
+    body-input: darken($tmp-base-bg, 25%),
+    theme-colors: map-get($template, theme-colors)
+  );
+  @return $palette;
+}
+
+@function createDarkPalette($template) {
+
+  $tmp-faded-base:  desaturate(map-get($template, base), 10%);
+  $tmp-base-bg-dark: darken($tmp-faded-base, 15%);
+  $tmp-base-bg: lighten($tmp-faded-base, 15%);
+
+  $palette: (
+    base: map-get($template, base),
+    body: map-get($template, body),
+    primary: map-get($template, primary),
+    faded-base: desaturate($tmp-faded-base, 10%),
+    bg: lighten($tmp-faded-base, 15%),
+    bg-alt: lighten($tmp-faded-base, 10%),
+    bg-dark: darken($tmp-faded-base, 15%),
+    bg-border: rgba($tmp-base-bg-dark, 0.5),
+    bg-input: lighten($tmp-base-bg, 5%),
+    body-muted: desaturate(darken(map-get($template, body), 35%), 70%),
+    body-alt-muted: lighten($tmp-faded-base, 35%),
+    body-input: darken($tmp-base-bg, 5%)
   );
   @return $palette;
 }
 
 $col-palette: (
-  basic: createLightPalette(map-get($col-template, basic))
+  basic-theme: createLightPalette(map-get($col-template, basic-theme)),
+  inverted-theme: createDarkPalette(map-get($col-template, inverted-theme)),
+  feature-theme: createLightPalette(map-get($col-template, feature-theme)),
 );
 
-$basic-palette: map-get($col-palette , basic);
-
-$theme-colors: (
-  "primary": map-get($basic-palette, primary),
-  "secondary": map-get($basic-palette, secondary),
-  "dark": map-get($basic-palette, primary)
-);

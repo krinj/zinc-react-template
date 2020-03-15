@@ -1,5 +1,7 @@
 import React from 'react';
 import DisplayableElement from '../DisplayableElement';
+import BlockTheme from './BlockTheme';
+
 
 interface ContentBlockProps {
     elements: DisplayableElement[];
@@ -7,6 +9,7 @@ interface ContentBlockProps {
     color?: string;
     classOverride?: string;
     backgroundImagePath?: string;
+    theme?: BlockTheme;
 }
 
 const getElementSize = (numberOfElements: number) => {
@@ -37,15 +40,17 @@ const ContentBlock: React.FC<ContentBlockProps> = (props) => {
     const blockStyle = {
         width: "100%", 
         height: "auto",
-        minHeight: "auto",
-        backgroundColor: props.color,
+        minHeight: "auto"
+    };
+
+    const themeStyle = {
         backgroundImage: "none",
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover"
-    };
+    }
     
     if (props.backgroundImagePath) {
-        blockStyle.backgroundImage = `url(${props.backgroundImagePath})`;
+        themeStyle.backgroundImage = `url(${props.backgroundImagePath})`;
     }
 
     if (props.height !== undefined) {
@@ -66,10 +71,10 @@ const ContentBlock: React.FC<ContentBlockProps> = (props) => {
         renderedElements.push(renderedContainer);
     }
 
-    const theme: string = "basic";
+    const theme: string = props.theme ? props.theme : BlockTheme.BASIC;
 
     return <div className={blockClass} style={blockStyle}>
-        <div className={theme}>
+        <div className={theme} style={themeStyle}>
             <div className="container dev content-holder">
                 <div className="row" style={{height: "100%"}}>{renderedElements}</div>
             </div>

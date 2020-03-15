@@ -21,8 +21,8 @@ class OpeningHours extends DisplayableElement {
 
 const renderOpeningHourSlot = (slot: OpeningHoursSlot, i: number) => {
 
-    return <div className="table-cell">
-        <div style={{display: "flex", justifyContent: "space-between"}} key={`slot_${i}`}>
+    return <div className="table-cell" key={`slot_${i}`}>
+        <div style={{display: "flex", justifyContent: "space-between"}}>
             <div><h5 className="no-margin">{slot.day}</h5></div>
             <div>{slot.detail}</div>
         </div>

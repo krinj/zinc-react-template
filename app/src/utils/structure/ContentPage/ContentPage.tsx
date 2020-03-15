@@ -19,6 +19,7 @@ const wrappedFooter = (model: FooterModel) => {
     return <ContentBlock 
         elements={[new Footer(model)]} 
         height={model.height}
+        theme={model.theme}
         classOverride="content-block-footer"/>;
 }
 
@@ -47,7 +48,7 @@ const ContentPage: React.FC<ContentPageProps> = (props) => {
         // Only show the main contact bar if it's not on mobile.
         const headerContactsToShow: ContactType[] | undefined = isMobile ? [] : props.headerModel.contactTypesToShow;
         const header = new Header({...props.headerModel, contactTypesToShow: headerContactsToShow});
-        headerBlock = wrapWithContentBlock(header);
+        headerBlock = wrapWithContentBlock(header, props.headerModel.theme);
 
         // If it's on mobile, we'll use a separate contact block.
         if (isMobile && props.headerModel.contactTypesToShow && props.headerModel.contactModel) {
@@ -55,7 +56,7 @@ const ContentPage: React.FC<ContentPageProps> = (props) => {
                 contactTypesToShow: props.headerModel.contactTypesToShow, 
                 contactModel: props.headerModel.contactModel});
 
-            mobileContactBlock = wrapWithContentBlock(mobileContactBar);
+            mobileContactBlock = wrapWithContentBlock(mobileContactBar, props.headerModel.theme);
         }
     }
 

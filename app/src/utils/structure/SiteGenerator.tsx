@@ -18,7 +18,7 @@ const createBlocksFromPage = (pageModel: ContentPageModel): JSX.Element[] => {
     for (let i: number = 0; i < pageModel.blocks.length; i++) {
         const blockModel: ContentBlockModel = pageModel.blocks[i];
         const contentBlock: JSX.Element = <ContentBlock elements={blockModel.elements} 
-        key={i} color={blockModel.color} backgroundImagePath={blockModel.imagePath}/>
+        key={i} theme={blockModel.theme} backgroundImagePath={blockModel.imagePath}/>
         contentBlocks.push(contentBlock);
     }
     return contentBlocks;

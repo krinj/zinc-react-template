@@ -2,6 +2,7 @@
 
 @each $key, $map in $col-palette {
 
+
     .content-block:nth-child(odd) .#{$key} {
         background-color: map-get($map, bg);
     }
@@ -10,8 +11,16 @@
         background-color: map-get($map, bg-alt);
     }
 
-    .content-block:first-child .#{$key} {
-        background-color: map-get($map, bg);
-    }
+    .#{$key} {
 
+        color: map-get($map, body);
+
+        .table-cell:nth-child(odd) {
+            background-color: darken(map-get($map, bg), 3%);
+        }
+    
+        .bottom-border {
+            border-color: map-get($map, bg-border);
+        }
+    }
 }

@@ -30,7 +30,7 @@ const FeatureListJSX: React.FC<FeatureListModel> = (props) => {
     for (let i: number = 0; i < props.feautureItemModels.length; i++) {
         const model: FeatureItemModel = props.feautureItemModels[i];
         const featureItem: FeatureItem = new FeatureItem(model);
-        const wrappedElement: JSX.Element = <div className="feature-item" key={`featureItem_${i}`}>{featureItem.render()}</div>;
+        const wrappedElement: JSX.Element = <div className="feature-item bottom-border" key={`featureItem_${i}`}>{featureItem.render()}</div>;
         featureListItems.push(wrappedElement);
     }
 

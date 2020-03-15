@@ -46,7 +46,7 @@ const getContactTextElement = (defs: ContactDefinition[]) => {
     const elements: JSX.Element[] = [];
     for (let i: number = 0; i < defs.length; i ++) {
         const def: ContactDefinition = defs[i];
-        const element = <div><h6 className="no-margin">{def.body}</h6></div>;
+        const element = <div key={"element" + i}><h6 className="no-margin">{def.body}</h6></div>;
         elements.push(element);
     }
     
@@ -64,7 +64,7 @@ const getContactIconElement = (defs: ContactDefinition[]) => {
     for (let i: number = 0; i < defs.length; i ++) {
         const def: ContactDefinition = defs[i];
         const icon: JSX.Element = <FontAwesomeIcon icon={def.icon} />;
-        const element = <a href={def.link}>{icon}</a>;
+        const element = <div key={"icon" + i}><a href={def.link} >{icon} </a></div>;
         elements.push(element);
     }
     
@@ -91,12 +91,8 @@ const FooterJSX: React.FC<FooterModel> = (props) => {
 
     return <>
     <div className="row dev no-margin" style={{width: "100%"}}>
-
-        
         <div className="footer-section col-md-6 dev no-padding">{copyright} {contactTextElement}</div>
-        {/* <div className="col-md-4 dev no-padding"></div> */}
         <div className="footer-section col-md-6 dev no-padding">{contactIconElement}</div>
-
     </div>
     </>
 }

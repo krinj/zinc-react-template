@@ -4,5 +4,7 @@
 }
 
 .contact-element:not(:last-child){
-    border-bottom: 1px solid #ddd;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
 }
+

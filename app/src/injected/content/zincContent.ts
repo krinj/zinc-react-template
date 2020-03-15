@@ -31,6 +31,7 @@ import DisplayableElement from "../../utils/structure/DisplayableElement";
 import ContactLibrary from "../../components/common-contact/ContactLibrary";
 import ContactType from "../../components/common-contact/ContactType";
 import ContactEntry from "../../components/common-contact/ContactEntry";
+import BlockTheme from "../../utils/structure/ContentBlock/BlockTheme";
 
 
 class ZincContent extends SiteContentInterface {
@@ -95,7 +96,7 @@ class ZincContent extends SiteContentInterface {
             callToActionLink: "https://google.com"
         });
 
-        this.addElementsAsNewBlock(card, card, card);
+        this.addElementsAsNewBlock(card, card, card).setTheme(BlockTheme.INVERTED);
     }
 
     private addBlockWithHoursAndLocation = (): void => {
@@ -203,7 +204,8 @@ class ZincContent extends SiteContentInterface {
             title: "Default Title",
             subtitle: "Subtitle Text",
             logoImagePath: logo,
-            contactTypesToShow: [ContactType.PHONE, ContactType.EMAIL]
+            contactTypesToShow: [ContactType.PHONE, ContactType.EMAIL],
+            theme: BlockTheme.FEATURE
         })
     }
 
@@ -212,7 +214,8 @@ class ZincContent extends SiteContentInterface {
             height: 32,
             contactModel: this.getContactModel(),
             contactTextToShow: [ContactType.PHONE, ContactType.EMAIL],
-            contactIconsToShow: [ContactType.FACEBOOK]
+            contactIconsToShow: [ContactType.FACEBOOK],
+            theme: BlockTheme.INVERTED
         })
     }
 
@@ -239,8 +242,8 @@ class ZincContent extends SiteContentInterface {
     // Utility.
     // ==========================================================================================
 
-    private createNextBlock = (color?: string): ContentBlockModel => {
-        const block = new ContentBlockModel(color);
+    private createNextBlock = (theme?: BlockTheme): ContentBlockModel => {
+        const block = new ContentBlockModel(theme);
         this.getIndexPage().add(block);
         return block;
     }

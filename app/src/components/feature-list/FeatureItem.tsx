@@ -4,7 +4,7 @@ import FeatureItemModel from './FeatureItemModel';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Markdown from 'markdown-to-jsx';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
-import "../../style/featurelist.css";
+import "../../style/featurelist.scss";
 
 
 class FeatureItem extends DisplayableElement {
@@ -64,7 +64,7 @@ const FeatureItemJSX: React.FC<FeatureItemModel> = (props) => {
     const centralSection = createBodyElement(props.title, props.body);
     const rightSection = createPriceElement(props.price, props.priceCaption);
 
-    return <div className="feature-item dev" style={{display: "flex"}}>
+    return <div className="dev" style={{display: "flex"}}>
         {leftSection}
         {centralSection}
         {rightSection}
