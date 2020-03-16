@@ -7,7 +7,7 @@ interface LocationModel {
     contactTypesToShow: ContactType[];
     mapAddress: string;
     contactModel: ContactModel;
-    googleApiKey?: string;
+    mapImage?: string;
 
 }
 

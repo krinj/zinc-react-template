@@ -20,6 +20,7 @@ import gallery3 from "../images/gallery_3.png";
 import gallery4 from "../images/gallery_4.png";
 import gallery5 from "../images/gallery_5.png";
 import gallery6 from "../images/gallery_6.png";
+import mapImage from "../images/location_map.png";
 
 // Import Font Icons
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -92,7 +93,7 @@ class ZincContent extends SiteContentInterface {
         const card = new Card({
             title: "Card Title", 
             body: "**This is a simple card element.** Markdown is also enabled on this body section.",
-            imagePath: "https://placekeanu.com/320/200/",
+            imagePath: gallery2,
             callToActionLink: "https://google.com"
         });
 
@@ -119,7 +120,7 @@ class ZincContent extends SiteContentInterface {
             mapAddress: "2 Park Street, Sydney, NSW",
             contactTypesToShow: [ContactType.ADDRESS, ContactType.PHONE, ContactType.EMAIL], 
             contactModel: this.getContactModel(),
-            googleApiKey: this.getGoogleMapApiKey()});
+            mapImage: mapImage});
 
         this.addElementsAsNewBlock(openingHours, locationElement);
     }
@@ -177,8 +178,7 @@ class ZincContent extends SiteContentInterface {
             callToActionLabel: "Press Me!"
         });
 
-        const block = this.addElementsAsNewBlock(textElement);
-        block.imagePath = gallery4;
+        const block = this.addElementsAsNewBlock(textElement).setTheme(BlockTheme.INVERTED).setBackgroundImage(gallery4);
     }
 
     // ==========================================================================================
@@ -221,7 +221,7 @@ class ZincContent extends SiteContentInterface {
 
     private populateApi = (): void => {
         this.setApiEndpoint("https://api.zinccli.com/");
-        this.setGoogleMapApiKey(undefined);
+        this.setGoogleMapApiKey(undefined);  // "AIzaSyBgMLqruLn8tGiPCzS-ezccT9jRkFYMlMg"
     }
 
     private registerIconLibrary = (): void => {

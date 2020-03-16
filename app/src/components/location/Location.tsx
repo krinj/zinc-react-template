@@ -24,18 +24,6 @@ class Location extends DisplayableElement {
     }
 }
 
-const getMapUrl = (address: string, apiKey: string): string => {
-    const mapApiURL: string = "https://maps.googleapis.com/maps/api/staticmap";
-    const scale: number = 2;
-    const zoom: number = 16;
-    const width: number = 380;
-    const height: number = 280;
-    const mapStyle: string = "style=feature:poi|element:all|visibility:simplified"
-    const marker: string = `markers=size:normal|color:red|${address}`
-    const mapStaticURL: string = `${mapApiURL}?center=${address}&zoom=${zoom}&size=${width}x${height}&scale=${scale}&${marker}&${mapStyle}&key=${apiKey}`
-    return mapStaticURL;
-}
-
 const getMapClickUrl = (address: string): string => {
     const mapsURL: string = "https://www.google.com/maps/place/"
     const formattedAddress: string = address.replace(" ", "+");
@@ -75,11 +63,10 @@ const LocationJSX: React.FC<LocationModel> = (props) => {
     const imageStyle = {width: "100%", height: "auto"}
 
     let mapImage: JSX.Element | null;
-    if (props.googleApiKey !== undefined) {
-        const mapStaticURL: string = getMapUrl(props.mapAddress, props.googleApiKey);
+    if (props.mapImage !== undefined) {
         const mapClickURL: string = getMapClickUrl(props.mapAddress);
         mapImage = <div style={imageStyle}>
-            <a href={mapClickURL} target="_blank"><img src={mapStaticURL} style={imageStyle}/></a>
+            <a href={mapClickURL} target="_blank"><img src={props.mapImage} style={imageStyle}/></a>
             </div>;
     } else {
         mapImage = <div><b>Error: No Map API Key</b></div>;

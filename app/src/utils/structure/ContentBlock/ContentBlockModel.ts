@@ -14,6 +14,12 @@ class ContentBlockModel {
 
     public setTheme(theme: BlockTheme) {
         this.theme = theme;
+        return this;
+    }
+
+    public setBackgroundImage(imagePath: string) {
+        this.imagePath = imagePath;
+        return this;
     }
 
     public add(element: DisplayableElement): ContentBlockModel {
