@@ -7,6 +7,7 @@ import * as serviceWorker from './serviceWorker';
 import "./style/bootstrap-override.scss";
 import "./style/custom.scss";
 import "./style/style.scss";
+import 'react-image-lightbox/style.css';
 
 
 ReactDOM.render(<App />, document.getElementById('root'));
