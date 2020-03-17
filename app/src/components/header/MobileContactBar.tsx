@@ -1,12 +1,11 @@
 import React from 'react';
 import DisplayableElement from '../../utils/structure/DisplayableElement';
 import ContactModel from '../common-contact/ContactModel';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import ContactLibrary from '../common-contact/ContactLibrary';
 import ContactType from '../common-contact/ContactType';
 import ContactDefinition from '../common-contact/ContactDefinition';
 import ContactEntry from '../common-contact/ContactEntry';
+import HeaderContactLink from './HeaderContactLink';
 
 
 interface MobileContactBarModel {
@@ -28,21 +27,6 @@ class MobileContactBar extends DisplayableElement {
     }
 }
 
-const createMobileContactElement = (iconString: IconProp, key: string, body?: string): JSX.Element => {
-    const iconElement: JSX.Element = <FontAwesomeIcon icon={iconString} />;
-    return <div className="dev" style={{width: "100%"}} key={key}>
-        <div className="btn-group" role="group" aria-label="Basic example"style={{width: "100%"}}>
-            <button type="button" className="btn btn-header btn-sm" >{iconElement}</button>
-            <button type="button" 
-            className="btn btn-outline-header btn-sm" 
-            style={{width: "100%", textAlign: "left", fontWeight: "bold"}}>
-                {body}
-            </button>
-        </div>
-        
-    </div>;
-}
-
 const MobileContactBarJSX: React.FC<MobileContactBarModel> = (props) => {
 
     // Get dense contact definitions.
@@ -61,7 +45,7 @@ const MobileContactBarJSX: React.FC<MobileContactBarModel> = (props) => {
             }
 
             const contactDef: ContactDefinition = contactDefs[i];
-            const element: JSX.Element = createMobileContactElement(contactDef.icon, `contactElement${i}`, contactDef.body);
+            const element: JSX.Element = <HeaderContactLink text={contactDef.body} link={contactDef.link} icon={contactDef.icon} key={"ContactButton" + i}/>
             contactElements.push(element);
         }
     }

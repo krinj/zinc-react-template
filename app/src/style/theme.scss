@@ -18,12 +18,37 @@ $col-template: (
   )
 );
 
+$font1: "Ubuntu";
+$font2: "Bellota Text";
+$font-heading: $font2;
+
 $theme-colors: (
   header: #ffffff
   // "primary": map-get($basic-palette, highlight),
   // "secondary": map-get($basic-palette, highlight),
   // "dark": map-get($basic-palette, highlight)
 );
+
+
+
+.tx1 {
+  font-family: $font1, sans-serif;
+}
+
+.tx2 {
+  font-family: $font2, sans-serif;
+}
+
+body {
+  margin: 0;
+  font-family: $font1, -apple-system, BlinkMacSystemFont, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3 {
+  font-family: $font-heading, sans-serif;
+}
 
 @function createLightPalette($template) {
 

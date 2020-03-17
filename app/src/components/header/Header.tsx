@@ -1,12 +1,11 @@
 import React from 'react';
 import HeaderModel from './HeaderModel';
 import DisplayableElement from '../../utils/structure/DisplayableElement';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import ContactLibrary from '../common-contact/ContactLibrary';
 import ContactDefinition from '../common-contact/ContactDefinition';
 import ContactType from '../common-contact/ContactType';
 import ContactEntry from '../common-contact/ContactEntry';
+import HeaderContactLink from './HeaderContactLink';
 
 
 class Header extends DisplayableElement {
@@ -46,26 +45,12 @@ const createLogoElement = (title: string, image?: string): JSX.Element => {
     </div>;
 }
 
-const createContactElement = (icon: IconProp, key: string, text?: string): JSX.Element => {
-
-    const iconElement: JSX.Element = <FontAwesomeIcon icon={icon} />;
-
-    return <div className="btn-group" role="group" aria-label="Basic example" style={{width: "100%"}} key={key}>
-            <button type="button" className="btn btn-header btn-sm" >{iconElement}</button>
-            <button type="button" 
-            className="btn btn-outline-header btn-sm" 
-            style={{width: "100%", textAlign: "left", fontWeight: "bold"}}>
-                {text}
-            </button>
-        </div>;
-}
-
 const createContactBar = (contactDefs: ContactDefinition[]): JSX.Element => {
 
     const contactElements: JSX.Element[] = [];
     for (let i = 0; i < contactDefs.length; i++) {
         const contactDef: ContactDefinition = contactDefs[i];
-        const e: JSX.Element = createContactElement(contactDef.icon, `contactElement${i}`, contactDef.body);
+        const e: JSX.Element = <HeaderContactLink text={contactDef.body} link={contactDef.link} icon={contactDef.icon} key={"ContactButton" + i}/>;
         contactElements.push(e);
     }
 
