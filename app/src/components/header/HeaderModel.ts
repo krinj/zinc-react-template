@@ -1,6 +1,7 @@
 import ContactModel from "../common-contact/ContactModel";
 import ContactType from "../common-contact/ContactType";
 import BlockTheme from "../../utils/structure/ContentBlock/BlockTheme";
+import ContentBlockModel from "../../utils/structure/ContentBlock/ContentBlockModel";
 
 interface HeaderModel {
     title: string;
@@ -9,6 +10,7 @@ interface HeaderModel {
     contactModel?: ContactModel;
     logoImagePath?: string;
     theme?: BlockTheme;
+    blocks?: ContentBlockModel[];
 }
 
 

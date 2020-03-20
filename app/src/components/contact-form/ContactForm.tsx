@@ -46,8 +46,8 @@ const onContactFormClick = (props: ContactFormClickProps) => {
         phone: props.phoneNumber,
         notes: props.notes
     };
-    // invokePostApi("https://api.zinccli.com/contact", payload, x => onContactFormResponse(x, props), x => onContactFormError(x, props))
-    setTimeout(() => props.setFormState(FormState.SUCCESS), 1000);
+    invokePostApi("https://api.zinccli.com/contact", payload, x => onContactFormResponse(x, props), x => onContactFormError(x, props))
+    // setTimeout(() => props.setFormState(FormState.SUCCESS), 1000);
 }
 
 const onContactFormResponse = (response: any, props: ContactFormClickProps) => {

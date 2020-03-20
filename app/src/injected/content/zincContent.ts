@@ -52,7 +52,6 @@ class ZincContent extends SiteContentInterface {
     // ==========================================================================================
 
     private addCustomContent = (): void => {
-        this.addBlockWithForm();
         this.addBlock2();
         this.addBlockGallery();
         this.addBlockCenteredText();
@@ -61,7 +60,28 @@ class ZincContent extends SiteContentInterface {
         this.addBlockWithFeatures();
     }
 
-    private addBlockWithForm = (): void => {
+    private populateHeader = (): void => {
+        this.setHeaderModel({
+            title: "Default Title",
+            subtitle: "Subtitle Text",
+            logoImagePath: logo,
+            contactTypesToShow: [ContactType.PHONE, ContactType.EMAIL],
+            theme: BlockTheme.FEATURE,
+            blocks: [this.createBlocksWithForm()]
+        })
+    }
+
+    private populateFooter = (): void => {
+        this.setFooterModel({
+            height: 32,
+            contactModel: this.getContactModel(),
+            contactTextToShow: [ContactType.PHONE, ContactType.EMAIL],
+            contactIconsToShow: [ContactType.FACEBOOK],
+            theme: BlockTheme.INVERTED
+        })
+    }
+
+    private createBlocksWithForm = (): ContentBlockModel => {
 
         const textBody: string = 
 
@@ -69,7 +89,7 @@ class ZincContent extends SiteContentInterface {
         "You can also use [Markdown](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet) to do some basic formatting. \n\n" +
         "* Example 1 \n* Example 2 \n* Example 3 \n\n";
 
-        const textElement = new TextSection({body: textBody})
+        const textElement = new TextSection({body: textBody, classOverride: "white-text"})
 
         const contactForm = new ContactForm({
             title: undefined, 
@@ -81,7 +101,7 @@ class ZincContent extends SiteContentInterface {
             requireNotes: true
         });
         
-        this.addElementsAsNewBlock(textElement, contactForm);
+        return new ContentBlockModel(BlockTheme.BASIC).add(textElement).add(contactForm);
     }
 
     private addBlock2 = (): void => {
@@ -199,29 +219,9 @@ class ZincContent extends SiteContentInterface {
         });
     }
 
-    private populateHeader = (): void => {
-        this.setHeaderModel({
-            title: "Default Title",
-            subtitle: "Subtitle Text",
-            logoImagePath: logo,
-            contactTypesToShow: [ContactType.PHONE, ContactType.EMAIL],
-            theme: BlockTheme.FEATURE
-        })
-    }
-
-    private populateFooter = (): void => {
-        this.setFooterModel({
-            height: 32,
-            contactModel: this.getContactModel(),
-            contactTextToShow: [ContactType.PHONE, ContactType.EMAIL],
-            contactIconsToShow: [ContactType.FACEBOOK],
-            theme: BlockTheme.INVERTED
-        })
-    }
-
     private populateApi = (): void => {
         this.setApiEndpoint("https://api.zinccli.com/");
-        this.setGoogleMapApiKey(undefined);  // "AIzaSyBgMLqruLn8tGiPCzS-ezccT9jRkFYMlMg"
+        this.setGoogleMapApiKey(undefined);
     }
 
     private registerIconLibrary = (): void => {

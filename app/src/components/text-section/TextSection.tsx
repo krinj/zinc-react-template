@@ -24,7 +24,8 @@ const TextSectionJSX: React.FC<TextSectionModel> = (props) => {
     const [body, setBody] = React.useState(props.body);
     const [isLoaded, setIsLoaded] = React.useState(false);
 
-    let classString: string = "dev-green";
+    let classString: string = "dev";
+
     const style = {
         minHeight: props.minHeight ? `${props.minHeight}px` : undefined,
         display: "flex"
@@ -32,6 +33,10 @@ const TextSectionJSX: React.FC<TextSectionModel> = (props) => {
 
     if (props.centered) {
         classString += " text-center";
+    }
+
+    if (props.classOverride) {
+        classString += " " + props.classOverride;
     }
 
     if (props.markdownPath !== undefined && !isLoaded) {

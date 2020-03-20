@@ -7,6 +7,7 @@ import Footer from '../../../components/footer/Footer';
 import ContentBlock from '../ContentBlock/ContentBlock';
 import MobileContactBar from '../../../components/header/MobileContactBar';
 import ContactType from '../../../components/common-contact/ContactType';
+import ContentBlockModel from '../ContentBlock/ContentBlockModel';
 
 
 interface ContentPageProps {
@@ -42,6 +43,7 @@ const ContentPage: React.FC<ContentPageProps> = (props) => {
 
     let headerBlock = null;
     let mobileContactBlock = null;
+    const headerContentBlocks = [];
 
     if (props.headerModel) {
 
@@ -58,14 +60,32 @@ const ContentPage: React.FC<ContentPageProps> = (props) => {
 
             mobileContactBlock = wrapWithContentBlock(mobileContactBar, props.headerModel.theme);
         }
+
+        // If the header has additional content blocks.
+        if (props.headerModel.blocks) {
+            for (let i: number = 0; i < props.headerModel.blocks.length; i++) {
+                const model: ContentBlockModel = props.headerModel.blocks[i];
+                const element: JSX.Element = <ContentBlock elements={model.elements} 
+                key={i} theme={model.theme} backgroundImagePath={model.imagePath}/>
+                headerContentBlocks.push(element);
+            }
+        }
     }
 
+    const fullyWrappedHeader = <header style={{position: "relative"}}>
+            <div className="header-placer header-slanted-bg"></div> 
+            {headerBlock}
+            {mobileContactBlock}
+            {headerContentBlocks}
+    </header>;
+
     const wrappedBodyAndHeader = <div style={{minHeight: `calc(100vh - ${footerHeight}px)`}}>
-            <div>{headerBlock}{mobileContactBlock}</div>
+            {fullyWrappedHeader}
             {props.contentBlocks}
         </div>;
 
     return <>
+        
         {wrappedBodyAndHeader}
         {footerBlock}
     </>
