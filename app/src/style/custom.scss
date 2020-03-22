@@ -3,11 +3,11 @@
 @each $key, $map in $col-palette {
 
 
-    .content-block:nth-child(odd) .#{$key} {
+    .content-block:nth-child(even) .#{$key} {
         background-color: map-get($map, bg);
     }
 
-    .content-block:nth-child(even) .#{$key} {
+    .content-block:nth-child(odd) .#{$key} {
         background-color: map-get($map, bg-alt);
     }
 

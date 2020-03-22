@@ -14,7 +14,9 @@ def get_static_map_url(address: str, api_key: str):
 
 
 def main():
-    map_path = get_static_map_url("2 Park Street, Sydney", "REDACTED")
+    address = "2/117 Brisbane St, Perth WA 6000"
+    key = "REDACTED"
+    map_path = get_static_map_url(address, key)
     print(map_path)
 
     with open('location_map.png', 'wb') as f:
