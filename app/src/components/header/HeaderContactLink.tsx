@@ -16,7 +16,7 @@ const HeaderContactLink: React.FC<HeaderContactLinkProps> = (props) => {
     const noHoverStyle: object = {pointerEvents: "none"};
     
     return <>
-    <div className="btn-group" role="group" aria-label="Basic example" style={{width: "100%"}} key={props.key}>
+    <div className="btn-group" role="group" aria-label="Basic example" style={{width: "100%"}}>
         <span className="btn btn-outline-header btn-sm" style={noHoverStyle}>{iconElement}</span>
         <a href={props.link} className="btn btn-outline-header btn-sm" style={linkStyle}>
             {props.text}

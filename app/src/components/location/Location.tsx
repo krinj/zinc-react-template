@@ -62,14 +62,15 @@ const LocationJSX: React.FC<LocationModel> = (props) => {
     const title: string = props.title === undefined ? "Contact Us" : props.title;
     const imageStyle = {width: "100%", height: "auto"}
 
-    let mapImage: JSX.Element | null;
+    let mapLinkElement: JSX.Element | null;
     if (props.mapImage !== undefined) {
         const mapClickURL: string = getMapClickUrl(props.mapAddress);
-        mapImage = <div style={imageStyle}>
-            <a href={mapClickURL} target="_blank"><img src={props.mapImage} style={imageStyle}/></a>
+        const mapImage: JSX.Element = <img src={props.mapImage} style={imageStyle} alt="Map location of the business"/>
+        mapLinkElement = <div style={imageStyle}>
+            <a href={mapClickURL} target="_blank">{mapImage}</a>
             </div>;
     } else {
-        mapImage = <div><b>Error: No Map API Key</b></div>;
+        mapLinkElement = <div><b>Error: No Map API Key</b></div>;
     }
 
     // Get dense contact definitions.
@@ -83,7 +84,7 @@ const LocationJSX: React.FC<LocationModel> = (props) => {
             <div className="card-body">
                 <h2>{title}</h2>
                 <div style={{width: "100%", height: "8px"}}/>
-                {mapImage}
+                {mapLinkElement}
                 {contactSection}
             </div>
         </div>

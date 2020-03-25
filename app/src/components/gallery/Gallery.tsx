@@ -60,7 +60,7 @@ const createGalleryThumbnail= (
     }
 
     return <div className={`${mdStyle} ${smStyle}`} style={{padding: `${GALLERY_PADDING}px`}} key={`gallery_image_${i}`}>
-        <img src={imagePath} style={{width: "100%", cursor: "pointer"}} onClick={onClick}/>
+        <img src={imagePath} style={{width: "100%", cursor: "pointer"}} onClick={onClick} alt=""/>
     </div>
 }
 

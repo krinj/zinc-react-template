@@ -22,9 +22,10 @@ class Header extends DisplayableElement {
     }
 }
 
-const createLogoElement = (title: string, image?: string): JSX.Element => {
+const createLogoElement = (title: string, subtitle?: string, image?: string): JSX.Element => {
 
     let imageElement: JSX.Element | null = null;
+    const subtitleElement: JSX.Element | null = subtitle  ? <h5 className="no-margin">Subtitle copy text here</h5> : null;
     let headerTitleClass: string = "header-title";
 
     if (image) {
@@ -35,10 +36,11 @@ const createLogoElement = (title: string, image?: string): JSX.Element => {
     return <div className="dev" style={{display: "flex"}}>
         
         {imageElement}
+        
         <div style={{display: "flex"}} className={headerTitleClass}>
             <div style={{margin: "auto"}}>
                 <h1 className="no-margin">{title}</h1>
-                <h5 className="no-margin">Subtitle copy text here</h5>
+                {subtitleElement}
             </div>
             
         </div>

@@ -1,15 +1,15 @@
 import React from 'react';
-import ZincContent from './injected/content/zincContent';
+import SiteContent from './injected/content/siteContent';
 import SiteGenerator from './utils/structure/SiteGenerator';
 
 
 const App: React.FC = () => {
   
-  const zincContent: ZincContent = new ZincContent()
+  const siteContent: SiteContent = new SiteContent()
   return (
     <div className="App">
 
-      <SiteGenerator content={zincContent}/>
+      <SiteGenerator content={siteContent}/>
 
     </div>
   );
