@@ -11,9 +11,9 @@ interface PageMap { [key: string]: ContentPageModel; }
 
 abstract class SiteContentInterface {
 
-    public pages: PageMap = {
-        index: new ContentPageModel()
-    };
+    public pages: Map<string, ContentPageModel> = new Map([[
+        "index", new ContentPageModel()]  // By default, always have an index.
+    ]);
 
     private apiEndpoint: string | undefined = undefined;
     private googleMapApiKey: string | undefined = undefined;
@@ -64,8 +64,23 @@ abstract class SiteContentInterface {
         return this.googleMapApiKey;
     }
 
-    public getIndexPage() {
-        return this.pages.index;
+    public getIndexPage(): ContentPageModel {
+        const indexPage = this.pages.get("index");
+        if (indexPage) {
+            return indexPage;
+        } else {
+            throw new Error("No Index?");
+        }
+    }
+
+    public createPage(key: string): ContentPageModel {
+        const page: ContentPageModel = new ContentPageModel();
+        this.pages.set(key, page);
+        return page;
+    }
+
+    public getPages() {
+        return this.pages;
     }
 }
 

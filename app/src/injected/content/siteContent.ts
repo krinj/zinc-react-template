@@ -33,6 +33,7 @@ import ContactLibrary from "../../components/common-contact/ContactLibrary";
 import ContactType from "../../components/common-contact/ContactType";
 import ContactEntry from "../../components/common-contact/ContactEntry";
 import BlockTheme from "../../utils/structure/ContentBlock/BlockTheme";
+import SignIn from "../../components/signin/SignIn";
 
 
 class ZincContent extends SiteContentInterface {
@@ -52,12 +53,16 @@ class ZincContent extends SiteContentInterface {
     // ==========================================================================================
 
     private addCustomContent = (): void => {
+
         this.addBlock2();
         this.addBlockGallery();
         this.addBlockCenteredText();
         this.addBlockWithCards();
         this.addBlockWithHoursAndLocation();
         this.addBlockWithFeatures();
+
+        this.createPage("/login")
+            .add(this.createLoginBlock());
     }
 
     private populateHeader = (): void => {
@@ -79,6 +84,13 @@ class ZincContent extends SiteContentInterface {
             contactIconsToShow: [ContactType.FACEBOOK],
             theme: BlockTheme.INVERTED
         })
+    }
+
+    private createLoginBlock = (): ContentBlockModel => {
+
+        const loginElement: SignIn = new SignIn({});
+        
+        return new ContentBlockModel(BlockTheme.BASIC).add(loginElement);
     }
 
     private createBlocksWithForm = (): ContentBlockModel => {
