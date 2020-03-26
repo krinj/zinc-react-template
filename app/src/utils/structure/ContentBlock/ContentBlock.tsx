@@ -10,6 +10,7 @@ interface ContentBlockProps {
     classOverride?: string;
     backgroundImagePath?: string;
     theme?: BlockTheme;
+    styleOverride?: object;
 }
 
 const getElementSize = (numberOfElements: number) => {
@@ -75,7 +76,7 @@ const ContentBlock: React.FC<ContentBlockProps> = (props) => {
 
     return <div className={blockClass} style={blockStyle}>
         <div className={theme} style={themeStyle}>
-            <div className="container dev content-holder">
+            <div className="container dev content-holder" style={props.styleOverride}>
                 <div className="row" style={{height: "100%"}}>{renderedElements}</div>
             </div>
         </div>

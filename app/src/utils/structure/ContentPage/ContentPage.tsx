@@ -8,6 +8,8 @@ import ContentBlock from '../ContentBlock/ContentBlock';
 import MobileContactBar from '../../../components/header/MobileContactBar';
 import ContactType from '../../../components/common-contact/ContactType';
 import ContentBlockModel from '../ContentBlock/ContentBlockModel';
+import Navigation from '../../../components/navigation/Navigation';
+import BlockTheme from '../ContentBlock/BlockTheme';
 
 
 interface ContentPageProps {
@@ -43,6 +45,7 @@ const ContentPage: React.FC<ContentPageProps> = (props) => {
 
     let headerBlock = null;
     let mobileContactBlock = null;
+    let navigationBlock = null;
     const headerContentBlocks = [];
 
     if (props.headerModel) {
@@ -51,6 +54,12 @@ const ContentPage: React.FC<ContentPageProps> = (props) => {
         const headerContactsToShow: ContactType[] | undefined = isMobile ? [] : props.headerModel.contactTypesToShow;
         const header = new Header({...props.headerModel, contactTypesToShow: headerContactsToShow});
         headerBlock = wrapWithContentBlock(header, props.headerModel.theme);
+
+        // If there is a navigation block.
+        if (props.headerModel.navigationModel) {
+            const navStyle: object = {paddingTop: "0.8em", paddingBottom: "0.8em"};
+            navigationBlock = wrapWithContentBlock(new Navigation(props.headerModel.navigationModel), BlockTheme.INVERTED, "navbar", navStyle);
+        }
 
         // If it's on mobile, we'll use a separate contact block.
         if (isMobile && props.headerModel.contactTypesToShow && props.headerModel.contactModel) {
@@ -73,8 +82,9 @@ const ContentPage: React.FC<ContentPageProps> = (props) => {
     }
 
     const fullyWrappedHeader = <header style={{position: "relative"}}>
-            <div className="header-placer header-slanted-bg"></div> 
+            <div className="header-placer"></div> 
             {headerBlock}
+            {navigationBlock}
             {mobileContactBlock}
             {headerContentBlocks}
     </header>;

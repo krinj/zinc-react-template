@@ -6,6 +6,7 @@ import ContactDefinition from '../common-contact/ContactDefinition';
 import ContactType from '../common-contact/ContactType';
 import ContactEntry from '../common-contact/ContactEntry';
 import HeaderContactLink from './HeaderContactLink';
+import NavBarLinear from '../navigation/NavBarLinear';
 
 
 class Header extends DisplayableElement {

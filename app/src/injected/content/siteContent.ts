@@ -34,6 +34,7 @@ import ContactType from "../../components/common-contact/ContactType";
 import ContactEntry from "../../components/common-contact/ContactEntry";
 import BlockTheme from "../../utils/structure/ContentBlock/BlockTheme";
 import SignIn from "../../components/signin/SignIn";
+import NavigationModel from "../../components/navigation/NavigationModel";
 
 
 class ZincContent extends SiteContentInterface {
@@ -66,13 +67,22 @@ class ZincContent extends SiteContentInterface {
     }
 
     private populateHeader = (): void => {
+
+        const navigationModel: NavigationModel = {
+            links: [
+                {label: "Login", link: "/login"},
+                {label: "Settings", link: "/settings"}
+            ]
+        }
+
         this.setHeaderModel({
             title: "Default Title",
             subtitle: "Subtitle Text",
             logoImagePath: logo,
             contactTypesToShow: [ContactType.PHONE, ContactType.EMAIL],
             theme: BlockTheme.FEATURE,
-            blocks: [this.createBlocksWithForm()]
+            blocks: [],  // this.createBlocksWithForm()
+            navigationModel: navigationModel
         })
     }
 

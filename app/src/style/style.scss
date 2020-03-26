@@ -33,6 +33,20 @@
         color: unset;
     }
 }
+
+.navbar-link {
+    color: unset;
+}
+
+.navbar-link:hover {
+    color: unset;
+}
+
+.navbar-link:not(:last-child) {
+    margin-right: 1.6rem;
+}
+
+
 @media only screen and (min-width: 768px) {
 
     .content-holder {
