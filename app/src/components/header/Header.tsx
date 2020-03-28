@@ -26,23 +26,34 @@ class Header extends DisplayableElement {
     }
 }
 
-const createTitleElement = (title: string, subtitle?: string, image?: string): JSX.Element => {
+const createTitleElement = (title: string, subtitle?: string, image?: string, leftAligned?: boolean): JSX.Element => {
 
     let imageElement: JSX.Element | null = null;
-    const subtitleElement: JSX.Element | null = subtitle  ? <h5 className="no-margin">Subtitle copy text here</h5> : null;
-    let headerTitleClass: string = "header-title";
+    
+    // Left or center align?
+    let headerAlign: string = leftAligned ? "text-left" : "text-center auto-margin";
 
     if (image) {
-        headerTitleClass += " header-logo-margin";
         imageElement = <div style={{display: "flex", marginRight: "16px"}}><img src={image} className="header-logo" alt="logo of business"/></div>;
+        if (!leftAligned) {
+            headerAlign += " header-logo-margin";
+        }
+    }
+    
+    // Title Holder Style, left or center anchor.
+    let titleHolderStyle = {margin: "auto", marginLeft: "auto"};
+    if (leftAligned) {
+        titleHolderStyle.marginLeft = "0";
     }
 
-    return <div className="dev max-width" style={{display: "flex"}}>
+    const subtitleElement: JSX.Element | null = subtitle  ? <h5 className="headerAlign no-margin">Subtitle copy text here</h5> : null;
+
+    return <div className="dev max-width flex">
         
         {imageElement}
         
-        <div style={{display: "flex"}} className={headerTitleClass}>
-            <div style={{margin: "auto"}}>
+        <div style={{display: "flex"}} className={headerAlign}>
+            <div style={titleHolderStyle}>
                 <h1 className="no-margin">{title}</h1>
                 {subtitleElement}
             </div>
@@ -78,8 +89,11 @@ const createMobileMenu = (navigationModel: NavigationModel, isMenuActive: boolea
 }
 
 const createMenuButton = (isMenuActive: boolean, onEnableMenu: any) => {
-    return <div className="dev flex clickable" onMouseDown={onEnableMenu} style={{position: "absolute", right: "0", height: "100%"}}>
-        <span className="auto-margin" style={{fontSize: "1.6em"}}><FontAwesomeIcon icon={"bars"}/></span>
+    return <div 
+        className="dev flex clickable" 
+        onMouseDown={onEnableMenu} 
+        style={{position: "absolute", right: "0", height: "100%", minWidth: "3em"}}>
+        <span className="auto-margin" style={{fontSize: "1.6em", marginRight: 0}}><FontAwesomeIcon icon={"bars"}/></span>
     </div>;
 }
 
@@ -109,12 +123,12 @@ const HeaderJSX: React.FC<HeaderModel> = (props) => {
     }
 
     const menuButton: JSX.Element | null = shouldShowNavMenu ? createMenuButton(menuActive, () => setMenuActive(true)) : null;
-
+    const leftAlignTitle: boolean = !props.isMobile || props.navigationModel !== undefined || props.logoImagePath !== undefined;
     return <div className="dev">
         <div className="row no-margin">
 
             <div className={`dev ${logoCol} no-padding flex`}>
-                {createTitleElement(props.title, props.logoImagePath)}
+                {createTitleElement(props.title, props.subtitle, props.logoImagePath, leftAlignTitle)}
                 {menuButton}
             </div>
 
