@@ -25,6 +25,7 @@ import mapImage from "../images/location_map.png";
 // Import Font Icons
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faCheck, faPhone, faUser, faTimes, faInfo, faMapMarkedAlt, faBars} from '@fortawesome/free-solid-svg-icons';
+import { faCog, faSignInAlt} from '@fortawesome/free-solid-svg-icons';
 import { faEnvelope, } from '@fortawesome/free-regular-svg-icons';
 import { faFacebookSquare, faFacebook } from '@fortawesome/free-brands-svg-icons';
 import TextSection from "../../components/text-section/TextSection";
@@ -70,8 +71,8 @@ class ZincContent extends SiteContentInterface {
 
         const navigationModel: NavigationModel = {
             links: [
-                {label: "Login", link: "/login"},
-                {label: "Settings", link: "/settings"}
+                {label: "Login", link: "/login", icon: "sign-in-alt"},
+                {label: "Settings", link: "/settings", icon: "cog"}
             ]
         }
 
@@ -250,6 +251,8 @@ class ZincContent extends SiteContentInterface {
 
         library.add(faCheck, faPhone, faEnvelope, faFacebookSquare, faUser, faTimes, faMapMarkedAlt, faBars);
         library.add(faInfo);
+        library.add(faCog);
+        library.add(faSignInAlt);
 
         // Set the icons that we need for our contact library.
         const contactLibrary: ContactLibrary = ContactLibrary.getInstance();
