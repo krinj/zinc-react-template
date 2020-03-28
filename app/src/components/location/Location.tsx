@@ -67,7 +67,7 @@ const LocationJSX: React.FC<LocationModel> = (props) => {
         const mapClickURL: string = getMapClickUrl(props.mapAddress);
         const mapImage: JSX.Element = <img src={props.mapImage} style={imageStyle} alt="Map location of the business"/>
         mapLinkElement = <div style={imageStyle}>
-            <a href={mapClickURL} target="_blank">{mapImage}</a>
+            <a href={mapClickURL} target="_blank" rel="noopener noreferrer">{mapImage}</a>
             </div>;
     } else {
         mapLinkElement = <div><b>Error: No Map API Key</b></div>;

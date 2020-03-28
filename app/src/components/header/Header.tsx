@@ -6,7 +6,6 @@ import ContactDefinition from '../common-contact/ContactDefinition';
 import ContactType from '../common-contact/ContactType';
 import ContactEntry from '../common-contact/ContactEntry';
 import HeaderContactLink from './HeaderContactLink';
-import NavBarLinear from '../navigation/NavBarLinear';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import NavigationModel from '../navigation/NavigationModel';
 import NavBarMobile from '../navigation/NavBarMobile';
@@ -72,15 +71,14 @@ const createContactBar = (contactDefs: ContactDefinition[]): JSX.Element => {
 
 const createMobileMenu = (navigationModel: NavigationModel, isMenuActive: boolean, onDisableMenu: any) => {
     return <>
-    <div className="mobile-nav-overlay" onMouseDown={onDisableMenu}>This is a Mobile Menu bar</div>
-    <NavBarMobile {...navigationModel} />
-    {/* <div className="mobile-nav">This is a Mobile Menu bar</div> */}
+        <div className="mobile-nav-overlay" onMouseDown={onDisableMenu}>This is a Mobile Menu bar</div>
+        <NavBarMobile {...navigationModel} onClose={onDisableMenu} />
     </>;
 }
 
 const createMenuButton = (isMenuActive: boolean, onEnableMenu: any) => {
-    return <div className="dev flex" style={{position: "absolute", right: "0", height: "100%"}}>
-        <span className="auto-margin" onMouseDown={onEnableMenu} style={{fontSize: "1.6em"}}><FontAwesomeIcon icon={"bars"}/></span>
+    return <div className="dev flex clickable" onMouseDown={onEnableMenu} style={{position: "absolute", right: "0", height: "100%"}}>
+        <span className="auto-margin" style={{fontSize: "1.6em"}}><FontAwesomeIcon icon={"bars"}/></span>
     </div>;
 }
 
