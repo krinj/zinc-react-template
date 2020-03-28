@@ -1,0 +1,47 @@
+@import "./theme.scss";
+
+@each $key, $map in $col-palette {
+
+    .mobile-nav-title .#{$key}  {
+        border-bottom: 1px solid map-get($map, bg-border);
+        margin-bottom: 2rem;
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+    }
+}
+
+.mobile-nav {
+    width: 80vw;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    padding: 1em;
+}
+
+.mobile-nav-element {
+    padding-top: 0.5em;
+    padding-bottom: 0.5rem;
+}
+
+// .mobile-nav-element:not(:last-child) {
+//     border-bottom-width: 1px;
+//     border-bottom-style: solid;
+//     border-bottom: 1px solid grey;
+// }
+
+.mobile-nav-link {
+    color: unset;
+    margin-bottom: 1rem;
+    // font-size: 1.2rem;
+}
+
+.mobile-nav-link:hover {
+    color: unset;
+}
+
+.mobile-nav-link:not(:last-child) {
+    margin-right: 1.6rem;
+}
+
