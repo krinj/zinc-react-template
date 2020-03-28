@@ -43,7 +43,7 @@ const NavBarMobile: React.FC<NavigationModel> = (props) => {
         navElements.push(navElement);
     }
 
-    return <div className={`mobile-nav ${theme}`}>
+    return <div className={`mobile-nav mobile-nav-menu-show ${theme}`}>
         {navTitle}
         {navElements}
     </div>;

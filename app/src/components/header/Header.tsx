@@ -9,6 +9,7 @@ import HeaderContactLink from './HeaderContactLink';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import NavigationModel from '../navigation/NavigationModel';
 import NavBarMobile from '../navigation/NavBarMobile';
+import "../../style/navigation.scss";
 
 
 class Header extends DisplayableElement {
@@ -71,7 +72,7 @@ const createContactBar = (contactDefs: ContactDefinition[]): JSX.Element => {
 
 const createMobileMenu = (navigationModel: NavigationModel, isMenuActive: boolean, onDisableMenu: any) => {
     return <>
-        <div className="mobile-nav-overlay" onMouseDown={onDisableMenu}>This is a Mobile Menu bar</div>
+        <div className="mobile-nav-overlay" onMouseDown={onDisableMenu} />
         <NavBarMobile {...navigationModel} onClose={onDisableMenu} />
     </>;
 }
