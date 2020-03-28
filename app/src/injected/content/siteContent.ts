@@ -24,7 +24,7 @@ import mapImage from "../images/location_map.png";
 
 // Import Font Icons
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faCheck, faPhone, faUser, faTimes, faInfo, faMapMarkedAlt} from '@fortawesome/free-solid-svg-icons';
+import { faCheck, faPhone, faUser, faTimes, faInfo, faMapMarkedAlt, faBars} from '@fortawesome/free-solid-svg-icons';
 import { faEnvelope, } from '@fortawesome/free-regular-svg-icons';
 import { faFacebookSquare, faFacebook } from '@fortawesome/free-brands-svg-icons';
 import TextSection from "../../components/text-section/TextSection";
@@ -248,7 +248,7 @@ class ZincContent extends SiteContentInterface {
 
     private registerIconLibrary = (): void => {
 
-        library.add(faCheck, faPhone, faEnvelope, faFacebookSquare, faUser, faTimes, faMapMarkedAlt);
+        library.add(faCheck, faPhone, faEnvelope, faFacebookSquare, faUser, faTimes, faMapMarkedAlt, faBars);
         library.add(faInfo);
 
         // Set the icons that we need for our contact library.

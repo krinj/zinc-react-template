@@ -1,5 +1,5 @@
 .dev {
-    /* border: 1px dashed #bbb; */
+    // border: 1px dashed #bbb;
 }
 
 .content-block-footer {
@@ -8,6 +8,10 @@
 
 .no-margin {
     margin: 0px;
+}
+
+.auto-margin {
+    margin: auto;
 }
 
 .no-padding {
@@ -130,6 +134,33 @@ img {
     padding: 1em;
 }
 
+.mobile-nav {
+    width: 80vw;
+    height: 100%;
+    background-color: white;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 2;
+}
+
+.mobile-nav-overlay {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+.flex {
+    display: flex;
+}
+
+.max-width {
+    width: 100%;
+}
   
 
 

@@ -8,6 +8,7 @@ import NavigationModel from "../navigation/NavigationModel";
 interface HeaderModel {
     title: string;
     contactTypesToShow: ContactType[];
+    isMobile?: boolean;
     navigationModel?: NavigationModel;
     subtitle?: string;
     contactModel?: ContactModel;

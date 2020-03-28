@@ -52,11 +52,11 @@ const ContentPage: React.FC<ContentPageProps> = (props) => {
 
         // Only show the main contact bar if it's not on mobile.
         const headerContactsToShow: ContactType[] | undefined = isMobile ? [] : props.headerModel.contactTypesToShow;
-        const header = new Header({...props.headerModel, contactTypesToShow: headerContactsToShow});
+        const header = new Header({...props.headerModel, contactTypesToShow: headerContactsToShow, isMobile: isMobile});
         headerBlock = wrapWithContentBlock(header, props.headerModel.theme);
 
         // If there is a navigation block.
-        if (props.headerModel.navigationModel) {
+        if (props.headerModel.navigationModel && !isMobile) {
             const navStyle: object = {paddingTop: "0.8em", paddingBottom: "0.8em"};
             navigationBlock = wrapWithContentBlock(new Navigation(props.headerModel.navigationModel), BlockTheme.INVERTED, "navbar", navStyle);
         }
