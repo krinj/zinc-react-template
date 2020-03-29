@@ -15,15 +15,22 @@ interface LinkElementProps {
 const LinkElement: React.FC<LinkElementProps> = (props) => {
 
     // If the link is a match, we just close the menu instead.
-    const routeMatch: any = useRouteMatch(props.navLink.link);
-    const onClose: any = routeMatch ?  props.onClose : null;
+    // const routeMatch: any = useRouteMatch(props.navLink.link);
+    
     const iconElement: JSX.Element | null = props.navLink.icon ?
         <FontAwesomeIcon icon={props.navLink.icon} style={{marginRight: "1rem"}}/> : null;
 
+    const fakeClose = (x: any) => {
+        console.log("fake close");  
+        const onClose: any = props.onClose;
+        if (onClose !== undefined) {
+            setTimeout(() => onClose(), 1);
+        }
+    }
+
     return <div className="mobile-nav-element">
         <Link className="mobile-nav-link" to={props.navLink.link} 
-        onMouseDown={onClose} 
-        onTouchEnd={onClose}>
+        onClick={fakeClose}>
             {iconElement}
             {props.navLink.label}
         </Link>

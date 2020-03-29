@@ -5,7 +5,6 @@ import BlockTheme from './BlockTheme';
 
 interface ContentBlockProps {
     elements: DisplayableElement[];
-    height?: number;
     color?: string;
     classOverride?: string;
     backgroundImagePath?: string;
@@ -38,27 +37,26 @@ const getElementSize = (numberOfElements: number) => {
 
 const ContentBlock: React.FC<ContentBlockProps> = (props) => {
 
+    const theme: string = props.theme ? props.theme : BlockTheme.BASIC;
+
     const blockStyle = {
         width: "100%", 
         height: "auto",
-        minHeight: "auto"
+        minHeight: "auto",
     };
 
     const themeStyle = {
         backgroundImage: "none",
         backgroundRepeat: "no-repeat",
-        backgroundSize: "cover"
+        backgroundSize: "cover",
+        height: "100%"
     }
     
     if (props.backgroundImagePath) {
         themeStyle.backgroundImage = `url(${props.backgroundImagePath})`;
     }
 
-    if (props.height !== undefined) {
-        blockStyle.minHeight = `${props.height}px`;
-    }
-
-    let blockClass: string = "content-block dev block-style";
+    let blockClass: string = "content-block dev block-style " + theme;
     if (props.classOverride) {
         blockClass += " " + props.classOverride;
     }
@@ -71,8 +69,6 @@ const ContentBlock: React.FC<ContentBlockProps> = (props) => {
         const renderedContainer: JSX.Element = <div className={"display-element " + elementSize} key={`block${i}`}>{renderedElement}</div>
         renderedElements.push(renderedContainer);
     }
-
-    const theme: string = props.theme ? props.theme : BlockTheme.BASIC;
 
     return <div className={blockClass} style={blockStyle}>
         <div className={theme} style={themeStyle}>

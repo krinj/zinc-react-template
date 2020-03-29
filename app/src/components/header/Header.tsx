@@ -118,12 +118,7 @@ const HeaderJSX: React.FC<HeaderModel> = (props) => {
     // Support both click and touch events.
 
     if (props.navigationModel && menuActive) {
-        const onDisableMenu = (ev: PointerEvent) => {
-            ev.preventDefault(); 
-            ev.stopPropagation();
-            setMenuActive(false);
-        }
-        mobileMenu = createMobileMenu(props.navigationModel, menuActive, onDisableMenu);
+        mobileMenu = createMobileMenu(props.navigationModel, menuActive, () => setMenuActive(false));
     }
     
     if (contactDefs) {
@@ -134,11 +129,7 @@ const HeaderJSX: React.FC<HeaderModel> = (props) => {
     // Support both click and touch events.
     let menuButton: JSX.Element | null = null;
     if (shouldShowNavMenu) {
-        const onEnableMenu = (ev: PointerEvent) => {
-            ev.preventDefault();
-            setMenuActive(true);
-        }
-        menuButton = createMenuButton(menuActive, onEnableMenu);
+        menuButton = createMenuButton(menuActive, () =>  setMenuActive(true));
     }
     
     const leftAlignTitle: boolean = !props.isMobile || props.navigationModel !== undefined || props.logoImagePath !== undefined;

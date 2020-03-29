@@ -89,7 +89,6 @@ class ZincContent extends SiteContentInterface {
 
     private populateFooter = (): void => {
         this.setFooterModel({
-            height: 32,
             contactModel: this.getContactModel(),
             contactTextToShow: [ContactType.PHONE, ContactType.EMAIL],
             contactIconsToShow: [ContactType.FACEBOOK],
