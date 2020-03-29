@@ -142,6 +142,10 @@ img {
     width: 100%;
 }
 
+.clickable {
+    touch-action: manipulation;
+}
+
 .clickable:hover {
     cursor: pointer;
 }

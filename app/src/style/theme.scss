@@ -81,7 +81,7 @@ h1, h2, h3 {
   $palette: (
     base: map-get($template, base),
     body: map-get($template, body),
-    primary: map-get($template, primary),
+    body-special: map-get($template, special),
     faded-base: desaturate($tmp-faded-base, 10%),
     bg: lighten($tmp-faded-base, 15%),
     bg-alt: lighten($tmp-faded-base, 10%),

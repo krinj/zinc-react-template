@@ -23,4 +23,8 @@
             border-color: map-get($map, bg-border);
         }
     }
+
+    .#{$key} .clickable:active {
+        color: rgba(map-get($map, body), 0.5);
+    }
 }

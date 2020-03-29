@@ -21,7 +21,7 @@ const LinkElement: React.FC<LinkElementProps> = (props) => {
         <FontAwesomeIcon icon={props.navLink.icon} style={{marginRight: "1rem"}}/> : null;
 
     return <div className="mobile-nav-element">
-        <Link className="mobile-nav-link" to={props.navLink.link} onMouseDown={onClose}>
+        <Link className="mobile-nav-link" to={props.navLink.link} onMouseDown={onClose} onTouchEnd={onClose}>
             {iconElement}
             {props.navLink.label}
         </Link>
@@ -35,7 +35,10 @@ const NavBarMobile: React.FC<NavigationModel> = (props) => {
     const theme: string = BlockTheme.BASIC;
     const navTitle = <div className="mobile-nav-title flex max-width">
         <div className={theme + " max-width"}><h1 className="no-margin">Menu</h1></div>
-        <div className={theme + " flex clickable"} onMouseDown={props.onClose} style={{minWidth: "3em"}}>
+        <div className={theme + " flex clickable"} 
+        onMouseDown={props.onClose} 
+        onTouchEnd={props.onClose} 
+        style={{minWidth: "3em"}}>
             <FontAwesomeIcon icon="times" style={{fontSize: "1.3em", margin: "auto", marginRight: "0"}} />
         </div>
     </div>

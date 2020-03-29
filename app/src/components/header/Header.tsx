@@ -39,7 +39,7 @@ const createTitleElement = (title: string, subtitle?: string, image?: string, le
             headerAlign += " header-logo-margin";
         }
     }
-    
+
     // Title Holder Style, left or center anchor.
     let titleHolderStyle = {margin: "auto", marginLeft: "auto"};
     if (leftAligned) {
@@ -83,7 +83,8 @@ const createContactBar = (contactDefs: ContactDefinition[]): JSX.Element => {
 
 const createMobileMenu = (navigationModel: NavigationModel, isMenuActive: boolean, onDisableMenu: any) => {
     return <>
-        <div className="mobile-nav-overlay" onMouseDown={onDisableMenu} />
+        {/* Only capture touch events, otherwise on mobile this causes a double-touch. */}
+        <div className="mobile-nav-overlay" onTouchEnd={onDisableMenu}/>
         <NavBarMobile {...navigationModel} onClose={onDisableMenu} />
     </>;
 }
@@ -91,8 +92,9 @@ const createMobileMenu = (navigationModel: NavigationModel, isMenuActive: boolea
 const createMenuButton = (isMenuActive: boolean, onEnableMenu: any) => {
     return <div 
         className="dev flex clickable" 
-        onMouseDown={onEnableMenu} 
-        style={{position: "absolute", right: "0", height: "100%", minWidth: "3em"}}>
+        onTouchEnd={onEnableMenu}
+        onClick={onEnableMenu}
+        style={{position: "absolute", right: "0", height: "100%", minWidth: "4em"}}>
         <span className="auto-margin" style={{fontSize: "1.6em", marginRight: 0}}><FontAwesomeIcon icon={"bars"}/></span>
     </div>;
 }
@@ -113,8 +115,14 @@ const HeaderJSX: React.FC<HeaderModel> = (props) => {
     const contactDefs: ContactDefinition[] = contactLib.getFilteredContactItems(props.contactTypesToShow, contactMap);
     let mobileMenu: JSX.Element | null = null;
 
+    // Support both click and touch events.
+
     if (props.navigationModel && menuActive) {
-        mobileMenu = createMobileMenu(props.navigationModel, menuActive, () => setMenuActive(false));
+        const onDisableMenu = (ev: PointerEvent) => {
+            ev.preventDefault(); 
+            setMenuActive(false);
+        }
+        mobileMenu = createMobileMenu(props.navigationModel, menuActive, onDisableMenu);
     }
     
     if (contactDefs) {
@@ -122,7 +130,16 @@ const HeaderJSX: React.FC<HeaderModel> = (props) => {
         logoCol = "col-md-7";
     }
 
-    const menuButton: JSX.Element | null = shouldShowNavMenu ? createMenuButton(menuActive, () => setMenuActive(true)) : null;
+    // Support both click and touch events.
+    let menuButton: JSX.Element | null = null;
+    if (shouldShowNavMenu) {
+        const onEnableMenu = (ev: PointerEvent) => {
+            ev.preventDefault();
+            setMenuActive(true);
+        }
+        menuButton = createMenuButton(menuActive, onEnableMenu);
+    }
+    
     const leftAlignTitle: boolean = !props.isMobile || props.navigationModel !== undefined || props.logoImagePath !== undefined;
     return <div className="dev">
         <div className="row no-margin">

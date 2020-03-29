@@ -11,7 +11,7 @@
 }
 
 .mobile-nav {
-    width: 80vw;
+    width: 70vw;
     height: 100%;
     position: fixed;
     top: 0;
@@ -56,7 +56,7 @@
 
 .mobile-nav-menu-show {
     /* This section calls the slideInFromLeft animation we defined above */
-    animation: 0.2s cubic-bezier(0, 0, 0.05, 1.0) 1 slideInFromLeft;
+    animation: 0.25s cubic-bezier(0, 0, 0.05, 1.0) 1 slideInFromLeft;
 }
 
 @keyframes overlayFadeIn {
@@ -75,6 +75,6 @@
     top: 0;
     left: 0;
     z-index: 1;
-    animation: 0.2s cubic-bezier(0, 0, 0.05, 1.0) 1 overlayFadeIn;
+    animation: 0.25s cubic-bezier(0, 0, 0.05, 1.0) 1 overlayFadeIn;
     background-color: rgba(0, 0, 0, 0.5);
 }
