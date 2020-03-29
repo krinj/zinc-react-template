@@ -120,6 +120,7 @@ const HeaderJSX: React.FC<HeaderModel> = (props) => {
     if (props.navigationModel && menuActive) {
         const onDisableMenu = (ev: PointerEvent) => {
             ev.preventDefault(); 
+            ev.stopPropagation();
             setMenuActive(false);
         }
         mobileMenu = createMobileMenu(props.navigationModel, menuActive, onDisableMenu);

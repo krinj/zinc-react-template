@@ -149,6 +149,11 @@ img {
 .clickable:hover {
     cursor: pointer;
 }
+
+.no-hover:hover {
+    color: unset;
+    background-color: unset;
+}
   
 
 

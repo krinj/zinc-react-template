@@ -21,7 +21,9 @@ const LinkElement: React.FC<LinkElementProps> = (props) => {
         <FontAwesomeIcon icon={props.navLink.icon} style={{marginRight: "1rem"}}/> : null;
 
     return <div className="mobile-nav-element">
-        <Link className="mobile-nav-link" to={props.navLink.link} onMouseDown={onClose} onTouchEnd={onClose}>
+        <Link className="mobile-nav-link" to={props.navLink.link} 
+        onMouseDown={onClose} 
+        onTouchEnd={onClose}>
             {iconElement}
             {props.navLink.label}
         </Link>
