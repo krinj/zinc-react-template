@@ -1,7 +1,7 @@
 import React from 'react';
 import DisplayableElement from '../../utils/structure/DisplayableElement';
 import AuthHeaderModel from './AuthHeaderModel';
-import Amplify, { Auth } from 'aws-amplify';
+import Amplify, { Auth, API } from 'aws-amplify';
 import AuthSignInForm from './AuthSignInForm';
 import AuthState from './AuthState';
 
@@ -34,6 +34,13 @@ const AuthHeaderJSX: React.FC<AuthHeaderModel> = (props) => {
 
     const [authState, setAuthState] = React.useState(AuthState.UNKNOWN);
 
+    // Auth.signUp({
+    //     username: "hello@zinccli.com",
+    //     password: "Hunter12!"
+    // })
+    // .then(x => console.log(x))
+    // .catch(x => console.log(x))
+
     if (authState === AuthState.UNKNOWN) {
         Auth.currentSession()
             .then(user => onUserAuthenticationResults(user, true, null, setAuthState))
@@ -53,11 +60,46 @@ const AuthHeaderJSX: React.FC<AuthHeaderModel> = (props) => {
             );
     }
 
+    const post = async () => {
+        console.log('calling api');
+        const response = await API.post('apiCrud', '/items', {
+          body: {
+            id: '1',
+            message: 'hello amplify!'
+          }
+        });
+        alert(JSON.stringify(response, null, 2));
+      };
+    
+      const get = async () => {
+        console.log('calling api');
+        const token = (await Auth.currentSession()).getAccessToken().getJwtToken();
+        console.log("Token: " + token);
+        const response = await API.get('apiCrud', '/', {});
+        
+        alert(JSON.stringify(response, null, 2));
+      };
+    
+      const list = async () => {
+        console.log('calling api');
+        const response = await API.get('apiCrud', '/items/1', {});
+        alert(JSON.stringify(response, null, 2));
+      };
+
     if (authState === AuthState.UNAUTHENTICATED) {
-        return renderUnauthenticatedUI(setAuthState);
+        return <>
+            {renderUnauthenticatedUI(setAuthState)}
+            <button onClick={post}>POST</button>
+            <button onClick={get}>GET</button>
+            <button onClick={list}>LIST</button>
+        </>
     } else {
         return <>This is a AuthHeader Element: {AuthState[authState]}
         <button style={{minWidth: "120px"}} className="btn btn-primary" onClick={signOut}>Sign Out</button>
+
+        <button onClick={post}>POST</button>
+        <button onClick={get}>GET</button>
+        <button onClick={list}>LIST</button>
         </>;
     }
 }
