@@ -1,7 +1,6 @@
 import React from 'react';
 import SiteContent from './injected/content/siteContent';
 import SiteGenerator from './utils/structure/SiteGenerator';
-import AuthTest from './x/AuthTest';
 import Amplify from 'aws-amplify';
 import awsconfig from "./amplify";
 
