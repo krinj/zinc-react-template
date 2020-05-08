@@ -9,7 +9,7 @@ import HeaderModel from '../../components/header/HeaderModel';
 import FooterModel from '../../components/footer/FooterModel';
 import HeaderWrapper from '../../components/header/HeaderWrapper';
 import Footer from '../../components/footer/Footer';
-import AuthHeader from '../../components/auth-header/AuthHeader';
+import AuthHeader from '../../components/auth/AuthHeader';
 import BlockTheme from './ContentBlock/BlockTheme';
 
 // This class generates the entire site from the content object.
@@ -67,11 +67,11 @@ const SiteGenerator: React.FC<SiteGeneratorProps> = (props) => {
     const noMatchRoute: JSX.Element = <Route path="*">{wrapPageContent(props.content.getIndexPage())}</Route>;
     const wrappedHeader: JSX.Element = <HeaderWrapper {...headerModel} />;
     const wrappedFooter: JSX.Element = wrapFooter(footerModel);
-    const wrappedAuthHeader: JSX.Element = <ContentBlock elements={[new AuthHeader({})]} theme={BlockTheme.INVERTED}/>;
+    // const wrappedAuthHeader: JSX.Element = <ContentBlock elements={[new AuthHeader({})]} theme={BlockTheme.INVERTED}/>;
 
     return <div style={{flexDirection: "column", minHeight: "100vh", display: "flex"}}>
         <BrowserRouter>
-            {wrappedAuthHeader}
+            {/* {wrappedAuthHeader} */}
             {wrappedHeader}
             <Switch>
                 {indexRoute}

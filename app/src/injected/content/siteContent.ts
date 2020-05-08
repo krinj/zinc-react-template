@@ -36,6 +36,7 @@ import ContactEntry from "../../components/common-contact/ContactEntry";
 import BlockTheme from "../../utils/structure/ContentBlock/BlockTheme";
 import SignIn from "../../components/signin/SignIn";
 import NavigationModel from "../../components/navigation/NavigationModel";
+import AuthElement from "../../components/auth/AuthElement";
 
 
 class ZincContent extends SiteContentInterface {
@@ -127,8 +128,9 @@ class ZincContent extends SiteContentInterface {
     }
 
     private addBlock2 = (): void => {
+        const authElement = new AuthElement({});
         const textElement = new TextSection({body: "Loading", markdownPath: sampleSection});
-        this.addElementsAsNewBlock(textElement);
+        this.addElementsAsNewBlock(authElement, textElement);
     }
 
     private addBlockWithCards = (): void => {

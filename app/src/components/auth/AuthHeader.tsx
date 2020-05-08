@@ -42,6 +42,7 @@ const AuthHeaderJSX: React.FC<AuthHeaderModel> = (props) => {
     // .catch(x => console.log(x))
 
     if (authState === AuthState.UNKNOWN) {
+        Auth.currentCredentials().then(x => {console.log("Got Credentials"); console.log(x);}).catch(x => console.log(x));
         Auth.currentSession()
             .then(user => onUserAuthenticationResults(user, true, null, setAuthState))
             .catch(err => onUserAuthenticationResults(null, false, err, setAuthState));
@@ -49,7 +50,7 @@ const AuthHeaderJSX: React.FC<AuthHeaderModel> = (props) => {
 
     const signOut = () => {
         Auth.signOut()
-            .then((x) => {
+            .then((x) => { 
                 console.log("sign out success"); 
                 console.log(x); 
                 setAuthState(AuthState.UNAUTHENTICATED);}
@@ -62,10 +63,11 @@ const AuthHeaderJSX: React.FC<AuthHeaderModel> = (props) => {
 
     const post = async () => {
         console.log('calling api');
-        const response = await API.post('apiCrud', '/items', {
+        const response = await API.post('apiCrudPost', '/', {
           body: {
             id: '1',
-            message: 'hello amplify!'
+            message: 'hello amplify!',
+            payload: "Message from Amplify"
           }
         });
         alert(JSON.stringify(response, null, 2));
@@ -73,16 +75,16 @@ const AuthHeaderJSX: React.FC<AuthHeaderModel> = (props) => {
     
       const get = async () => {
         console.log('calling api');
-        const token = (await Auth.currentSession()).getAccessToken().getJwtToken();
-        console.log("Token: " + token);
-        const response = await API.get('apiCrud', '/', {});
+        const response = await API.get('apiCrudGet', '/books/1', {
+            queryStringParameters: {x: "q1"}
+        });
         
         alert(JSON.stringify(response, null, 2));
       };
     
       const list = async () => {
         console.log('calling api');
-        const response = await API.get('apiCrud', '/items/1', {});
+        const response = await API.get('apiCrudGet', '/items/1', {});
         alert(JSON.stringify(response, null, 2));
       };
 
@@ -96,7 +98,6 @@ const AuthHeaderJSX: React.FC<AuthHeaderModel> = (props) => {
     } else {
         return <>This is a AuthHeader Element: {AuthState[authState]}
         <button style={{minWidth: "120px"}} className="btn btn-primary" onClick={signOut}>Sign Out</button>
-
         <button onClick={post}>POST</button>
         <button onClick={get}>GET</button>
         <button onClick={list}>LIST</button>
