@@ -21,10 +21,10 @@ class AuthElement extends DisplayableElement {
 
 
 
-const renderUnknownState = (setState: Dispatch<SetStateAction<AuthState>>) => {
+const renderUnknownState = (setState: Dispatch<SetStateAction<AuthState>>, setUserName: Dispatch<SetStateAction<string>>) => {
     
-    Auth.currentSession()
-        .then(user => setState(AuthState.AUTHENTICATED))
+    Auth.currentUserPoolUser()
+        .then(user => {setState(AuthState.AUTHENTICATED); setUserName(user.attributes.email)})
         .catch(err => setState(AuthState.UNAUTHENTICATED));
 
     return <>Please wait...</>;
@@ -34,7 +34,7 @@ const renderSignInForm = (setState: Dispatch<SetStateAction<AuthState>>) => {
     return <AuthSignInForm setAuthState={setState}/>;
 }
 
-const renderAuthenticatedState = (setState: Dispatch<SetStateAction<AuthState>>) => {
+const renderAuthenticatedState = (setState: Dispatch<SetStateAction<AuthState>>, userName: string) => {
 
     const isDisabled = false;
     const onSignOut = () => {
@@ -45,7 +45,7 @@ const renderAuthenticatedState = (setState: Dispatch<SetStateAction<AuthState>>)
     }
 
     return <div>
-        You are authenticated as: ....
+        You are authenticated as: {userName}
         <button style={{width: "100%"}} 
         className="btn btn-primary" 
         onClick={onSignOut}
@@ -61,13 +61,18 @@ const renderErrorState = (setState: Dispatch<SetStateAction<AuthState>>) => {
     return <>There was an error!</>;
 }
 
-const renderAuthForState = (state: AuthState, setState: Dispatch<SetStateAction<AuthState>>) => {
+const renderAuthForState = (
+    state: AuthState, 
+    setState: Dispatch<SetStateAction<AuthState>>,
+    userName: string, 
+    setUserName: Dispatch<SetStateAction<string>>) => {
+
     switch (state) {
         case (AuthState.UNKNOWN):
-            return renderUnknownState(setState);
+            return renderUnknownState(setState, setUserName);
 
         case AuthState.AUTHENTICATED:
-            return renderAuthenticatedState(setState);
+            return renderAuthenticatedState(setState, userName);
 
         case AuthState.UNAUTHENTICATED:
             return renderSignInForm(setState);
@@ -83,11 +88,12 @@ const renderAuthForState = (state: AuthState, setState: Dispatch<SetStateAction<
 const AuthElementJSX: React.FC<AuthElementModel> = (props) => {
 
     const [authState, setAuthState] = React.useState(AuthState.UNKNOWN);
+    const [userName, setUserName] = React.useState("Unknown");
     
     return <div className="card">
         <div className="card-body">
             <h3 className="card-title">{"Authenticate"}</h3>
-            {renderAuthForState(authState, setAuthState)}
+            {renderAuthForState(authState, setAuthState, userName, setUserName)}
         </div>
 
     </div>
