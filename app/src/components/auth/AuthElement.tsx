@@ -19,24 +19,64 @@ class AuthElement extends DisplayableElement {
      }
 }
 
+
+
+const renderUnknownState = (setState: Dispatch<SetStateAction<AuthState>>) => {
+    
+    Auth.currentSession()
+        .then(user => setState(AuthState.AUTHENTICATED))
+        .catch(err => setState(AuthState.UNAUTHENTICATED));
+
+    return <>Please wait...</>;
+}
+
 const renderSignInForm = (setState: Dispatch<SetStateAction<AuthState>>) => {
     return <AuthSignInForm setAuthState={setState}/>;
 }
 
 const renderAuthenticatedState = (setState: Dispatch<SetStateAction<AuthState>>) => {
-    return <div>You are authenticated as: ....</div>
+
+    const isDisabled = false;
+    const onSignOut = () => {
+        Auth.signOut()
+            .then(x => console.log(x))
+            .catch(e => console.log(e));
+        setState(AuthState.UNAUTHENTICATED);
+    }
+
+    return <div>
+        You are authenticated as: ....
+        <button style={{width: "100%"}} 
+        className="btn btn-primary" 
+        onClick={onSignOut}
+        disabled={isDisabled}>Sign Out</button>
+    </div>
+}
+
+const renderUnconfirmedState = (setState: Dispatch<SetStateAction<AuthState>>) => {
+    return <>Your account is unconfirmed. Please check your email to verify.</>;
+}
+
+const renderErrorState = (setState: Dispatch<SetStateAction<AuthState>>) => {
+    return <>There was an error!</>;
 }
 
 const renderAuthForState = (state: AuthState, setState: Dispatch<SetStateAction<AuthState>>) => {
     switch (state) {
         case (AuthState.UNKNOWN):
-            return renderSignInForm(setState);
+            return renderUnknownState(setState);
 
         case AuthState.AUTHENTICATED:
             return renderAuthenticatedState(setState);
 
         case AuthState.UNAUTHENTICATED:
             return renderSignInForm(setState);
+
+        case AuthState.ERROR:
+            return renderErrorState(setState);
+
+        case AuthState.UNCONFIRMED:
+            return renderUnconfirmedState(setState);
     }
 }
 

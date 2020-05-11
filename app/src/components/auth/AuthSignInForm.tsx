@@ -17,15 +17,15 @@ interface AuthSignInSubmissionProps {
 const onSignInClick = (props: AuthSignInSubmissionProps) => {
     Auth.signIn({username: props.email, password: props.password})
         .then(data => {console.log(data); props.setAuthState(AuthState.AUTHENTICATED)})
-        .catch(err => console.log(err));
+        .catch(err => {console.log(err); props.setAuthState(AuthState.ERROR)});
 }
 
 const onRegisterClick = (props: AuthSignInSubmissionProps) => {
     console.log("Register with: " + props);
     console.log(props);
     Auth.signUp({username: props.email, password: props.password})
-        .then(data => {console.log(data); props.setAuthState(AuthState.AUTHENTICATED)})
-        .catch(err => console.log(err));
+        .then(data => {console.log(data); props.setAuthState(AuthState.UNCONFIRMED)})
+        .catch(err => {console.log(err); props.setAuthState(AuthState.ERROR)});
 }
 
 const createButton = (label: string, isDisabled: boolean, onClick: (e: any) => void) => {
