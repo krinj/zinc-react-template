@@ -2,30 +2,31 @@ import React from 'react';
 import CustomInputField from '../common/InputField';
 import AuthState from './AuthState';
 import { Auth } from 'aws-amplify';
+import AuthStatus from './AuthStatus';
 
 interface AuthSignInFormProps {
-    setAuthState: (x: AuthState) => void;
+    setAuthStatus: (x: AuthStatus) => void;
 }
 
 interface AuthSignInSubmissionProps {
     username: string;
     email: string;
     password: string;
-    setAuthState: (x: AuthState) => void;
+    setAuthStatus: (x: AuthStatus) => void;
 }
 
 const onSignInClick = (props: AuthSignInSubmissionProps) => {
     Auth.signIn({username: props.email, password: props.password})
-        .then(data => {console.log(data); props.setAuthState(AuthState.AUTHENTICATED)})
-        .catch(err => {console.log(err); props.setAuthState(AuthState.ERROR)});
+        .then(data => {console.log(data); props.setAuthStatus({authState: AuthState.AUTHENTICATED, user: {email: data.attributes.email}})})
+        .catch(err => {console.log(err); props.setAuthStatus({authState: AuthState.ERROR})});
 }
 
 const onRegisterClick = (props: AuthSignInSubmissionProps) => {
     console.log("Register with: " + props);
     console.log(props);
     Auth.signUp({username: props.email, password: props.password})
-        .then(data => {console.log(data); props.setAuthState(AuthState.UNCONFIRMED)})
-        .catch(err => {console.log(err); props.setAuthState(AuthState.ERROR)});
+        .then(data => {console.log(data); props.setAuthStatus({authState: AuthState.UNCONFIRMED})})
+        .catch(err => {console.log(err); props.setAuthStatus({authState: AuthState.ERROR})});
 }
 
 const createButton = (label: string, isDisabled: boolean, onClick: (e: any) => void) => {
@@ -46,7 +47,7 @@ const AuthSignInForm: React.FC<AuthSignInFormProps> = (props) => {
     const emailField: CustomInputField = new CustomInputField("Email", React.useState(""));
     const passwordField: CustomInputField = new CustomInputField("Password", React.useState(""));
 
-    const authProps = {username: usernameField.value, email: emailField.value, password: passwordField.value, setAuthState: props.setAuthState};
+    const authProps = {username: usernameField.value, email: emailField.value, password: passwordField.value, setAuthStatus: props.setAuthStatus};
 
     return <form>
         

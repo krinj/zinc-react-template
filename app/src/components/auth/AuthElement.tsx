@@ -4,6 +4,7 @@ import AuthElementModel from './AuthElementModel';
 import AuthState from './AuthState';
 import { Auth } from 'aws-amplify';
 import AuthSignInForm from './AuthSignInForm';
+import AuthStatus from './AuthStatus';
 
 class AuthElement extends DisplayableElement {
 
@@ -21,31 +22,31 @@ class AuthElement extends DisplayableElement {
 
 
 
-const renderUnknownState = (setState: Dispatch<SetStateAction<AuthState>>, setUserName: Dispatch<SetStateAction<string>>) => {
+const renderUnknownState = (status: AuthStatus, setStatus: Dispatch<SetStateAction<AuthStatus>>) => {
     
     Auth.currentUserPoolUser()
-        .then(user => {setState(AuthState.AUTHENTICATED); setUserName(user.attributes.email)})
-        .catch(err => setState(AuthState.UNAUTHENTICATED));
+        .then(user => {setStatus({authState: AuthState.AUTHENTICATED, user: {email: user.attributes.email}})})
+        .catch(err => setStatus({authState: AuthState.UNAUTHENTICATED}));
 
     return <>Please wait...</>;
 }
 
-const renderSignInForm = (setState: Dispatch<SetStateAction<AuthState>>) => {
-    return <AuthSignInForm setAuthState={setState}/>;
+const renderSignInForm = (setStatus: Dispatch<SetStateAction<AuthStatus>>) => {
+    return <AuthSignInForm setAuthStatus={setStatus}/>;
 }
 
-const renderAuthenticatedState = (setState: Dispatch<SetStateAction<AuthState>>, userName: string) => {
+const renderAuthenticatedState = (status: AuthStatus, setStatus: Dispatch<SetStateAction<AuthStatus>>) => {
 
     const isDisabled = false;
     const onSignOut = () => {
         Auth.signOut()
             .then(x => console.log(x))
             .catch(e => console.log(e));
-        setState(AuthState.UNAUTHENTICATED);
+        setStatus({authState: AuthState.UNAUTHENTICATED});
     }
 
     return <div>
-        You are authenticated as: {userName}
+        You are authenticated as: {status.user?.email}
         <button style={{width: "100%"}} 
         className="btn btn-primary" 
         onClick={onSignOut}
@@ -53,47 +54,44 @@ const renderAuthenticatedState = (setState: Dispatch<SetStateAction<AuthState>>,
     </div>
 }
 
-const renderUnconfirmedState = (setState: Dispatch<SetStateAction<AuthState>>) => {
+const renderUnconfirmedState = (setState: Dispatch<SetStateAction<AuthStatus>>) => {
     return <>Your account is unconfirmed. Please check your email to verify.</>;
 }
 
-const renderErrorState = (setState: Dispatch<SetStateAction<AuthState>>) => {
+const renderErrorState = (setState: Dispatch<SetStateAction<AuthStatus>>) => {
     return <>There was an error!</>;
 }
 
 const renderAuthForState = (
-    state: AuthState, 
-    setState: Dispatch<SetStateAction<AuthState>>,
-    userName: string, 
-    setUserName: Dispatch<SetStateAction<string>>) => {
+    status: AuthStatus, 
+    setStatus: Dispatch<SetStateAction<AuthStatus>>) => {
 
-    switch (state) {
+    switch (status.authState) {
         case (AuthState.UNKNOWN):
-            return renderUnknownState(setState, setUserName);
+            return renderUnknownState(status, setStatus);
 
         case AuthState.AUTHENTICATED:
-            return renderAuthenticatedState(setState, userName);
+            return renderAuthenticatedState(status, setStatus);
 
         case AuthState.UNAUTHENTICATED:
-            return renderSignInForm(setState);
+            return renderSignInForm(setStatus);
 
         case AuthState.ERROR:
-            return renderErrorState(setState);
+            return renderErrorState(setStatus);
 
         case AuthState.UNCONFIRMED:
-            return renderUnconfirmedState(setState);
+            return renderUnconfirmedState(setStatus);
     }
 }
 
 const AuthElementJSX: React.FC<AuthElementModel> = (props) => {
 
-    const [authState, setAuthState] = React.useState(AuthState.UNKNOWN);
-    const [userName, setUserName] = React.useState("Unknown");
+    const [authStatus, setAuthStatus] = React.useState<AuthStatus>({authState: AuthState.UNKNOWN});
     
     return <div className="card">
         <div className="card-body">
             <h3 className="card-title">{"Authenticate"}</h3>
-            {renderAuthForState(authState, setAuthState, userName, setUserName)}
+            {renderAuthForState(authStatus, setAuthStatus)}
         </div>
 
     </div>

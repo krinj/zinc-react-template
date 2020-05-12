@@ -4,6 +4,7 @@ import AuthHeaderModel from './AuthHeaderModel';
 import Amplify, { Auth, API } from 'aws-amplify';
 import AuthSignInForm from './AuthSignInForm';
 import AuthState from './AuthState';
+import AuthStatus from './AuthStatus';
 
 
 class AuthHeader extends DisplayableElement {
@@ -21,13 +22,13 @@ class AuthHeader extends DisplayableElement {
      }
 }
 
-const onUserAuthenticationResults = (user: any, success: boolean, err: any, setAuthState: any) => {
+const onUserAuthenticationResults = (user: any, success: boolean, err: any, setAuthStatus: any) => {
     console.log("Auth Success: " + success);
-    setAuthState(success ? AuthState.AUTHENTICATED : AuthState.UNAUTHENTICATED);
+    setAuthStatus({authState: success ? AuthState.AUTHENTICATED : AuthState.UNAUTHENTICATED});
 }
 
-const renderUnauthenticatedUI = (setAuthState: (x: AuthState) => void): JSX.Element => {
-    return <AuthSignInForm setAuthState={setAuthState}/>
+const renderUnauthenticatedUI = (setAuthStatus: (x: AuthStatus) => void): JSX.Element => {
+    return <AuthSignInForm setAuthStatus={setAuthStatus}/>
 }
 
 const AuthHeaderJSX: React.FC<AuthHeaderModel> = (props) => {
@@ -90,17 +91,17 @@ const AuthHeaderJSX: React.FC<AuthHeaderModel> = (props) => {
 
     if (authState === AuthState.UNAUTHENTICATED) {
         return <>
-            {renderUnauthenticatedUI(setAuthState)}
+            {/* {renderUnauthenticatedUI(setAuthState)}
             <button onClick={post}>POST</button>
             <button onClick={get}>GET</button>
-            <button onClick={list}>LIST</button>
+            <button onClick={list}>LIST</button> */}
         </>
     } else {
         return <>This is a AuthHeader Element: {AuthState[authState]}
-        <button style={{minWidth: "120px"}} className="btn btn-primary" onClick={signOut}>Sign Out</button>
+        {/* <button style={{minWidth: "120px"}} className="btn btn-primary" onClick={signOut}>Sign Out</button>
         <button onClick={post}>POST</button>
         <button onClick={get}>GET</button>
-        <button onClick={list}>LIST</button>
+        <button onClick={list}>LIST</button> */}
         </>;
     }
 }
