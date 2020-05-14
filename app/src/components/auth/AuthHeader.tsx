@@ -27,8 +27,8 @@ const onUserAuthenticationResults = (user: any, success: boolean, err: any, setA
     setAuthStatus({authState: success ? AuthState.AUTHENTICATED : AuthState.UNAUTHENTICATED});
 }
 
-const renderUnauthenticatedUI = (setAuthStatus: (x: AuthStatus) => void): JSX.Element => {
-    return <AuthSignInForm setAuthStatus={setAuthStatus}/>
+const renderUnauthenticatedUI = (status: AuthStatus, setAuthStatus: (x: AuthStatus) => void): JSX.Element => {
+    return <AuthSignInForm authStatus={status} setAuthStatus={setAuthStatus}/>
 }
 
 const AuthHeaderJSX: React.FC<AuthHeaderModel> = (props) => {

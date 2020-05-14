@@ -31,8 +31,8 @@ const renderUnknownState = (status: AuthStatus, setStatus: Dispatch<SetStateActi
     return <>Please wait...</>;
 }
 
-const renderSignInForm = (setStatus: Dispatch<SetStateAction<AuthStatus>>) => {
-    return <AuthSignInForm setAuthStatus={setStatus}/>;
+const renderSignInForm = (status: AuthStatus, setStatus: Dispatch<SetStateAction<AuthStatus>>) => {
+    return <AuthSignInForm setAuthStatus={setStatus} authStatus={status}/>;
 }
 
 const renderAuthenticatedState = (status: AuthStatus, setStatus: Dispatch<SetStateAction<AuthStatus>>) => {
@@ -74,7 +74,7 @@ const renderAuthForState = (
             return renderAuthenticatedState(status, setStatus);
 
         case AuthState.UNAUTHENTICATED:
-            return renderSignInForm(setStatus);
+            return renderSignInForm(status, setStatus);
 
         case AuthState.ERROR:
             return renderErrorState(setStatus);
